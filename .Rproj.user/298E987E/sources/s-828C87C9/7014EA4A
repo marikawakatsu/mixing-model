@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538581212593.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7014EA4A",
+    "lastKnownWriteTime" : 1538677490,
+    "last_content_update" : 1538677490248,
+    "path" : "~/Documents/Research/Tarnita Lab/Mixing Experiments/MixingModel/scripts/2_EvaluateResults.R",
+    "project_path" : "scripts/2_EvaluateResults.R",
+    "properties" : {
+        "cursorPosition" : "11,37",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

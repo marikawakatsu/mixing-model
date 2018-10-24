@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1538666797482.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "CDBEDCF1",
+    "lastKnownWriteTime" : 1538676478,
+    "last_content_update" : 1538676478551,
+    "path" : "~/Documents/Research/Tarnita Lab/Mixing Experiments/MixingModel/scripts/1_MixingTest.R",
+    "project_path" : "scripts/1_MixingTest.R",
+    "properties" : {
+        "cursorPosition" : "9,37",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
