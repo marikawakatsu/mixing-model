@@ -7,8 +7,6 @@
 rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
-file_name <- "AlphaDiff_OneHighOneLow"
-
 ####################
 # Set global variables
 ####################
@@ -30,13 +28,11 @@ InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
-A_alpha        <- c(m*1.5, m*0.5) #efficiency of task performance
-B_alpha        <- c(m*0.5, m*1.5)
+A_alpha        <- c(m, m) #efficiency of task performance
+B_alpha        <- c(m*1.5, m*1.5)
 quitP          <- 0.2 #probability of quitting task once active !!Change!!
 
-
-
-
+file_name <- "AlphaDiff_OneHighOneLow"
 
 ####################
 # Run simulation multiple times
