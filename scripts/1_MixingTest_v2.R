@@ -16,26 +16,27 @@ Ns             <- c(4, 16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mixes          <- c("A", "B", "AB")
 A_ThreshM      <- c(10, 10) #population threshold means for clone line A !!Change!!
 A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
-B_ThreshSD     <- B_ThreshM * 0.3 #population threshold standard deviations for clone line B !!Change!!
+B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
 InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m) #efficiency of task performance
 B_alpha        <- c(m, m)
-quitP          <- 0.2 #probability of quitting task once active !!Change!!
+quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
-file_name <- sprintf("AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
+file_name <- sprintf("AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
                      A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
                      B_ThreshM[1], B_ThreshM[2], B_ThreshSD[1]/B_ThreshM[1], B_ThreshSD[2]/B_ThreshM[2],
-                     deltas[1], deltas[2], threshSlope, A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP)
+                     deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
+                     B_alpha[1], B_alpha[2], quitP[1], quitP[2])
 
 ####################
 # Run simulation multiple times
@@ -158,9 +159,25 @@ for (i in 1:length(Ns)) {
                                     StimulusMatrix = stimMat, 
                                     nSlope = threshSlope) #!!! Change!!!
         # Update task performance
-        X_g <- updateTaskPerformance(P_sub_g    = P_g,
-                                     TaskMat    = X_g,
-                                     QuitProb   = quitP)  #!!! Change!!!
+        if (mix == "A") {
+          X_g <- updateTaskPerformance(P_sub_g    = P_g,
+                                       TaskMat    = X_g,
+                                       QuitProb   = quitP[1])  
+        } else if(mix == "B") {
+          X_g <- updateTaskPerformance(P_sub_g    = P_g,
+                                       TaskMat    = X_g,
+                                       QuitProb   = quitP[2])  
+        } else if(mix == "AB") {
+          X_g_A <- updateTaskPerformance(P_sub_g  = P_g[1:(n/2), ],
+                                         TaskMat  = X_g[1:(n/2), ],
+                                         QuitProb = quitP[1]) 
+          X_g_B <- updateTaskPerformance(P_sub_g  = P_g[(n/2+1):nrow(P_g), ],
+                                         TaskMat  = X_g[(n/2+1):nrow(P_g), ],
+                                         QuitProb = quitP[2])
+          rownames(X_g_B) <- paste0("v-", (n/2+1):nrow(P_g))
+          X_g <- rbind(X_g_A, X_g_B)
+          rm(X_g_A, X_g_B)
+        }
         
         # Capture current task performance tally
         tally <- matrix(c(t, colSums(X_g)), ncol = ncol(X_g) + 1)
@@ -272,7 +289,7 @@ task_corr <- do.call("rbind", task_corr)
 ####################
 # Save run
 ####################
-# save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 
 

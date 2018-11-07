@@ -6,7 +6,6 @@
 rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
-
 ####################
 # Set global variables
 ####################
@@ -16,7 +15,7 @@ Ns             <- c(4, 16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mixes          <- c("A", "B", "AB")
@@ -25,16 +24,18 @@ A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for 
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
 InitialStim    <- c(0, 0) #intital vector of stimuli
-deltas         <- c(1.8, 1.8) #vector of stimuli increase rates  
+deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m) #efficiency of task performance
 B_alpha        <- c(m, m)
-quitP          <- 0.2 #probability of quitting task once active !!Change!!
+quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
-file_name <- sprintf("AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
-                     A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2],
-                     threshSlope, A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP)
+file_name <- sprintf("AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
+                     A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
+                     B_ThreshM[1], B_ThreshM[2], B_ThreshSD[1]/B_ThreshM[1], B_ThreshSD[2]/B_ThreshM[2],
+                     deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
+                     B_alpha[1], B_alpha[2], quitP[1], quitP[2])
 
 load(paste0("output/Rdata/", file_name, ".Rdata"))
 
