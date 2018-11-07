@@ -7,7 +7,7 @@
 rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
-file_name <- "AlphaDiff_OneHighOneLow"
+file_name <- "Diff_Etas_HighB"
 
 ####################
 # Set global variables
@@ -28,7 +28,9 @@ B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Chang
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
 InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
-threshSlope    <- 7 #exponent parameter for threshold curve shape
+# threshSlope    <- 7 #exponent parameter for threshold curve shape
+A_threshSlope  <- 7 #exponent parameter for threshold curve shape
+B_threshSlope  <- 14 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m*1.5, m*0.5) #efficiency of task performance
 B_alpha        <- c(m*0.5, m*1.5)
@@ -82,6 +84,15 @@ for (i in 1:length(Ns)) {
       alpha      <- matrix(input, ncol = m, byrow = T)
     } else if (mix == "B") {
       alpha      <- matrix(rep(B_alpha, n), ncol = m)
+    }
+    
+    # Seed Etas (threshold slopes) by lines
+    if (mix == "A") {
+      thresh_slope_mat <- data.frame(Eta = rep(A_threshSlope, n)) 
+    } else if(mix == "B") {
+      thresh_slope_mat <- data.frame(Eta = rep(B_threshSlope, n)) 
+    } else if(mix == "AB") {
+      thresh_slope_mat <- data.frame(Eta = c(rep(A_threshSlope, n/2), rep(B_threshSlope, n/2)))  
     }
     
     # Prep lists for collection of simulation outputs
@@ -154,10 +165,14 @@ for (i in 1:length(Ns)) {
                                state_matrix = X_g, 
                                time_step = t)
         # Calculate task demand based on global stimuli
-        P_g <- calcThresholdProbMat(TimeStep = t + 1, # first row is generation 0
-                                    ThresholdMatrix = threshMat, 
-                                    StimulusMatrix = stimMat, 
-                                    nSlope = threshSlope)
+        # P_g <- calcThresholdProbMat(TimeStep = t + 1, # first row is generation 0
+        #                             ThresholdMatrix = threshMat, 
+        #                             StimulusMatrix = stimMat, 
+        #                             nSlope = threshSlope)
+        P_g <- calcThresholdProbMat_diffEta(TimeStep = t + 1, # first row is generation 0
+                                            ThresholdMatrix = threshMat, 
+                                            StimulusMatrix = stimMat, 
+                                            nSlopeMatrix = thresh_slope_mat)
         # Update task performance
         X_g <- updateTaskPerformance(P_sub_g    = P_g,
                                      TaskMat    = X_g,

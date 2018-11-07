@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541615162074.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1432974056",
+    "id" : "326A6AEC",
+    "lastKnownWriteTime" : 1541616093,
+    "last_content_update" : 1541616093431,
+    "path" : "~/Documents/Research/Tarnita Lab/Mixing Experiments/MixingModel/scripts/util/__Util_ThresholdFunctions.R",
+    "project_path" : "scripts/util/__Util_ThresholdFunctions.R",
+    "properties" : {
+        "cursorPosition" : "82,2",
+        "scrollLine" : "61"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

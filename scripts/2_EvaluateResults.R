@@ -7,9 +7,9 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/AlphaDiff_OneHighOneLow.Rdata")
+load("output/Rdata/Diff_Etas_HighB.Rdata")
 
-file_name <- "AlphaDiff_OneHighOneLow"
+file_name <- "Diff_Etas_HighB"
 
 ####################
 # Final task distributions
