@@ -7,7 +7,7 @@
 rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
-file_name <- "DifferentAlphas_BothTasksDiff"
+file_name <- "Diff_Etas_HighB"
 
 ####################
 # Set global variables
@@ -18,7 +18,7 @@ Ns             <- c(4, 16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mixes          <- c("A", "B", "AB")
@@ -28,16 +28,16 @@ B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Chang
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
 InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
-threshSlope    <- 7 #exponent parameter for threshold curve shape
+# threshSlope    <- 7 #exponent parameter for threshold curve shape
+A_threshSlope  <- 7 #exponent parameter for threshold curve shape
+B_threshSlope  <- 14 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m) #efficiency of task performance
-B_alpha        <- c(0.8*m, 0.8*m)
+B_alpha        <- c(m, m)
 quitP          <- 0.2 #probability of quitting task once active !!Change!!
 
-# Social Network Parameters
-p              <- 1 #baseline probablity of initiating an interaction per time step
-epsilon        <- 0.01 #relative weighting of social interactions for adjusting thresholds
-beta           <- 1.1 #probability of interacting with individual in same state relative to others
+
+
 
 
 ####################
@@ -84,6 +84,15 @@ for (i in 1:length(Ns)) {
       alpha      <- matrix(input, ncol = m, byrow = T)
     } else if (mix == "B") {
       alpha      <- matrix(rep(B_alpha, n), ncol = m)
+    }
+    
+    # Seed Etas (threshold slopes) by lines
+    if (mix == "A") {
+      thresh_slope_mat <- data.frame(Eta = rep(A_threshSlope, n)) 
+    } else if(mix == "B") {
+      thresh_slope_mat <- data.frame(Eta = rep(B_threshSlope, n)) 
+    } else if(mix == "AB") {
+      thresh_slope_mat <- data.frame(Eta = c(rep(A_threshSlope, n/2), rep(B_threshSlope, n/2)))  
     }
     
     # Prep lists for collection of simulation outputs
@@ -137,11 +146,6 @@ for (i in 1:length(Ns)) {
       # Create cumulative task performance matrix
       X_tot <- X_g
       
-      # Create cumulative adjacency matrix
-      g_tot <-  matrix(data = rep(0, n * n), ncol = n)
-      colnames(g_tot) <- paste0("v-", 1:n)
-      rownames(g_tot) <- paste0("v-", 1:n)
-      
       # Prep correlation step matrix
       X_prev <- matrix(data = rep(0, n * m), ncol = m)
       X_prevTot <- matrix(data = rep(0, n * m), ncol = m)
@@ -161,10 +165,14 @@ for (i in 1:length(Ns)) {
                                state_matrix = X_g, 
                                time_step = t)
         # Calculate task demand based on global stimuli
-        P_g <- calcThresholdProbMat(TimeStep = t + 1, # first row is generation 0
-                                    ThresholdMatrix = threshMat, 
-                                    StimulusMatrix = stimMat, 
-                                    nSlope = threshSlope)
+        # P_g <- calcThresholdProbMat(TimeStep = t + 1, # first row is generation 0
+        #                             ThresholdMatrix = threshMat, 
+        #                             StimulusMatrix = stimMat, 
+        #                             nSlope = threshSlope)
+        P_g <- calcThresholdProbMat_diffEta(TimeStep = t + 1, # first row is generation 0
+                                            ThresholdMatrix = threshMat, 
+                                            StimulusMatrix = stimMat, 
+                                            nSlopeMatrix = thresh_slope_mat)
         # Update task performance
         X_g <- updateTaskPerformance(P_sub_g    = P_g,
                                      TaskMat    = X_g,
@@ -175,19 +183,6 @@ for (i in 1:length(Ns)) {
         colnames(tally) <- c("t", colnames(X_g))
         tally <- transform(tally, Inactive = n - sum(X_g), n = n, replicate = sim)
         taskTally[[t]] <- tally
-        
-        # Update social network (previously this was before probability/task update)
-        g_adj <- temporalNetwork(X_sub_g = X_g,
-                                 p = p,
-                                 bias = beta)
-        g_tot <- g_tot + g_adj
-        
-        # Adjust thresholds
-        threshMat <- adjust_thresholds_social_capped(social_network = g_adj,
-                                                     threshold_matrix = threshMat,
-                                                     state_matrix = X_g,
-                                                     epsilon = epsilon,
-                                                     threshold_max = 20)
         
         # Update total task performance profile
         X_tot <- X_tot + X_g
@@ -292,7 +287,7 @@ task_corr <- do.call("rbind", task_corr)
 ####################
 # Save run
 ####################
-# save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 
 

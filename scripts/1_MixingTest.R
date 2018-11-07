@@ -22,7 +22,7 @@ reps           <- 10 #number of replications per simulation (for ensemble) !!Cha
 
 # Threshold Parameters
 mixes          <- c("A", "B", "AB")
-A_ThreshM      <- c(14, 14) #population threshold means for clone line A !!Change!!
+A_ThreshM      <- c(10, 10) #population threshold means for clone line A !!Change!!
 A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
@@ -32,8 +32,8 @@ deltas         <- c(0.6, 0.6) #vector of stimuli increase rates
 A_threshSlope  <- 7 #exponent parameter for threshold curve shape
 B_threshSlope  <- 14 #exponent parameter for threshold curve shape
 alpha          <- m
-A_alpha        <- c(m*1.5, m*0.5) #efficiency of task performance
-B_alpha        <- c(m*0.5, m*1.5)
+A_alpha        <- c(m, m) #efficiency of task performance
+B_alpha        <- c(m, m)
 quitP          <- 0.2 #probability of quitting task once active !!Change!!
 
 

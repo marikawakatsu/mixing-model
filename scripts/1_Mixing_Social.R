@@ -31,7 +31,7 @@ deltas         <- c(0.6, 0.6) #vector of stimuli increase rates
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m) #efficiency of task performance
-B_alpha        <- c(0.8*m, 0.8*m)
+B_alpha        <- c(m, m)
 quitP          <- 0.2 #probability of quitting task once active !!Change!!
 
 # Social Network Parameters
