@@ -6,6 +6,7 @@
 rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
+
 ####################
 # Set global variables
 ####################
@@ -15,11 +16,11 @@ Ns             <- c(4, 16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mixes          <- c("A", "B", "AB")
-A_ThreshM      <- c(10, 10) #population threshold means for clone line A !!Change!!
+A_ThreshM      <- c(20, 20) #population threshold means for clone line A !!Change!!
 A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
@@ -27,7 +28,7 @@ InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
-A_alpha        <- c(m, m) #efficiency of task performance
+A_alpha        <- c(m*3, m*3) #efficiency of task performance
 B_alpha        <- c(m, m)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
