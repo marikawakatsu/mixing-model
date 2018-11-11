@@ -1,0 +1,11 @@
+syntax: glob
+
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*~
+*.log
+*.aux
+*.synctex.gz
+*.pdf
