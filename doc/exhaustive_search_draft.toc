@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}Overview}{1}
+\contentsline {section}{\numberline {2}Plan}{2}
+\contentsline {subsection}{\numberline {2.1}Original model in Ulrich et al. \cite {ulrich2018}}{2}
+\contentsline {subsection}{\numberline {2.2}\textit {Varying} across lines and \textit {fixing} across tasks}{3}
+\contentsline {subsection}{\numberline {2.3}\textit {Fixing} across lines and \textit {varying} across tasks}{3}
+\contentsline {section}{\numberline {3}Results}{4}
+\contentsline {subsection}{\numberline {3.1}Base case}{4}
+\contentsline {subsection}{\numberline {3.2}\textit {Varying} across lines and \textit {fixing} across tasks}{5}
+\contentsline {subsubsection}{\numberline {3.2.1}Varying task performance efficiency $\alpha $ by line}{5}
+\contentsline {subsubsection}{\numberline {3.2.2}Varying mean threshold $\mu $ by line}{6}
+\contentsline {subsubsection}{\numberline {3.2.3}Varying threshold variance $\sigma $ by line}{7}
+\contentsline {subsubsection}{\numberline {3.2.4}Varying threshold stochasticity $\eta $ by line}{8}
+\contentsline {subsubsection}{\numberline {3.2.5}Varying quit probability $\tau $ by line}{9}
+\contentsline {subsection}{\numberline {3.3}\textit {Fixing} across lines and \textit {varying} across tasks}{10}
+\contentsline {subsubsection}{\numberline {3.3.1}Varying task performance efficiency $\alpha $ by task}{10}
+\contentsline {subsubsection}{\numberline {3.3.2}Varying mean threshold $\mu $ by task}{11}
+\contentsline {subsubsection}{\numberline {3.3.3}Varying threshold variance $\sigma $ by task}{12}
+\contentsline {subsubsection}{\numberline {3.3.4}Varying task demand rate $\delta $ by task}{13}
+\contentsline {subsection}{\numberline {3.4}\textit {Varying} across lines and \textit {Varying} across tasks}{15}
+\contentsline {section}{\numberline {4}Conclusions so far}{16}

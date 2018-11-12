@@ -204,9 +204,11 @@
 
 \maketitle
 
+\tableofcontents
+\hspace{0pt}\\
 {\color{red}Chris: I am planning to first add all relevant figures to this doc so that we can then discuss which ones to highlight in a more finalized document -- but let me know if you think of a better way to do this!}
 
-\section{Aim}
+\section{Overview}
 The goal of this investigation is to understand how varying one or more or the parameters of the fixed threshold model affects the behavior of single line (A or B) colonies and mixed colonies.
 \\
 
@@ -288,42 +290,159 @@ so that we can agree on what it is that we want the model to do.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
 	\caption{Base case. Parameter values for both tasks (task 1 and task 2) and lines (line A and line B) as as follows: $\delta = 0.6$, $\alpha = 2$, $\mu = 10$, $\sigma = 0.1$, $\eta = 7$, $\tau = 0.2$.}
 	\label{fig:base}
 \end{figure}
 
 \subsection{\textit{Varying} across lines and \textit{fixing} across tasks}
 
-\subsubsection{Varying task performance efficiency $\alpha$}
+\subsubsection{Varying task performance efficiency $\alpha$ by line}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20}.png}
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20}.png}
 	\caption{Varying task performance efficiency ($\alpha$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific efficiencies, $\alpha^A = 2, \alpha^B = 6$. \\\hspace{0pt}\\
 \textbf{Interpretation}: Given identical demand rate for the two tasks, B ants spend less time performing tasks because the stimuli decrease more quickly (only task 1 is shown here, but would expect the same relation between A and B for task 2). There seems to be some \textbf{‘behavioral contagion’} (in Yuko’s terms), i.e., the A and B ants become more similar in behavior.}
-	\label{fig:varyalpha}
+	\label{fig:varyalphaAB}
 \end{figure}
 
-\subsubsection{Varying mean threshold $\mu$}
+\subsubsection{Varying mean threshold $\mu$ by line}
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_20.00_20.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
-	\caption{Varying task performance efficiency ($\alpha$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific efficiencies, $\alpha^A = 2, \alpha^B = 6$. \\\hspace{0pt}\\
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_20.00_20.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Varying mean threshold ($\mu$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific mean thresholds, $\mu^A = 10, \mu^B = 20$. \\\hspace{0pt}\\
 \textbf{Interpretation}: Changing the mean internal threshold by line \textbf{does not} change mean frequency of task 1 performance in single-line colonies. In the mixed case, we observe the expected increase in behavioral specialization.}
-	\label{fig:varymu}
+	\label{fig:varymuAB}
 \end{figure}
 
 
-\subsubsection{Varying threshold variance $\sigma$}
+\subsubsection{Varying threshold variance $\sigma$ by line}
 
-\subsubsection{Varying threshold stochasticity $\eta$}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.30_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
+	\caption{Varying threshold variance ($\sigma$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold variances, $\sigma^A = 0.1, \sigma^B = 0.3$. \\\hspace{0pt}\\
+\textbf{Interpretation}: Varying the threshold variance \textbf{does not} appear to alter the mean frequency of performing task 1. It is unclear from this particular plot if, in the mixed case, the mean of each line differs from the mean of the corresponding single-line colony (we would expect it to, since the line with higher variance is more likely pick up tasks, although this effect might be counterbalanced by those with high-end thresholds that don’t perform tasks as often), but we could easily check this.
+\\\hspace{0pt}\\
+If we do not observe a difference in the variance of task performance between the two types of ants (in all three experiments), then it is unlikely that this parameter governs the behavior of the single-line vs. mixed colonies. {\color{blue}Whether we observe such a difference or not should be able to be answered empirically (the data already there, additional statistical tests needed).}}
+	\label{fig:varysigmaAB}
+\end{figure}
 
-\subsubsection{Varying quit probability $\tau$}
 
+\subsubsection{Varying threshold stochasticity $\eta$ by line}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{Diff_Etas_HighB.png}
+	\caption{Varying threshold stochasticity ($\eta$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold slope parameters, $\eta^A = 7, \eta^B = 14$. \\\hspace{0pt}\\
+\textbf{Interpretation}: }
+	\label{fig:varyetaAB}
+\end{figure}
+
+\subsubsection{Varying quit probability $\tau$ by line}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.10_0.10_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.60}.png}
+	\caption{Varying quit probability ($\tau$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific quit probabilities, $\tau^A = 7, \tau^B = 14$. \\\hspace{0pt}\\
+\textbf{Observation}: Higher quit probability ($\tau^B = 0.6$) means that line B ants experience greater turnover rate, which results in smaller variance in frequency of performing task 1.
+{\color{blue}
+If there is a way to count the number of times the ants ``switch tasks'' (i.e. go to and from the nest), then we could measure a proxy for the average period that the ants spend on one task. The quit probability can be estimated as its inverse.}}
+	\label{fig:varytauAB}
+\end{figure}
 
 \subsection{\textit{Fixing} across lines and \textit{varying} across tasks}
+
+\subsubsection{Varying task performance efficiency $\alpha$ by task}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_2.00_6.00_quitP_0.20}.png}
+	\caption{Varying task performance efficiency ($\alpha$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific efficiencies, $\alpha_1 = 2, \alpha_2 = 6$. \\\hspace{0pt}\\
+\textbf{Observation}: In the single-line cases, the average task 1 performance frequency decreases. This is counterintuitive because I expected that the ants would spend more time performing task 1 because they are less efficient\dots? Also, what is happening in the mixed case?}
+	\label{fig:varyalpha12}
+\end{figure}
+
+\subsubsection{Varying mean threshold $\mu$ by task}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_20.00_BThreshM_10.00_20.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Varying mean threshold ($\mu$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific mean thresholds, $\mu_1 = 10, \mu_2 = 20$. \\\hspace{0pt}\\
+\textbf{Observation}: No visible change compared to the base case. My intuitive interpretation is that the stimulus for the task with the higher mean threshold (in this case task 2) decreases more slowly, which means that the ants have a smaller probability for performing that task (task 2) but over a longer period of time.}
+	\label{fig:varymu12}
+\end{figure}
+
+
+\subsubsection{Varying threshold variance $\sigma$ by task}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.30_BThreshM_10.00_10.00_BThreshSD_0.10_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
+	\caption{Varying threshold variance ($\sigma$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific threshold variances, $\sigma_1 = 0.1, \sigma_2 = 0.3$. \\\hspace{0pt}\\
+\textbf{Observation}: Changing the threshold variance for one task (task 2 in this case) affects the performance frequency of the other task (task 1) as well, as expected. Variance in task 1 performance frequency is greater than in the base case.}
+	\label{fig:varysigma12}
+\end{figure}
+
+
+\subsubsection{Varying task demand rate $\delta$ by task}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_1.80_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Varying task demand rate ($\delta$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific demand rates, $\delta_1 = 0.6, \delta_2 = 1.8$. \\\hspace{0pt}\\
+%\textbf{Interpretation}: 
+}
+	\label{fig:varydelta12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_1.80_1.80_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Higher task demand rate ($\delta$) for both tasks compared to the base case, with $\delta_1 = \delta_2 = 1.8$. \\\hspace{0pt}\\
+%\textbf{Interpretation}: 
+}
+	\label{fig:varydeltaextra}
+\end{figure}
+
+\subsection{\textit{Varying} across lines and \textit{Varying} across tasks}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_6.00_2.00_quitP_0.20}.png}
+	\caption{Varying task efficiency ($\alpha$) by both line and task. The line-and-task-specific efficiencies are, $\alpha^A_1 = 2,\ \alpha^A_2 = 6,\ \alpha^B_1 = 6,\ \alpha^B_2 = 6$. \\\hspace{0pt}\\
+%\textbf{Interpretation}: 
+}
+	\label{fig:varyalphaAB12}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.65\linewidth]{{AThreshM_10.00_20.00_BThreshM_20.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Higher task demand rate ($\delta$) for both tasks compared to the base case, with $\mu^A_1 = 10,\ \mu^A_2 = 20,\ \mu^B_1 = 20,\ \mu^B_2 = 10$. \\\hspace{0pt}\\
+%\textbf{Interpretation}: 
+}
+	\label{fig:varymuAB12}
+\end{figure}
+
+\section{Conclusions so far}
+
+\begin{itemize}
+	\item Varying task performance efficiency ($\alpha$) by line
+	\begin{itemize}
+		\item produces different mean task 1 performance frequencies
+		\item produces the `behavioral contagion' pattern
+	\end{itemize}
+	\item Varying mean threshold ($\mu$) and quit probability ($\tau$) by line
+	\begin{itemize}
+		\item does NOT produce different mean task 1 performance freq.
+		\item produces the `behavioral amplification' pattern
+	\end{itemize}
+	\item Seems biologically unlikely that the threshold variance ($\sigma$) varies by line
+
+\end{itemize}
 
 \begin{thebibliography}{99}
 
