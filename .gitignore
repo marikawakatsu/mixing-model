@@ -4,8 +4,11 @@ syntax: glob
 .Rhistory
 .RData
 .Ruserdata
+.DS_Store
+
 *~
 *.log
 *.aux
 *.synctex.gz
 *.pdf
+*.toc
