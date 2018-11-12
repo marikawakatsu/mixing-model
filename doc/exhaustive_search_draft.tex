@@ -17,7 +17,6 @@
 \usepackage{array}
 \usepackage{lscape}
 
-
 \usepackage[margin=1in]{geometry}
 \newcommand{\newword}[1]{\textbf{\emph{#1}}}
 
@@ -186,11 +185,19 @@
 \newcommand{\tw}{d\tilde{W}_t}
 \newcommand{\tws}{d\tilde{W}_s}
 
+\bibliographystyle{plain}
+\usepackage{float}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document-specific settings
+
 \title{Fixed Threshold Mixing Model ({\color{red}Draft})}
 \author{\hspace{0pt}\vspace{-30pt}}
 \date{Last updated: \today}
 
-\bibliographystyle{plain}
+\graphicspath{ {../output/Task_dist/} }
+\usepackage[margin=.3in]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -279,17 +286,35 @@ so that we can agree on what it is that we want the model to do.
 
 \subsection{Base case}
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Base case. Parameter values for both tasks (task 1 and task 2) and lines (line A and line B) as as follows: $\delta = 0.6$, $\alpha = 2$, $\mu = 10$, $\sigma = 0.1$, $\eta = 7$, $\tau = 0.2$.}
+	\label{fig:base}
+\end{figure}
+
 \subsection{\textit{Varying} across lines and \textit{fixing} across tasks}
 
 \subsubsection{Varying task performance efficiency $\alpha$}
 
-\begin{figure}[!h]
+\begin{figure}[H]
 	\centering
-	\label{fig:figure1}
-	\caption{Blah}
+	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20}.png}
+	\caption{Varying task performance efficiency ($\alpha$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific efficiencies, $\alpha^A = 2, \alpha^B = 6$. \\\hspace{0pt}\\
+\textbf{Interpretation}: Given identical demand rate for the two tasks, B ants spend less time performing tasks because the stimuli decrease more quickly (only task 1 is shown here, but would expect the same relation between A and B for task 2). There seems to be some \textbf{‘behavioral contagion’} (in Yuko’s terms), i.e., the A and B ants become more similar in behavior.}
+	\label{fig:varyalpha}
 \end{figure}
 
 \subsubsection{Varying mean threshold $\mu$}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.75\linewidth]{{AThreshM_10.00_10.00_BThreshM_20.00_20.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
+	\caption{Varying task performance efficiency ($\alpha$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific efficiencies, $\alpha^A = 2, \alpha^B = 6$. \\\hspace{0pt}\\
+\textbf{Interpretation}: Changing the mean internal threshold by line \textbf{does not} change mean frequency of task 1 performance in single-line colonies. In the mixed case, we observe the expected increase in behavioral specialization.}
+	\label{fig:varymu}
+\end{figure}
+
 
 \subsubsection{Varying threshold variance $\sigma$}
 
