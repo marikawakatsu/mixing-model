@@ -1,5 +1,7 @@
 syntax: glob
 
+.DS_Store
+
 .Rproj.user
 .Rhistory
 .RData
