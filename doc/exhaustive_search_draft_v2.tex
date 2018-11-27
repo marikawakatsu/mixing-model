@@ -24,8 +24,7 @@
 \newcommand{\into}{\hookrightarrow}
 \newcommand{\onto}{\twoheadrightarrow}
 
-%Things LaTeX names by appearance, rather than meaning
-% By now, I've learned the standard LaTeX names, but I remember they used to give me trouble, so here are some macros
+%Macros
 \newcommand{\isom}{\cong} %The isomorphism symbol
 \newcommand{\union}{\cup}
 \newcommand{\intersection}{\cap}
@@ -62,12 +61,11 @@
 \DeclareMathOperator{\ccc}{\mathrm{cold}}
 
 
-
 %This makes alternating tensors look right in displayed equations
 \newcommand{\Alt}{\bigwedge\nolimits}
 
+%Blackboard bold letters
 
-%Blackboard bold letters.
 \renewcommand{\AA}{\mathbb{A}}
 \newcommand{\BB}{\mathbb{B}}
 \newcommand{\CC}{\mathbb{C}}
@@ -299,7 +297,7 @@ so that we can agree on what it is that we want the model to do.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.5\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20}.png}
+	\includegraphics[width=.5\linewidth]{{New_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20}.png}
 	\caption{Varying task performance efficiency ($\alpha$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific efficiencies, $\alpha^A = 2, \alpha^B = 6$. \\\hspace{0pt}\\
 \textbf{Interpretation}: Given identical demand rate for the two tasks, B ants spend less time performing tasks because the stimuli decrease more quickly (only task 1 is shown here, but would expect the same relation between A and B for task 2). There seems to be some convergence of behavior between lines in the mixed case, i.e., the A and B ants become more similar in behavior. This would be similar to one of the instances of apparent "behavioral contagion" found in the experiments.}
 	\label{fig:varyalphaAB}
@@ -357,7 +355,7 @@ If there is a way to count the number of times the ants ``switch tasks'' (i.e. g
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.5\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_2.00_6.00_quitP_0.20}.png}
+	\includegraphics[width=.5\linewidth]{{New_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_2.00_6.00_quitP_0.20}.png}
 	\caption{Varying task performance efficiency ($\alpha$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific efficiencies, $\alpha_1 = 2, \alpha_2 = 6$. \\\hspace{0pt}\\
 \textbf{Observation}: In the single-line cases, the average task 1 performance frequency decreases. This is counterintuitive because I expected that the ants would spend more time performing task 1 because they are less efficient\dots? Also, what is happening in the mixed case?}
 	\label{fig:varyalpha12}
@@ -409,8 +407,8 @@ If there is a way to count the number of times the ants ``switch tasks'' (i.e. g
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=.5\linewidth]{{AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_6.00_2.00_quitP_0.20}.png}
-	\caption{Varying task efficiency ($\alpha$) by both line and task. The line-and-task-specific efficiencies are, $\alpha^A_1 = 2,\ \alpha^A_2 = 6,\ \alpha^B_1 = 6,\ \alpha^B_2 = 6$. \\\hspace{0pt}\\
+	\includegraphics[width=.5\linewidth]{{New_AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.10_0.10_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_6.00_Balpha_6.00_2.00_quitP_0.20_0.20}.png}
+	\caption{Varying task efficiency ($\alpha$) by both line and task. The line-and-task-specific efficiencies are $\alpha^A_1 = 2,\ \alpha^A_2 = 6,\ \alpha^B_1 = 6,\ \alpha^B_2 = 6$. \\\hspace{0pt}\\
 %\textbf{Interpretation}: 
 }
 	\label{fig:varyalphaAB12}
@@ -419,7 +417,7 @@ If there is a way to count the number of times the ants ``switch tasks'' (i.e. g
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.5\linewidth]{{AThreshM_10.00_20.00_BThreshM_20.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
-	\caption{Higher task demand rate ($\delta$) for both tasks compared to the base case, with $\mu^A_1 = 10,\ \mu^A_2 = 20,\ \mu^B_1 = 20,\ \mu^B_2 = 10$. \\\hspace{0pt}\\
+	\caption{Varying mean threshold ($\mu$) by both line and task. The line-and-task-specific efficiencies are $\mu^A_1 = 10,\ \mu^A_2 = 20,\ \mu^B_1 = 20,\ \mu^B_2 = 10$. \\\hspace{0pt}\\
 %\textbf{Interpretation}: 
 }
 	\label{fig:varymuAB12}
