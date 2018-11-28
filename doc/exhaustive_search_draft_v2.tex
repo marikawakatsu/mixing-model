@@ -14,7 +14,7 @@
 \renewcommand{\appendixtocname}{Appendix}
 \renewcommand{\appendixpagename}{Appendix}
 
-% \usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{empheq}
 \usepackage{blkarray}
 \usepackage{cancel}
@@ -213,7 +213,7 @@
 \section{Overview}
 
 \subsection{Aim}
-Our goal is to understand how varying one or more or the parameters of the fixed threshold model affects the behavior of single line (A or B) colonies and mixed colonies. Specifically, we are interested what parameter combinations produce the following patterns that (we think) we observe in the empirical data (Figs.~1~and~2 in Yuko's document):
+Our goal is to understand how varying one or more or the parameters of the fixed threshold model (FTM) affects the behavior of single line (A or B) colonies and mixed colonies. Specifically, we are interested what parameter combinations produce the following patterns that (we think) we observe in the empirical data (Figs.~1~and~2 in Yuko's document):
 
 \begin{itemize}
     \item \textbf{Differences in colony average behavior}: 
@@ -223,11 +223,19 @@ Our goal is to understand how varying one or more or the parameters of the fixed
     When the A and B lines are mixed in the experiment, the two genotypes appear to become behaviorally more similar. Moreover, this behavioral `contagion' is asymmetric, and the direction of convergence (i.e. whether the mean RMSD in the mixed case becomes closer to that of A alone or B alone) depends on the type of larvae. We therefore expect the model to show 1) \textit{convergence in mean frequencies of task 1 performance between line A and B ants} and 2) \textit{different asymmetries in such behavioral convergence depending on some relative property of tasks}.
     
 \end{itemize}
-   
+
+\subsection{The two-line fixed threshold model}
+{\color{red}Write down equations for the model}
+
 \subsection{Parameter exploration}
-{\color{red}Plain English explanation of what I'm doing here with the paramters}
-\\
+
+\subsubsection{Base case}   
+{\color{red}Plain English explanation of what I'm doing here with the paramters}. 
 For reference, the parameters originally used in Ulrich et al.~\cite{ulrich2018} are summarized in Table~\ref{tab:original} in Appendix~\ref{sec:original}.
+
+\subsubsection{Varying parameters} 
+
+Of the parameters in the above model, we think that the following five could plausibly capture the inherent differences between the two genotypes (A and B): \textbf{the efficiency parameter $\alpha$, the mean threshold $\mu$, the threshold variation $\sigma$, the threshold stochasticity parameter $\eta$}, and \textbf{the quit probability~$\tau$}. To systematically investigate their effects, we have taken the base model and varied one of the five parameters at a time. For example, when testing the effects of varying the task efficiency $\alpha$ between the two lines, we introduced variation in $\alpha$ only ($\alpha^A = 2$, $\alpha^B = 6$) and kept all other parameter values identical the base model ($\delta = 0.6$, $\mu = 10$, $\sigma = 0.1$, $\eta = 7$, $\tau = 0.2$). Table~\ref{tab:byline} summarizes the specific values we have tested. 
 
 %\subsubsection{\textit{Varying} across lines and \textit{fixing} across tasks}
 \begin{table}[H] \small
@@ -238,7 +246,7 @@ For reference, the parameters originally used in Ulrich et al.~\cite{ulrich2018}
       $n$ & Fixed & $n = 4, 16$ & Based on colony sizes used in the mixing experiments \\ \hline
       $m$ & Fixed & $m = 2$ & For simplicity; no compelling reason to change from \cite{ulrich2018} \\ \hline
       $\delta$ & Fixed & $\delta = 0.6$ & Stimulus increase rate should not depend on line\\ \hline
-      $\alpha$ & By line  & $\alpha^A = 2,\alpha^B = 6$ & Line B ants are be more efficient than line A ants at both tasks \\ \hline
+      $\alpha$ & By line  & $\alpha^A = 2,\alpha^B = 6$ & Line B ants are more efficient than line A ants at both tasks \\ \hline
       $\mu$ & By line  & $\mu^A = 10,\mu^B = 20 $ & Line B ants have higher mean thresholds than line A ants for both tasks; creates a bimodal distribution of thresholds in the mixed case \\ \hline
       $\sigma$ & By line & $\sigma^A = 0.1, \sigma^B = 0.3$ & Line B ants have a greater range of internal thresholds than line A ants; seems unlikely since the variance in RMSD does not appear to differ between lines A and B, but included here for thoroughness \\ \hline
       $\eta$ & By line & $\eta^A = 7, \eta^B = 14 $ &  Line B ants respond more deterministically to both stimuli than line A ants\\ \hline
@@ -334,8 +342,8 @@ If there is a way to count the number of times the ants ``switch tasks'' (i.e. g
 \newpage
 \begin{appendices}
 
-\section{The original model in Ulrich et al.} \label{sec:original}
-Table~\ref{tab:original} summarizes the original fixed threshold model for single-line colonies in Ulrich et al.~\cite{ulrich2018}.  Here we only include the parameter values in Fig.~3 of the paper, which serve as the base model for our investigation.
+\section{FTM in Ulrich et al.} \label{sec:original}
+Table~\ref{tab:original} summarizes the parameters used in the fixed threshold model for single-line colonies in Ulrich et al.~\cite{ulrich2018}.  Here we only include the parameter values in Fig.~3 of the paper, on which we have based the base model for our investigation.
 
 \begin{table}[H] \small
   \begin{center}
@@ -357,9 +365,9 @@ Table~\ref{tab:original} summarizes the original fixed threshold model for singl
 \end{table}
 
 
-\section{Additional results: \textit{varying} across lines and \textit{fixing} across tasks (Supplement to Section~\ref{sec:byline})}
+\section{Additional results: \textit{varying} across lines and \textit{fixing} across tasks}
 
-See Table~\ref{tab:byline} for parameter values.
+Here we present additional figures that supplement the results in Section~\ref{sec:byline}. See Table~\ref{tab:byline} for parameter values.
 
 
 \subsection{Varying threshold variance $\sigma$ by line}
