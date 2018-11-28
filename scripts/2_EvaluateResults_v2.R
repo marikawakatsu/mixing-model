@@ -60,11 +60,11 @@ task_dist <- task_dist %>%
                                  paste("AB", unique(replicate), sep = "-")) ))
 
 # Plot
-gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
+gg_dist <- ggplot(data = task_dist, aes(y = Task2, x = set, color = Line)) +
   geom_point(size = 0.3) +
   theme_classic() +
   labs(x = "Replicate",
-       y = "Frequency Task 1") +
+       y = "Frequency Task 2") +
   #scale_color_brewer(palette = "Paired") +
   scale_color_manual(values = c("#ca0020", "#0571b0")) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
@@ -74,5 +74,5 @@ gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
   facet_grid(n~.)
 gg_dist
 
-ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 3, height = 3, dpi = 400)
+ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
 
