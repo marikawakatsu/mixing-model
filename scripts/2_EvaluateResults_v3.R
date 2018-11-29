@@ -3,8 +3,8 @@
 # Evaluate ensemble model outputs
 #
 ################################################################################
-
 rm(list = ls())
+
 source("scripts/util/__Util__MASTER.R")
 
 ####################
@@ -29,12 +29,12 @@ deltas         <- c(0.6, 0.6) #vector of stimuli increase rates
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m*3) #efficiency of task performance
-B_alpha        <- c(m*3, m)
+B_alpha        <- c(m, m*3)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
 file_name1 <- sprintf("New_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
                       A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 
-                      A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP[1])  # for quitp[1] = quitP[2]
+                      A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP[1])
 
 file_name2 <- sprintf("New_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
                       A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
@@ -42,7 +42,7 @@ file_name2 <- sprintf("New_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%
                       deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
                       B_alpha[1], B_alpha[2], quitP[1], quitP[2])
 
-file_name <- file_name2
+file_name <- file_name1
 rm(file_name1, file_name2)
 
 load(paste0("output/Rdata/", file_name, ".Rdata"))
@@ -60,11 +60,11 @@ task_dist <- task_dist %>%
                                  paste("AB", unique(replicate), sep = "-")) ))
 
 # Plot
-gg_dist <- ggplot(data = task_dist, aes(y = Task2, x = set, color = Line)) +
+gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
   geom_point(size = 0.3) +
   theme_classic() +
   labs(x = "Replicate",
-       y = "Frequency Task 2") +
+       y = "Frequency Task 1") +
   #scale_color_brewer(palette = "Paired") +
   scale_color_manual(values = c("#ca0020", "#0571b0")) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
@@ -74,5 +74,5 @@ gg_dist <- ggplot(data = task_dist, aes(y = Task2, x = set, color = Line)) +
   facet_grid(n~.)
 gg_dist
 
-ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
+ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 3, height = 3, dpi = 400)
 

@@ -7,7 +7,7 @@
 rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
-file_name <- "Diff_Etas_HighB"
+# file_name <- "Diff_Etas_HighB"
 
 ####################
 # Set global variables
@@ -76,14 +76,14 @@ for (i in 1:length(Ns)) {
     #   StimRates      <- c(0.6, 0.6) * 1.4
     # }
     
-    # Set work efficiency by lines
+    # Set work efficiency by lines # updated 11/15/18
     if (mix == "A") {
-      alpha      <- matrix(rep(A_alpha, n), ncol = m)
+      alpha      <- matrix(rep(A_alpha, n), ncol = m, byrow = T)
     } else if (mix == "AB") {
       input      <- c( rep(A_alpha, n/2), rep(B_alpha, n/2) ) 
       alpha      <- matrix(input, ncol = m, byrow = T)
     } else if (mix == "B") {
-      alpha      <- matrix(rep(B_alpha, n), ncol = m)
+      alpha      <- matrix(rep(B_alpha, n), ncol = m, byrow = T)
     }
     
     # Seed Etas (threshold slopes) by lines
