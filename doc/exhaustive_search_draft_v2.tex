@@ -212,7 +212,7 @@
 \newpage
 \section{Overview}
 
-\subsection{Aim}
+\subsection{Aim}\label{sec:aim}
 Our goal is to understand how varying one or more or the parameters of the fixed threshold model (FTM) affects the behavior of single line (A or B) colonies and mixed colonies. Specifically, we are interested what parameter combinations produce the following patterns that (we think) we observe in the empirical data (Figs.~1~and~2 in Yuko's document):
 
 \begin{itemize}
@@ -389,21 +389,22 @@ Similar to the case where $\mu$ is varied by line only (Fig.~\ref{fig:varymuAB})
 
 \section{Conclusions so far}
 
+By systematically varying the parameters of the FTM, we have made progress in disentangling their effects on the model behavior in both single-line and mixed cases. Our main takeaways so far are as follows:
+
 \begin{itemize}
-	\item Varying task performance efficiency ($\alpha$) by line
-	\begin{itemize}
-		\item produces different mean task 1 performance frequencies
-		\item produces the `behavioral contagion' pattern
-	\end{itemize}
-	\item Varying mean threshold ($\mu$) and quit probability ($\tau$) by line
-	\begin{itemize}
-		\item does NOT produce different mean task 1 performance freq.
-		\item produces the `behavioral amplification' pattern
-	\end{itemize}
-	\item Seems biologically unlikely that the threshold variance ($\sigma$) varies by line
+	\item Varying the \textbf{task performance efficiency ($\alpha$)} by line produces 1) different mean task 1 performance frequencies in single-line colonies, analogous to different mean RMSD values observed in the experiment, and 2) convergence of behavior between lines in the mixed colonies, similar to the asymmetric behavioral ``contagion'' pattern observed in the experiment.
+	
+	\item Contrary to what we might expect intuitively, varying the \textbf{mean threshold ($\mu$)} by line does \textit{not} produce different mean task 1 performance frequencies. In the mixed case, however, we do observe the behavioral ``amplification'' pattern, i.e., greater behavioral specialization.
+
+	\item Similarly, varying the \textbf{quit probability ($\tau$)} by line does \textit{not} produce different mean task 1 performance frequencies but produces the behavioral amplification pattern. Additionally, varying $\tau$ results in different variances in the frequencies of task 1 performance among single-line colonies. 
+	From the data, the single-line colonies do not appear to exhibit significantly different variances in their RMSD values,
+so it seems biologically unlikely that $\tau$ varies significantly by line.
 
 \end{itemize}
 
+Overall, the FTM seems to at least partially explain the key patterns observed in the two-line mixing experiments, namely 1) the differences in colony average behavior and 2) the convergence of behavior between lines in the mixed case (Section~\ref{sec:aim}). We have not yet been able to capture the different asymmetries in behavioral convergence that seem to arise  depending on the type of larvae. A natural next step would be to test if varying a combination of the above three parameters ($\alpha$, $\mu$, $\tau$) produces this pattern.
+
+We have two main questions for you that we think would help us move forward with this project. First, \textbf{do the above theoretical results make biological sense?} We would like to know if, for example, it is biologically plausible that the line A and B ants differ significantly in their task performance efficiencies. Second, \textbf{which of the experimental patterns discussed here would you consider to be actually significant, statistically or mechanistically?} We would also be interested in knowing if you have found any other significant patterns since our last meeting.
 
 \begin{thebibliography}{99}
 
@@ -412,39 +413,6 @@ Similar to the case where $\mu$ is varied by line only (Fig.~\ref{fig:varymuAB})
 \end{thebibliography}
 
 \begin{appendices}
-
-\section{Additional results: varying parameters by line only}\vspace{-5pt}
-Here we present additional figures that supplement the results in Section~\ref{sec:byline}. See Table~\ref{tab:byline} for parameter values.\vspace{-5pt}
-
-\subsection{Varying threshold variance $\sigma$ by line}\vspace{-5pt}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.30_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
-	\caption{Varying threshold variance ($\sigma$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold variances, $\sigma^A = 0.1, \sigma^B = 0.3$. 
-%	\\\hspace{0pt}\\
-%\textbf{Observation}: Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1.
-%\\\hspace{0pt}\\
-%If we do not observe a difference in the variance of task performance between the two types of ants (in all three experiments), then it is unlikely that this parameter governs the behavior of the single-line vs. mixed colonies. {\color{blue}Whether we observe such a difference or not should be able to be answered empirically (the data already there, additional statistical tests needed).}
-\vspace{-10pt}}
-	\label{fig:varysigmaAB}
-\end{figure}
-
-Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1. {\color{blue}Additionally, the data do not appear to show significant differences in the variance of RMSD between A-only and B-only colonies---although additional statistical tests might be needed to confirm this.}
-In this case, it seems biologically implausible that variation in $\sigma$ governs the behavior of the single-line vs. mixed colonies.
-
-
-\subsection{Varying threshold stochasticity $\eta$ by line}\vspace{-5pt}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.4\linewidth]{Diff_Etas_HighB.png}
-	\caption{Varying threshold stochasticity ($\eta$) by line. The parameter values are identical to those in the base case, with the exception of line-specific threshold slope parameters, $\eta^A = 7, \eta^B = 14$.
-	\vspace{-5pt}} 
-%	\\\hspace{0pt}\\
-%\textbf{Observation}: 	
-	\label{fig:varyetaAB}
-\end{figure}
 
 \section{Additional results: varying parameters by task only}\label{sec:bytask}
 
@@ -523,6 +491,40 @@ As we expected, changing the threshold variance for one task (task 2 in this cas
 }
 	\label{fig:varydelta12}
 \end{figure}
+
+
+\section{Additional results: varying parameters by line only}\vspace{-5pt}
+Here we present additional figures that supplement the results in Section~\ref{sec:byline}. See Table~\ref{tab:byline} for parameter values.\vspace{-5pt}
+
+\subsection{Varying threshold stochasticity $\eta$ by line}\vspace{-5pt}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\linewidth]{Diff_Etas_HighB.png}
+	\caption{Varying threshold stochasticity ($\eta$) by line. The parameter values are identical to those in the base case, with the exception of line-specific threshold slope parameters, $\eta^A = 7, \eta^B = 14$.
+	\vspace{-5pt}} 
+%	\\\hspace{0pt}\\
+%\textbf{Observation}: 	
+	\label{fig:varyetaAB}
+\end{figure}
+
+\subsection{Varying threshold variance $\sigma$ by line}\vspace{-5pt}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.30_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
+	\caption{Varying threshold variance ($\sigma$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold variances, $\sigma^A = 0.1, \sigma^B = 0.3$. 
+%	\\\hspace{0pt}\\
+%\textbf{Observation}: Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1.
+%\\\hspace{0pt}\\
+%If we do not observe a difference in the variance of task performance between the two types of ants (in all three experiments), then it is unlikely that this parameter governs the behavior of the single-line vs. mixed colonies. {\color{blue}Whether we observe such a difference or not should be able to be answered empirically (the data already there, additional statistical tests needed).}
+\vspace{-10pt}}
+	\label{fig:varysigmaAB}
+\end{figure}
+
+Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1. {\color{blue}Additionally, the data do not appear to show significant differences in the variance of RMSD between A-only and B-only colonies---although additional statistical tests might be needed to confirm this.}
+In this case, it seems biologically implausible that variation in $\sigma$ governs the behavior of the single-line vs. mixed colonies.
+
 
 %\begin{figure}[H]
 %	\centering
