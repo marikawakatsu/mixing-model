@@ -298,7 +298,7 @@ Here we highlight results that either show some significant behavior or we think
 	\label{fig:base}
 \end{figure}
 
-\subsection{\textit{Varying} by line and \textit{fixing} by task}\label{sec:byline}
+\subsection{Varying parameters by line only}\label{sec:byline}
 
 \subsubsection{Varying task performance efficiency $\alpha$ by line}
 
@@ -342,34 +342,50 @@ Somewhat counterintuitively, changing the mean internal threshold by line \texti
 %Higher quit probability ($\tau^B = 0.8$) means that line B ants experience greater turnover rate, which results in smaller variance in frequency of performing task 1.
 %{\color{blue}
 %If there is a way to count the number of times the ants ``switch tasks'' (i.e. go to and from the nest), then we could measure a proxy for the average period that the ants spend on one task. The quit probability can be estimated as its inverse.}
-\vspace{-10pt}}
+\vspace{-5pt}}
 	\label{fig:varytauAB}
 \end{figure}
 
-Higher quit probability ($\tau^B$ = $0.8$) means that line B ants experience greater turnover rate, which results in smaller variance in frequency of performing task 1.
+The higher quit probability ($\tau^B$ = $0.8$) leads to a higher turnover rate for B ants, which results in a smaller variance in the frequency of performing task 1.
 {\color{blue}
 We are wondering if there is a way to empirically measure the quit probability.
-For example, might it be possible to estimate the average period that the ants spend on one task by counting the number of times the ants ``switch tasks'' (i.e. go to and from the nest). Then perhaps the quit probability can be estimated as its inverse. If there is no significant difference in this quit probability proxy between A and B ants, then the variation in $\tau$ would be a biologically implausible explanation for the mixing patterns.}
+For example, might it be possible to estimate the average period that the ants spend on one task by counting the number of times they ``switch tasks'' (i.e. go to and from the nest). Then the quit probability can be estimated as its inverse. If there is no significant difference in this quit probability proxy between A and B ants, then the variation in $\tau$ would be a biologically implausible explanation for the mixing patterns.}
 
-\subsection{\textit{Varying} by line and \textit{varying} by task}
+\newpage
+\subsection{Varying parameters by both line and task}
+\vspace{-5pt}
+%In addition to varying parameters by line (Section~\ref{sec:byline}) and task (Appendix~\ref{sec:bytask}) only,
+%We have additionally tested two cases where parameters vary both by line and by task.\vspace{-10pt}
 
+\subsubsection{Varying task performance efficiency $\alpha$ by both line and task}
+\vspace{-7pt}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{New_AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.10_0.10_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_6.00_Balpha_6.00_2.00_quitP_0.20_0.20}.png}
-	\caption{Varying task efficiency ($\alpha$) by both line and task. The line-and-task-specific efficiencies are $\alpha^A_1 = 2,\ \alpha^A_2 = 6,\ \alpha^B_1 = 6,\ \alpha^B_2 = 2$. \\\hspace{0pt}\\
+	\caption{Varying task efficiency ($\alpha$) by both line and task. The line-and-task-specific efficiencies are $\alpha^A_1 = 2,\ \alpha^A_2 = 6,\ \alpha^B_1 = 6,\ \alpha^B_2 = 2$. 
+%	\\\hspace{0pt}\\
 %\textbf{Observation}: 
+\vspace{-10pt}
 }
 	\label{fig:varyalphaAB12}
 \end{figure}
 
+Similar to the case where $\alpha$ is varied by line only (Fig.~\ref{fig:varyalphaAB}), varying $\alpha$ by both line and task produces different mean frequencies of task 1 performance between A-only and B-only colonies. However, unlike in Fig.~\ref{fig:varyalphaAB}, where B-only colonies performed both tasks (1 and 2) less frequently compared to A-only colonies, here the B-only colonies perform task 2 more frequently than A-only colonies. Again, this supports our intuition that the more efficient an ant is at a task, the less time it spends performing that task.
+\vspace{-7pt}
+
+\subsubsection{Varying mean threshold $\mu$ by both line and task}
+\vspace{-7pt}
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_20.00_BThreshM_20.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
-	\caption{Varying mean threshold ($\mu$) by both line and task. The line-and-task-specific efficiencies are $\mu^A_1 = 10,\ \mu^A_2 = 20,\ \mu^B_1 = 20,\ \mu^B_2 = 10$. \\\hspace{0pt}\\
+	\caption{Varying mean threshold ($\mu$) by both line and task. The line-and-task-specific efficiencies are $\mu^A_1 = 10,\ \mu^A_2 = 20,\ \mu^B_1 = 20,\ \mu^B_2 = 10$.
 %\textbf{Observation}: 
+\vspace{-10pt}
 }
 	\label{fig:varymuAB12}
 \end{figure}
+
+Similar to the case where $\mu$ is varied by line only (Fig.~\ref{fig:varymuAB}), varying $\mu$ by both line and task \textit{does not} produce different mean frequencies of task 1 performance between A-only and B-only colonies. The reversed ordering of the thresholds between lines A and B (A ants have a higher mean threshold for task 2 compared to task 1, and vice versa for B ants) leads to a greater behavioral specialization in the mixed case compared to Fig.~\ref{fig:varymuAB}.
 
 \section{Conclusions so far}
 
@@ -388,45 +404,55 @@ For example, might it be possible to estimate the average period that the ants s
 
 \end{itemize}
 
-\newpage
+
+\begin{thebibliography}{99}
+
+\bibitem{ulrich2018} Y. Ulrich, J. Saragosti, C. K. Tokita, C. E. Tarnita, D. J. C. Kronauer, ``Fitness benefits and emergent division of labour at the onset of group living,'' \textit{Nature}, vol. 560, pp. 635-638, Aug. 2018.
+
+\end{thebibliography}
+
 \begin{appendices}
 
-\section{Additional results: \textit{varying} by line and \textit{fixing} by task}
+\section{Additional results: varying parameters by line only}\vspace{-5pt}
+Here we present additional figures that supplement the results in Section~\ref{sec:byline}. See Table~\ref{tab:byline} for parameter values.\vspace{-5pt}
 
-Here we present additional figures that supplement the results in Section~\ref{sec:byline}. See Table~\ref{tab:byline} for parameter values.
-
-
-\subsection{Varying threshold variance $\sigma$ by line}
+\subsection{Varying threshold variance $\sigma$ by line}\vspace{-5pt}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.10_BThreshM_10.00_10.00_BThreshSD_0.30_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
-	\caption{Varying threshold variance ($\sigma$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold variances, $\sigma^A = 0.1, \sigma^B = 0.3$. \\\hspace{0pt}\\
-\textbf{Observation}: Varying the threshold variance \textbf{does not} appear to alter the mean frequency of performing task 1. It is unclear from this particular plot if, in the mixed case, the mean of each line differs from the mean of the corresponding single-line colony (we would expect it to, since the line with higher variance is more likely pick up tasks, although this effect might be counterbalanced by those with high-end thresholds that don’t perform tasks as often), but we could easily check this.
-\\\hspace{0pt}\\
-If we do not observe a difference in the variance of task performance between the two types of ants (in all three experiments), then it is unlikely that this parameter governs the behavior of the single-line vs. mixed colonies. {\color{blue}Whether we observe such a difference or not should be able to be answered empirically (the data already there, additional statistical tests needed).}}
+	\caption{Varying threshold variance ($\sigma$) by line. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of line-specific threshold variances, $\sigma^A = 0.1, \sigma^B = 0.3$. 
+%	\\\hspace{0pt}\\
+%\textbf{Observation}: Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1.
+%\\\hspace{0pt}\\
+%If we do not observe a difference in the variance of task performance between the two types of ants (in all three experiments), then it is unlikely that this parameter governs the behavior of the single-line vs. mixed colonies. {\color{blue}Whether we observe such a difference or not should be able to be answered empirically (the data already there, additional statistical tests needed).}
+\vspace{-10pt}}
 	\label{fig:varysigmaAB}
 \end{figure}
 
+Varying the threshold variance \textit{does not} appear to alter the mean frequency of performing task 1. {\color{blue}Additionally, the data do not appear to show significant differences in the variance of RMSD between A-only and B-only colonies---although additional statistical tests might be needed to confirm this.}
+In this case, it seems biologically implausible that variation in $\sigma$ governs the behavior of the single-line vs. mixed colonies.
 
-\subsection{Varying threshold stochasticity $\eta$ by line}
+
+\subsection{Varying threshold stochasticity $\eta$ by line}\vspace{-5pt}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{Diff_Etas_HighB.png}
-	\caption{Varying threshold stochasticity ($\eta$) by line. The parameter values are identical to those in the base case, with the exception of line-specific threshold slope parameters, $\eta^A = 7, \eta^B = 14$.} 
+	\caption{Varying threshold stochasticity ($\eta$) by line. The parameter values are identical to those in the base case, with the exception of line-specific threshold slope parameters, $\eta^A = 7, \eta^B = 14$.
+	\vspace{-5pt}} 
 %	\\\hspace{0pt}\\
-%\textbf{Observation}: 
+%\textbf{Observation}: 	
 	\label{fig:varyetaAB}
 \end{figure}
 
-\section{Additional results: \textit{fixing} by line and \textit{varying} by task}\label{sec:bytask}
+\section{Additional results: varying parameters by task only}\label{sec:bytask}
 
 \subsection{Parameters values tested}
 
 \begin{table}[H] \small
   \begin{center}
-    \begin{tabular}{|c|>{\centering}m{0.65in}|>{\centering}m{1.15in}|m{3.5in}|} 
+    \begin{tabular}{|c|>{\centering}m{0.5in}|>{\centering}m{1.1in}|m{3.8in}|} 
       \hline
       \textbf{Parameter} & \textbf{Varied?} & \textbf{Model value(s)} & \textbf{Notes / Biological interpretation} \\ \hline
       $n$ & Fixed & $n = 4, 16$ & Based on colony sizes used in the mixing experiments \\ \hline
@@ -434,7 +460,7 @@ If we do not observe a difference in the variance of task performance between th
       $\delta$ & By task & $\delta_1 = 0.6, \delta_2 = 1.8 $ & Demand for task 2 increases more rapidly than that for task 1; $\delta$ could capture the difference between A larvae vs. B larvae? \\ \hline
       $\alpha$ & By task  & $\alpha_1 = 2,\alpha_2 = 6$ & Ants are more efficient at task 2 than at task 1 \\ \hline
       $\mu$ & By task  & $\mu_1 = 10,\mu_2 = 20 $ & The mean threshold for task 2 is higher than that for task 1\\ \hline
-      $\sigma$ & By task & $\sigma_1 = 0.1, \sigma_2 = 0.3$ & Ants vary more in their international thresholds for task 2 than those for task 1 \\ \hline
+      $\sigma$ & By task & $\sigma_1 = 0.1, \sigma_2 = 0.3$ & Ants vary more in their internal thresholds for task 2 than for task 1 \\ \hline
       $\eta$ & Fixed & $\eta = 7$ & Stochasticity in behavior seems inherent to the ants, not tasks\\ \hline
       $\tau$ & Fixed & $\tau = 0.2$ & 
 %      Ants have a shorter period for task 2 relative to task 1 (e.g., task 2 is more taxing so they need to take more breaks) 
@@ -450,8 +476,9 @@ If we do not observe a difference in the variance of task performance between th
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{New_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_6.00_Balpha_2.00_6.00_quitP_0.20}.png}
-	\caption{Varying task performance efficiency ($\alpha$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific efficiencies, $\alpha_1 = 2, \alpha_2 = 6$. \\\hspace{0pt}\\
-\textbf{Observation}: In the single-line cases, the average task 1 performance frequency decreases. This is counterintuitive because I expected that the ants would spend more time performing task 1 because they are less efficient\dots? Also, what is happening in the mixed case?}
+	\caption{Varying task performance efficiency ($\alpha$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific efficiencies, $\alpha_1 = 2, \alpha_2 = 6$. 
+	% alpha_bug fixed
+}
 	\label{fig:varyalpha12}
 \end{figure}
 
@@ -460,22 +487,31 @@ If we do not observe a difference in the variance of task performance between th
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_20.00_BThreshM_10.00_20.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20}.png}
-	\caption{Varying mean threshold ($\mu$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific mean thresholds, $\mu_1 = 10, \mu_2 = 20$. \\\hspace{0pt}\\
-\textbf{Observation}: No visible change compared to the base case. My intuitive Observation is that the stimulus for the task with the higher mean threshold (in this case task 2) decreases more slowly, which means that the ants have a smaller probability for performing that task (task 2) but over a longer period of time.}
+	\caption{Varying mean threshold ($\mu$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific mean thresholds, $\mu_1 = 10, \mu_2 = 20$. 
+%	\\\hspace{0pt}\\
+%\textbf{Observation}: 
+%No visible change compared to the base case. Our intuitive interpretation is that the stimulus for the task with the higher mean threshold (in this case task 2) decreases more slowly, which means that the ants have a smaller probability for performing that task (task 2) but over a longer period of time.
+}
 	\label{fig:varymu12}
 \end{figure}
 
+No visible change compared to the base case. Our intuitive interpretation is that the stimulus for the task with the higher mean threshold (in this case task 2) decreases more slowly, which means that the ants have a smaller probability for performing that task (task 2) but over a longer period of time.
 
 \subsection{Varying threshold variance $\sigma$ by task}
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=.4\linewidth]{{AThreshM_10.00_10.00_AThreshSD_0.10_0.30_BThreshM_10.00_10.00_BThreshSD_0.10_0.30_deltas_0.60_0.60_threshSlope_7_7_Aalpha_2.00_2.00_Balpha_2.00_2.00_quitP_0.20_0.20}.png}
-	\caption{Varying threshold variance ($\sigma$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific threshold variances, $\sigma_1 = 0.1, \sigma_2 = 0.3$. \\\hspace{0pt}\\
-\textbf{Observation}: Changing the threshold variance for one task (task 2 in this case) affects the performance frequency of the other task (task 1) as well, as expected. Variance in task 1 performance frequency is greater than in the base case.}
+	\caption{Varying threshold variance ($\sigma$) by task. The parameter values are identical to those in the base case (Fig.~\ref{fig:base}) with the exception of task-specific threshold variances, $\sigma_1 = 0.1, \sigma_2 = 0.3$. 
+%	\\\hspace{0pt}\\
+%\textbf{Observation}: 
+%Changing the threshold variance for one task (task 2 in this case) affects the performance frequency of the other task (task 1) as well, as expected. Variance in task 1 performance frequency is greater than in the base case.
+}
 	\label{fig:varysigma12}
 \end{figure}
 
+The variance in task 1 performance frequency is greater than in the base case.
+As we expected, changing the threshold variance for one task (task 2 in this case) affects the performance frequency of the other task (task 1) as well. 
 
 \subsection{Varying task demand rate $\delta$ by task}
 
@@ -496,15 +532,8 @@ If we do not observe a difference in the variance of task performance between th
 %}
 %	\label{fig:varydeltaextra}
 %\end{figure}
-
 \end{appendices}
 
-
-\begin{thebibliography}{99}
-
-\bibitem{ulrich2018} Y. Ulrich, J. Saragosti, C. K. Tokita, C. E. Tarnita, D. J. C. Kronauer, ``Fitness benefits and emergent division of labour at the onset of group living,'' \textit{Nature}, vol. 560, pp. 635-638, Aug. 2018.
-
-\end{thebibliography}
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
