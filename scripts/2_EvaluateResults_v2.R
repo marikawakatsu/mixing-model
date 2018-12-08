@@ -29,7 +29,7 @@ deltas         <- c(0.6, 0.6) #vector of stimuli increase rates
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
 A_alpha        <- c(m, m*3) #efficiency of task performance
-B_alpha        <- c(m*3, m)
+B_alpha        <- c(m, m*3)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
 file_name1 <- sprintf("New_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
@@ -42,7 +42,7 @@ file_name2 <- sprintf("New_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%
                       deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
                       B_alpha[1], B_alpha[2], quitP[1], quitP[2])
 
-file_name <- file_name2
+file_name <- file_name1
 rm(file_name1, file_name2)
 
 load(paste0("output/Rdata/", file_name, ".Rdata"))
