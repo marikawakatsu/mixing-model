@@ -28,7 +28,7 @@ InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.2, 1) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
 alpha          <- m
-A_alpha        <- c(m*3, m*3) #efficiency of task performance
+A_alpha        <- c(m, m) #efficiency of task performance
 B_alpha        <- c(m, m)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
