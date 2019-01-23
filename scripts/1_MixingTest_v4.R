@@ -1,12 +1,29 @@
-params = matrix(c(2,6,6,2, 2,2,1,1, 2,1,1,2), nrow = 3, ncol = 4, byrow = TRUE)
+################################################################################
+#
+# Modified version of 1_MixingTest.R, allowing for variation in threshSlope, quitP
+#
+################################################################################
+
+rm(list = ls())
+# params <- matrix(c(2,2,2,2,0.6,0.6,
+#                    2,2,6,6,0.6,0.6, 
+#                    2,6,6,2,0.6,0.6,
+#                    2,2,1,1,0.6,0.6,
+#                    2,1,1,2,0.6,0.6,
+#                    2,2,2,2,0.6,1.0,
+#                    2,2,2,2,0.6,0.2),
+#                  nrow = 7, ncol = 6, byrow = TRUE)
+params <- matrix(c(2, 2, 6, 6, 0.6, 1.0,
+                   2, 6, 6, 2, 0.6, 1.0,
+                   2, 2, 6, 6, 1.0, 0.6,
+                   2,	6, 6, 2, 1.0,	0.6,
+                   2,	2, 1,	1, 0.6, 0.6,
+                   2,	1, 1,	2, 0.6, 1.0,
+                   2,	2, 1,	1, 0.6,	1.0,
+                   2,	1, 1,	2, 0.6,	1.0),
+                 nrow = 8, ncol = 6, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
-  ################################################################################
-  #
-  # Modified version of 1_MixingTest.R, allowing for variation in threshSlope, quitP
-  #
-  ################################################################################
-  
   # rm(list = ls())
   source("scripts/util/__Util__MASTER.R")
   
@@ -28,12 +45,12 @@ for (INDEX in 1:nrow(params)){
   B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
   B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
-  deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
+  deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
   alpha          <- m
   # A_alpha        <- c(m, m*3) #efficiency of task performance
   # B_alpha        <- c(m*3, m)
-  A_alpha        <- c(2, params[INDEX,2])
+  A_alpha        <- c(params[INDEX,1], params[INDEX,2])
   B_alpha        <- c(params[INDEX,3], params[INDEX,4])
   quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
   
