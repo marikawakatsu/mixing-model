@@ -1,6 +1,6 @@
 ################################################################################
 #
-# Modified version of 1_MixingTest_v2.R, allowing for 25-75 compositions
+# Modified version of 1_MixingTest_v2.R, allowing for 25-75 compositions (and other compositions)
 #
 ################################################################################
 
@@ -12,14 +12,14 @@ source("scripts/util/__Util__MASTER.R")
 ####################
 # Initial paramters: Free to change
 # Base parameters
-Ns             <- c(4, 16) #vector of number of individuals to simulate
+Ns             <- c(16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
 reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
-mixes          <- c("A", "B", "AB")
+mix_ratios     <- c(0, 0.25, 0.5, 0.75, 1) # %line A
 A_ThreshM      <- c(10, 10) #population threshold means for clone line A !!Change!!
 A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
@@ -27,16 +27,15 @@ B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for 
 InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.1) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
-alpha          <- m
 A_alpha        <- c(m, m) #efficiency of task performance
 B_alpha        <- c(m, m)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
 
-file_name1 <- sprintf("New_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
+file_name1 <- sprintf("UneverMix_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
                       A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 
                       A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP[1])  # note quitp[1] = quitP[2]
 
-file_name2 <- sprintf("New_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
+file_name2 <- sprintf("UneverMix_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
                      A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
                      B_ThreshM[1], B_ThreshM[2], B_ThreshSD[1]/B_ThreshM[1], B_ThreshSD[2]/B_ThreshM[2],
                      deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
@@ -67,29 +66,20 @@ for (i in 1:length(Ns)) {
   mix_taskDist <- list()
   mix_taskCorr <- list()
   
-  for (mix_index in 1:length(mixes)) {
+  for (mix_index in 1:length(mix_ratios)) {
     
     # Set mix
-    mix <- mixes[mix_index]
-    
-    # Set stim levels (for different larvae)
-    # if (mix == "A") {
-    #   StimRates      <- c(0.6, 0.6)
-    # } else if (mix == "AB") {
-    #   StimRates      <- c(0.6, 0.6) * 1.3
-    # } else if (mix == "B") {
-    #   StimRates      <- c(0.6, 0.6) * 1.4
-    # }
+    mix <- mix_ratios[mix_index]
+    n_A <- mix * n
+    n_B <- (1 - mix) * n
+    if (n_A %% 1 != 0 | n_B %% 1 != 0) {
+      print("ERROR: Mixes provided create fractions of individuals")
+      break
+    }
     
     # Set work efficiency by lines # updated 11/15/18
-    if (mix == "A") {
-      alpha      <- matrix(rep(A_alpha, n), ncol = m, byrow = T)
-    } else if (mix == "AB") {
-      input      <- c( rep(A_alpha, n/2), rep(B_alpha, n/2) ) 
-      alpha      <- matrix(input, ncol = m, byrow = T)
-    } else if (mix == "B") {
-      alpha      <- matrix(rep(B_alpha, n), ncol = m, byrow = T)
-    }
+    input      <- c( rep(A_alpha, n * mix), rep(B_alpha, n * (1 - mix)) ) 
+    alpha      <- matrix(input, ncol = m, byrow = T)
     
     # Prep lists for collection of simulation outputs
     ens_taskDist  <- list()
@@ -109,32 +99,33 @@ for (i in 1:length(Ns)) {
                              gens = gens)
       
       # Seed internal thresholds
-      if (mix == "A") {
-        threshMat <- seedThresholds(n = n, 
-                                    m = m, 
-                                    ThresholdMeans = A_ThreshM, 
-                                    ThresholdSDs = A_ThreshSD)
-        rownames(threshMat) <- paste0("A-", rownames(threshMat))
-      } else if(mix == "B") {
-        threshMat <- seedThresholds(n = n, 
-                                    m = m, 
-                                    ThresholdMeans = B_ThreshM, 
-                                    ThresholdSDs = B_ThreshSD)
-        rownames(threshMat) <- paste0("B-", rownames(threshMat))
-      } else if(mix == "AB") {
-        threshMatA <- seedThresholds(n = n / 2, 
+      if (n_A != 0 & n_B != 0) {
+        threshMatA <- seedThresholds(n = n_A, 
                                      m = m, 
                                      ThresholdMeans = A_ThreshM, 
                                      ThresholdSDs = A_ThreshSD)
         rownames(threshMatA) <- paste0("A-", rownames(threshMatA))
-        threshMatB <- seedThresholds(n = n / 2, 
+        threshMatB <- seedThresholds(n = n_B, 
                                      m = m, 
                                      ThresholdMeans = B_ThreshM, 
                                      ThresholdSDs = B_ThreshSD)
         rownames(threshMatB) <- paste0("B-", rownames(threshMatB))
         threshMat <- rbind(threshMatA, threshMatB)
         rm(threshMatA, threshMatB)
+      } else if (n_A != 0) {
+        threshMat <- seedThresholds(n = n, 
+                                    m = m, 
+                                    ThresholdMeans = A_ThreshM, 
+                                    ThresholdSDs = A_ThreshSD)
+        rownames(threshMat) <- paste0("A-", rownames(threshMat))
+      } else if (n_B != 0) {
+        threshMat <- seedThresholds(n = n, 
+                                    m = m, 
+                                    ThresholdMeans = B_ThreshM, 
+                                    ThresholdSDs = B_ThreshSD)
+        rownames(threshMat) <- paste0("B-", rownames(threshMat))
       }
+
       
       # Start task performance
       X_g <- matrix(data = rep(0, length(P_g)), ncol = ncol(P_g))
@@ -286,7 +277,7 @@ for (i in 1:length(Ns)) {
 
 # Bind and process
 task_dist <- unlist(groups_taskDist, recursive = FALSE)
-task_dist <- unlist(task_dist, recursive = FALSE)
+# task_dist <- unlist(task_dist, recursive = FALSE)
 task_dist <- do.call("rbind", task_dist)
 
 task_corr <- unlist(groups_taskCorr, recursive = FALSE)
