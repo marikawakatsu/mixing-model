@@ -8,16 +8,16 @@
 ################################################################################
 
 rm(list = ls())
-params <- matrix(c(10,	10,	20,	20,	0.1,	0.1,	0.1,	0.1,
-                   10,	20,	20,	10,	0.1,	0.1,	0.1,	0.1,
-                   10,	10,	10,	10,	0.1,	0.1,	0.3,	0.3,
-                   10,	10,	10,	10,	0.1,	0.3,	0.3,	0.1),
-                 nrow = 4, ncol = 8, byrow = TRUE)
 # params <- matrix(c(10,	10,	20,	20,	0.1,	0.1,	0.1,	0.1,
-#                    10,	20,	20,	10,	0.1,	0.3,	0.3,	0.1,
-#                    10,	10,	20,	20,	0.1,	0.3,	0.3,	0.1,
-#                    10,	20,	20,	10,	0.1,	0.3,	0.1,	0.3),
+#                    10,	20,	20,	10,	0.1,	0.1,	0.1,	0.1,
+#                    10,	10,	10,	10,	0.1,	0.1,	0.3,	0.3,
+#                    10,	10,	10,	10,	0.1,	0.3,	0.3,	0.1),
 #                  nrow = 4, ncol = 8, byrow = TRUE)
+params <- matrix(c(10,	10,	20,	20,	0.1,	0.1,	0.3,	0.3,
+                   10,	20,	20,	10,	0.1,	0.3,	0.3,	0.1,
+                   10,	10,	20,	20,	0.1,	0.3,	0.3,	0.1,
+                   10,	20,	20,	10,	0.1,	0.1,	0.3,	0.3),
+                 nrow = 4, ncol = 8, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -82,7 +82,10 @@ for (INDEX in 1:nrow(params)){
     summarise(SD1 = sd(Task1),
               SD2 = sd(Task2),
               Mean1 = mean(Task1),
-              Mean2 = mean(Task2))
+              Mean2 = mean(Task2)
+              # Ymin1 = mean(Task1) - sd(Task1),
+              # Ymin2 = mean(Task2) - sd(Task2)
+    )
   
   task_VarMean_byrepABonly <- task_dist %>% # stats by replicate, mixed colonies only
     filter(Mix == "AB") %>%
@@ -135,8 +138,8 @@ for (INDEX in 1:nrow(params)){
                   aes(x = set, ymin = Mean1 - SD1, ymax = Mean1 + SD1), size = 0.3, width = 0.4)
   
   gg_dist1
-  
   ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = 3, dpi = 400)
+
   
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -151,10 +154,9 @@ for (INDEX in 1:nrow(params)){
                aes(x = set, y = Mean2), size = 0.8, alpha = 1, stroke = 0.5) +
     geom_errorbar(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
                   aes(x = set, ymin = Mean2 - SD2, ymax = Mean2 + SD2), size = 0.3, width = 0.4)
-  
   gg_dist2
-  
   ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
+
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
@@ -187,11 +189,10 @@ for (INDEX in 1:nrow(params)){
                size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
                   size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
-  
+
   gg_dist4
   ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = 3, dpi = 400)
-  
-  
+
 }
 
 
