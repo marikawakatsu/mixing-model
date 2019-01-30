@@ -7,9 +7,9 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.10_threshSlope_7_Aalpha_2.00_2.00_Balpha_0.50_0.50_quitP_0.20.Rdata")
+load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20.Rdata")
 
-file_name <- "Mix_Alphas"
+file_name <- "Mix_Alphas_B-super-efficient"
 
 ####################
 # Final task distributions
@@ -36,5 +36,5 @@ gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
   facet_grid(n~.)
 gg_dist
 
-ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 3, height = 3, dpi = 400)
+ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 4, height = 2, dpi = 400)
 
