@@ -22,8 +22,8 @@ rm(list = ls())
 #                    2,	2, 1,	1, 0.6,	1.0,
 #                    2,	1, 1,	2, 0.6,	1.0),
 #                  nrow = 8, ncol = 6, byrow = TRUE)
-params <- matrix(c(2,	2, 4,	4, 0.6,	0.6,
-                   2,	4, 4,	2, 0.6,	0.6),
+params <- matrix(c(2, 4, 1, 3, 0.6,	1.0,
+                   2,	4, 1,	3, 1.0,	0.6),
                  nrow = 2, ncol = 6, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){

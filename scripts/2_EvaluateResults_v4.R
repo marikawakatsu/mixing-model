@@ -25,9 +25,10 @@ rm(list = ls())
 #                    2,	2, 1,	1, 0.6,	1.0,
 #                    2,	1, 1,	2, 0.6,	1.0),
 #                  nrow = 8, ncol = 6, byrow = TRUE)
-params <- matrix(c(2,	2, 4,	4, 0.6,	0.6,
-                   2,	4, 4,	2, 0.6,	0.6),
-                 nrow = 2, ncol = 6, byrow = TRUE)
+params <- matrix(c(2, 4, 1, 3, 0.6,	0.6,
+                   2,	4, 1,	3, 0.6,	1.0,
+                   2,	4, 1,	3, 1.0,	0.6),
+                 nrow = 3, ncol = 6, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -148,7 +149,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist1
   
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = 3, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = 3, dpi = 400)
   
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -166,7 +167,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist2
   
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
