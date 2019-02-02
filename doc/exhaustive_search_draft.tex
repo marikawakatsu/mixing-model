@@ -210,19 +210,18 @@
 
 \section{Overview}
 The goal of this investigation is to understand how varying one or more or the parameters of the fixed threshold model affects the behavior of single line (A or B) colonies and mixed colonies.
-\\
 
-{\color{red}
-Here I think we might want to insert a list of specific patterns that (we think) we observe in the data:
+Namely, we look for under what parameter settings in the fixed response threshold can result in two qualitative patterns observed in empirical mixing data:
 \begin{itemize}
-    \item Different mean frequencies of task 1 performance between line A and B ants
-    \item Convergence of behavior between lines in mixed case
+    \item Different behavioral means for task performance for each genetic line in isolation, and
+    \item The convergence of behavioral means for each line when mixed with members of the other line (i.e., the appearance of a "social contagion").
 \end{itemize}
-so that we can agree on what it is that we want the model to do.
-}
 
 \section{Plan}
 \subsection{Original model in Ulrich et al. \cite{ulrich2018}}
+
+We play with parameters using the model as in Ulrich et. al \cite{ulrich2018} as our base model. Parameters will take the values as used in that model unless they are explicitly changed by us. 
+
 \begin{table}[h!] \small
   \begin{center}
     \begin{tabular}{|c|>{\centering}p{2.05in}|c|c|} 
@@ -244,6 +243,9 @@ so that we can agree on what it is that we want the model to do.
 
 \newpage
 \subsection{\textit{Varying} across lines and \textit{fixing} across tasks}
+
+Here we assume that the two lines differ in some trait (e.g., threshold mean), but do not differ between tasks within a line. In other words, individuals of a given line do not "treat" tasks differently, but individuals of different lines inherently differ in some way. 
+
 \begin{table}[hbt!] \small
   \begin{center}
     \begin{tabular}{|c|>{\centering}m{0.65in}|>{\centering}m{1.15in}|m{3.5in}|} 
@@ -264,6 +266,8 @@ so that we can agree on what it is that we want the model to do.
 \end{table}
 
 \subsection{\textit{Fixing} across lines and \textit{varying} across tasks}
+
+Here we assume that the two lines are essentially identical, but that individuals treat tasks differently in some way. 
 
 \begin{table}[hbt!] \small
   \begin{center}
