@@ -1,0 +1,209 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{latexsym}
+\usepackage{amssymb,amsmath}
+\usepackage{graphicx}
+\usepackage{sgame}
+\usepackage{color}
+\usepackage{authblk}
+
+% \usepackage{hyperref}
+\usepackage{empheq}
+\usepackage{blkarray}
+\usepackage{cancel}
+\usepackage{enumerate}
+\usepackage{times}
+\usepackage{array}
+\usepackage{lscape}
+
+\usepackage[margin=1in]{geometry}
+\newcommand{\newword}[1]{\textbf{\emph{#1}}}
+
+%Arrows
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+
+%Things LaTeX names by appearance, rather than meaning
+% By now, I've learned the standard LaTeX names, but I remember they used to give me trouble, so here are some macros
+\newcommand{\isom}{\cong} %The isomorphism symbol
+\newcommand{\union}{\cup}
+\newcommand{\intersection}{\cap}
+\newcommand{\bigunion}{\bigcup}
+\newcommand{\bigintersection}{\bigcap}
+\newcommand{\disjointunion}{\sqcup}
+\newcommand{\bigdisjointunion}{\bigsqcup}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+%Some multiletter functions
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\CoKer}{CoKer}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Proj}{Proj}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+%Their calligraphic versions; use these for the sheaf constructions
+\DeclareMathOperator{\HHom}{\mathcal{H} \textit{om}}
+\DeclareMathOperator{\EExt}{\mathcal{E} \textit{xt}}
+\DeclareMathOperator{\EEnd}{\mathcal{E} \textit{nd}}
+\DeclareMathOperator{\TTor}{\mathcal{T} \textit{or}}
+\DeclareMathOperator{\KKer}{\mathcal{K}\textit{er}}
+\DeclareMathOperator{\CCoKer}{\mathcal{C} \textit{o}\mathcal{K} \textit{er}}
+\newcommand{\IIm}{\mathop{\mathcal{I} \textit{m}}}
+\newcommand{\ccH}{\mathscr{H}} %The very curly H
+
+\DeclareMathOperator{\sss}{\mathrm{sunny}}
+\DeclareMathOperator{\rrr}{\mathrm{rainy}}
+\DeclareMathOperator{\hhh}{\mathrm{hot}}
+\DeclareMathOperator{\ccc}{\mathrm{cold}}
+
+
+
+%This makes alternating tensors look right in displayed equations
+\newcommand{\Alt}{\bigwedge\nolimits}
+
+
+%Blackboard bold letters.
+\renewcommand{\AA}{\mathbb{A}}
+\newcommand{\BB}{\mathbb{B}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\EE}{\mathbb{E}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\GG}{\mathbb{G}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\II}{\mathbb{I}}
+\newcommand{\JJ}{\mathbb{J}}
+\newcommand{\KK}{\mathbb{K}}
+\newcommand{\LL}{\mathbb{L}}
+\newcommand{\MM}{\mathbb{M}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\OO}{\mathbb{O}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\renewcommand{\SS}{\mathbb{S}}
+\newcommand{\TT}{\mathbb{T}}
+\newcommand{\UU}{\mathbb{U}}
+\newcommand{\VV}{\mathbb{V}}
+\newcommand{\WW}{\mathbb{W}}
+\newcommand{\XX}{\mathbb{X}}
+\newcommand{\YY}{\mathbb{Y}}
+\newcommand{\ZZ}{\mathbb{Z}}
+
+%Calligraphic letters
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cB}{\mathcal{B}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cI}{\mathcal{I}}
+\newcommand{\cJ}{\mathcal{J}}
+\newcommand{\cK}{\mathcal{K}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cP}{\mathcal{P}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cR}{\mathcal{R}}
+\newcommand{\cS}{\mathcal{S}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cX}{\mathcal{X}}
+\newcommand{\cY}{\mathcal{Y}}
+\newcommand{\cZ}{\mathcal{Z}}
+
+
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\inte}{int}
+\DeclareMathOperator{\nhd}{nhd}
+
+\newcommand{\ds}{\displaystyle}
+\newcommand{\mc}{\mathcal}
+\newcommand{\ol}{\overline}
+\newcommand{\modu}{\hspace{-2mm} \mod}
+
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\cen}{Center}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\re}{Re}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\mor}{Mor}
+\DeclareMathOperator{\irr}{Irr}
+\DeclareMathOperator{\sgn}{sgn}
+
+\DeclareMathOperator{\cov}{Cov}
+\DeclareMathOperator{\var}{Var}
+
+\DeclareMathOperator{\erf}{erf}
+%\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\argmin}{argmin}
+\DeclareMathOperator{\argmax}{argmax}
+
+\DeclareMathOperator{\lip}{Lip}
+
+\newcommand{\bbm}{\begin{bmatrix}}
+\newcommand{\bpm}{\begin{pmatrix}}
+\newcommand{\ebm}{\end{bmatrix}}
+\newcommand{\epm}{\end{pmatrix}}
+
+\newcommand{\ddx}[2]{\frac{d #1}{d #2}}
+\newcommand{\ddt}[1]{\frac{d #1}{dt}}
+
+ \newcommand{\del}[2]{\frac{\partial #1}{\partial #2}}
+ \newcommand{\dsdel}[2]{\displaystyle\frac{\partial #1}{\partial #2}}
+ 
+ \newcommand{\doubledel}[3]{\displaystyle\frac{\partial^2 #1}{\partial #2 \partial #3}}
+ \newcommand{\doubledelsame}[2]{\displaystyle\frac{\partial^2 #1}{\partial #2^2}}
+  
+%newcommand{\ddx}[2]{\frac{d #1}{d #2}}
+%\newcommand{\ddt}[1]{\frac{d #1}{dt}}
+
+\newcommand{\dsddx}[2]{\displaystyle\frac{d #1}{d #2}}
+\newcommand{\dsddt}[1]{\displaystyle\frac{d #1}{dt}}
+
+\newcommand{\pbderiv}{\ds\del{V}{x_1} \dsddt{x_1} + \ds\del{V}{x_2} \dsddt{x_2}}
+
+\newcommand{\ito}{It\^o \hspace{0.05mm}}
+\newcommand{\itos}{It\^os \hspace{0.05mm}}
+
+\newcommand{\gronwall}{Gr\"onwall  \hspace{0.05mm}}
+\newcommand{\gronwalls}{Gr\"onwall's  \hspace{0.05mm}}
+
+\newcommand{\tw}{d\tilde{W}_t}
+\newcommand{\tws}{d\tilde{W}_s}
+
+\bibliographystyle{plain}
+\usepackage{float}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document-specific settings
+
+\title{Mixing Model Calculations\vspace{-10pt}}
+\author{Mari Kawakatsu\vspace{-15pt}}
+\date{Last updated: \today}
+
+\graphicspath{ {../output/Task_dist/} }
+\usepackage[margin=.3in]{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
