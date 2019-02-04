@@ -1,0 +1,3825 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    161130,       3817]
+NotebookOptionsPosition[    160182,       3793]
+NotebookOutlinePosition[    160534,       3809]
+CellTagsIndexPosition[    160491,       3806]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P1A", "[", 
+   RowBox[{"s1_", ",", "\[Theta]1A_", ",", "\[Eta]_"}], "]"}], ":=", 
+  FractionBox[
+   SuperscriptBox["s1", "\[Eta]"], 
+   RowBox[{
+    SuperscriptBox["s1", "\[Eta]"], "+", 
+    SuperscriptBox["\[Theta]1A", "\[Eta]"]}]]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P2A", "[", 
+   RowBox[{"s2_", ",", "\[Theta]2A_", ",", "\[Eta]_"}], "]"}], ":=", 
+  FractionBox[
+   SuperscriptBox["s2", "\[Eta]"], 
+   RowBox[{
+    SuperscriptBox["s2", "\[Eta]"], "+", 
+    SuperscriptBox["\[Theta]2A", "\[Eta]"]}]]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P1B", "[", 
+   RowBox[{"s1_", ",", "\[Theta]1B_", ",", "\[Eta]_"}], "]"}], ":=", 
+  FractionBox[
+   SuperscriptBox["s1", "\[Eta]"], 
+   RowBox[{
+    SuperscriptBox["s1", "\[Eta]"], "+", 
+    SuperscriptBox["\[Theta]1B", "\[Eta]"]}]]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"P2B", "[", 
+    RowBox[{"s2_", ",", "\[Theta]2B_", ",", "\[Eta]_"}], "]"}], ":=", 
+   FractionBox[
+    SuperscriptBox["s2", "\[Eta]"], 
+    RowBox[{
+     SuperscriptBox["s2", "\[Eta]"], "+", 
+     SuperscriptBox["\[Theta]2B", "\[Eta]"]}]]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"f1", ":=", 
+  RowBox[{"\[Delta]1", " ", "-", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"\[Alpha]1A", "*", "x1A"}], " ", "+", " ", 
+     RowBox[{"\[Alpha]1B", "*", "x1B"}]}], "n"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f2", ":=", 
+  RowBox[{"\[Delta]2", " ", "-", 
+   FractionBox[
+    RowBox[{
+     RowBox[{"\[Alpha]2A", "*", "x2A"}], " ", "+", " ", 
+     RowBox[{"\[Alpha]2B", "*", "x2B"}]}], "n"]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f3", ":=", 
+  RowBox[{
+   RowBox[{
+    FractionBox["1", "2"], "*", 
+    RowBox[{"P1A", "[", 
+     RowBox[{"s1", ",", "\[Theta]1A", ",", "\[Eta]"}], "]"}], 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["n", "2"], "-", 
+      RowBox[{"(", 
+       RowBox[{"x1A", "+", "x2A"}], ")"}]}], ")"}]}], " ", "-", " ", 
+   RowBox[{"\[Tau]", "*", "x1A"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f4", ":=", 
+  RowBox[{
+   RowBox[{
+    FractionBox["1", "2"], "*", 
+    RowBox[{"P2A", "[", 
+     RowBox[{"s2", ",", "\[Theta]2A", ",", "\[Eta]"}], "]"}], 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["n", "2"], "-", 
+      RowBox[{"(", 
+       RowBox[{"x1A", "+", "x2A"}], ")"}]}], ")"}]}], " ", "-", " ", 
+   RowBox[{"\[Tau]", "*", "x2A"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f5", ":=", 
+  RowBox[{
+   RowBox[{
+    FractionBox["1", "2"], "*", 
+    RowBox[{"P1B", "[", 
+     RowBox[{"s1", ",", "\[Theta]1B", ",", "\[Eta]"}], "]"}], 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["n", "2"], "-", 
+      RowBox[{"(", 
+       RowBox[{"x1B", "+", "x2B"}], ")"}]}], ")"}]}], " ", "-", " ", 
+   RowBox[{"\[Tau]", "*", "x1B"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f6", ":=", 
+  RowBox[{
+   RowBox[{
+    FractionBox["1", "2"], "*", 
+    RowBox[{"P2B", "[", 
+     RowBox[{"s2", ",", "\[Theta]2B", ",", "\[Eta]"}], "]"}], 
+    RowBox[{"(", 
+     RowBox[{
+      FractionBox["n", "2"], "-", 
+      RowBox[{"(", 
+       RowBox[{"x1B", "+", "x2B"}], ")"}]}], ")"}]}], " ", "-", " ", 
+   RowBox[{"\[Tau]", "*", "x2B"}]}]}]}], "Input",
+ CellChangeTimes->{{3.758138635349854*^9, 3.758138707100869*^9}, {
+  3.758138739457087*^9, 3.758138850944961*^9}, {3.7581390398044243`*^9, 
+  3.758139170900568*^9}, {3.758139310484503*^9, 3.7581393850198097`*^9}, {
+  3.758139923599612*^9, 3.758139932038888*^9}, {3.7581400272383957`*^9, 
+  3.7581400273517323`*^9}, {3.75814008767688*^9, 3.7581400884601994`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"fa9dd0f9-2a73-4290-9e3b-653acaeda5b8"],
+
+Cell[BoxData[{
+ RowBox[{"f1p", ":=", 
+  RowBox[{"f1", "/.", 
+   RowBox[{"x1B", "\[Rule]", "0"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{"f2p", ":=", 
+  RowBox[{"f2", "/.", 
+   RowBox[{"x2B", "\[Rule]", "0"}]}]}]}], "Input",
+ CellChangeTimes->{{3.758139595391732*^9, 3.7581396139830923`*^9}, {
+  3.758139651831614*^9, 3.758139726708765*^9}},
+ CellLabel->
+  "In[219]:=",ExpressionUUID->"2f370c98-96e9-479b-98ac-946c12d25be0"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Solve", "[", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f1", "\[Equal]", "0"}], " ", "&&", " ", 
+    RowBox[{"f2", "\[Equal]", "0"}], " ", "&&", 
+    RowBox[{"f3", "\[Equal]", "0"}], " ", "&&", " ", 
+    RowBox[{"f4", "\[Equal]", "0"}], " ", "&&", " ", 
+    RowBox[{"f5", "\[Equal]", "0"}], "&&", 
+    RowBox[{"f6", "\[Equal]", "0"}]}], ",", 
+   RowBox[{"{", 
+    RowBox[{"s1", ",", "s2", ",", "x1A", ",", "x2A", ",", "x1B", ",", "x2B"}],
+     "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"Takes", " ", "too", " ", "long"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.7581394243860273`*^9, 3.758139584532791*^9}, {
+  3.758139622985531*^9, 3.758139658727519*^9}, {3.758139693458579*^9, 
+  3.7581397024612217`*^9}, {3.7581397659880867`*^9, 3.75813983238549*^9}, {
+  3.7581400672423487`*^9, 
+  3.7581400717900877`*^9}},ExpressionUUID->"9f4c97e8-7ae4-47eb-86d4-\
+c462a046193e"],
+
+Cell[BoxData["$Aborted"], "Output",
+ CellChangeTimes->{
+  3.758139443152975*^9, {3.758139476249804*^9, 3.758139584885627*^9}, {
+   3.7581396272659683`*^9, 3.758139851009591*^9}, 3.7581399482537727`*^9, 
+   3.758140025224835*^9, 3.758140064767955*^9},
+ CellLabel->
+  "Out[240]=",ExpressionUUID->"835734df-cd9c-428f-8b4f-db5dd25924ee"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"\[Eta]", "=", "7"}], ";", 
+  RowBox[{"\[Tau]", "=", "0.2"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Theta]1A", "=", "10"}], ";", 
+  RowBox[{"\[Theta]1B", "=", "\[Theta]1A"}], ";", 
+  RowBox[{"\[Theta]2A", "=", "\[Theta]1A"}], ";", 
+  RowBox[{"\[Theta]2B", "=", "\[Theta]1A"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"$Assumptions", "=", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "s1", ",", "s2", ",", "x1A", ",", "x2A", ",", "x1B", ",", "x2B", ",", 
+      "\[Delta]1", ",", "\[Delta]2", ",", "\[Alpha]1A", ",", "\[Alpha]1B", 
+      ",", "\[Alpha]2A", ",", "\[Alpha]2B"}], "}"}], "\[Element]", 
+    "Reals"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"eq", "=", 
+   RowBox[{"FullSimplify", "[", 
+    RowBox[{
+     RowBox[{"Solve", "[", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"f1", "\[Equal]", "0"}], " ", "&&", " ", 
+        RowBox[{"f2", "\[Equal]", "0"}], " ", "&&", 
+        RowBox[{"f3", "\[Equal]", "0"}], " ", "&&", " ", 
+        RowBox[{"f4", "\[Equal]", "0"}], " ", "&&", " ", 
+        RowBox[{"f5", "\[Equal]", "0"}], "&&", 
+        RowBox[{"f6", "\[Equal]", "0"}]}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+        "s1", ",", "s2", ",", "x1A", ",", "x2A", ",", "x1B", ",", "x2B"}], 
+        "}"}]}], "]"}], ",", "$Assumptions"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.758140116009481*^9, 3.758140148431622*^9}, {
+  3.7581402011943903`*^9, 3.758140206394367*^9}, {3.758140238461659*^9, 
+  3.758140239032412*^9}, {3.758140278053141*^9, 3.758140490445734*^9}, {
+  3.758141264969281*^9, 
+  3.758141462246195*^9}},ExpressionUUID->"cd705c33-31f7-4bae-b968-\
+bbec947565bd"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "Solve","ratnz",
+   "\"Solve was unable to solve the system with inexact coefficients. The \
+answer was obtained by solving a corresponding exact system and numericizing \
+the result.\"",2,99,15,28425327893775582089,"Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.75814142282123*^9},
+ CellLabel->
+  "During evaluation of \
+In[96]:=",ExpressionUUID->"37fab3aa-85d0-445f-9b99-9e997db0ea8e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+              "\[Delta]1"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "+", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10.982933519861973`", "\[VeryThinSpace]", "-", 
+             RowBox[{"5.289102023215959`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "+", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{"-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"2.712560568390795`", "\[VeryThinSpace]", "-", 
+             RowBox[{"11.884504368147047`", " ", "\[ImaginaryI]"}]}], ")"}], 
+           " ", 
+           SuperscriptBox[
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+              "\[Delta]2"}], ")"}], 
+            RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+            RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+            RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+            RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.60042581723039`", "\[VeryThinSpace]", "-", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"7.6004258172303905`", "\[VeryThinSpace]", "+", 
+           RowBox[{"9.530632524154553`", " ", "\[ImaginaryI]"}]}], ")"}], " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"s1", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}], ")"}], " ", 
+            "\[Delta]1"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"s2", "\[Rule]", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"12.190136542044755`", " ", 
+         SuperscriptBox[
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}], ")"}], " ", 
+            "\[Delta]2"}], ")"}], 
+          RowBox[{"1", "/", "7"}]]}], ")"}], "/", 
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2A"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1A", " ", "\[Alpha]2B"}], "+", 
+          RowBox[{"5.`", " ", "\[Alpha]1B", " ", "\[Alpha]2B"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2A", " ", "\[Delta]1"}], "-", 
+          RowBox[{"10.`", " ", "\[Alpha]2B", " ", "\[Delta]1"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1A", " ", "\[Delta]2"}], "-", 
+          RowBox[{"14.`", " ", "\[Alpha]1B", " ", "\[Delta]2"}]}], ")"}], 
+        RowBox[{"1", "/", "7"}]]}]}], ",", 
+     RowBox[{"x1A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2A", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}], ",", 
+     RowBox[{"x1B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]1"}], 
+       RowBox[{"\[Alpha]1A", "+", "\[Alpha]1B"}]]}], ",", 
+     RowBox[{"x2B", "\[Rule]", 
+      FractionBox[
+       RowBox[{"n", " ", "\[Delta]2"}], 
+       RowBox[{"\[Alpha]2A", "+", "\[Alpha]2B"}]]}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.75814023984612*^9, 3.7581402791522417`*^9, {3.75814034167607*^9, 
+   3.7581403897702513`*^9}, {3.758140425394218*^9, 3.75814049101087*^9}, {
+   3.7581412671324663`*^9, 3.758141299593926*^9}, {3.758141353250084*^9, 
+   3.7581414228668413`*^9}},
+ CellLabel->"Out[99]=",ExpressionUUID->"750c3424-8d39-4d1c-99fc-f7b00b6027f8"]
+}, Open  ]]
+},
+WindowSize->{808, 905},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"11.3 for Mac OS X x86 (32-bit, 64-bit Kernel) (March 5, \
+2018)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3594, 100, 435, "Input",ExpressionUUID->"fa9dd0f9-2a73-4290-9e3b-653acaeda5b8"],
+Cell[4155, 122, 421, 10, 52, "Input",ExpressionUUID->"2f370c98-96e9-479b-98ac-946c12d25be0"],
+Cell[CellGroupData[{
+Cell[4601, 136, 930, 21, 52, "Input",ExpressionUUID->"9f4c97e8-7ae4-47eb-86d4-c462a046193e"],
+Cell[5534, 159, 333, 6, 34, "Output",ExpressionUUID->"835734df-cd9c-428f-8b4f-db5dd25924ee"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5904, 170, 1713, 41, 136, "Input",ExpressionUUID->"cd705c33-31f7-4bae-b968-bbec947565bd"],
+Cell[7620, 213, 443, 10, 42, "Message",ExpressionUUID->"37fab3aa-85d0-445f-9b99-9e997db0ea8e"],
+Cell[8066, 225, 152100, 3565, 6615, "Output",ExpressionUUID->"750c3424-8d39-4d1c-99fc-f7b00b6027f8"]
+}, Open  ]]
+}
+]
+*)
+
