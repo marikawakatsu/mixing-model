@@ -25,10 +25,13 @@ rm(list = ls())
 #                    2,	2, 1,	1, 0.6,	1.0,
 #                    2,	1, 1,	2, 0.6,	1.0),
 #                  nrow = 8, ncol = 6, byrow = TRUE)
-params <- matrix(c(2, 4, 1, 3, 0.6,	0.6,
-                   2,	4, 1,	3, 0.6,	1.0,
-                   2,	4, 1,	3, 1.0,	0.6),
-                 nrow = 3, ncol = 6, byrow = TRUE)
+# params <- matrix(c(2, 4, 1, 3, 0.6,	1.0,
+#                    2,	4, 1,	3, 1.0,	0.6),
+#                  nrow = 2, ncol = 6, byrow = TRUE)
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 15, 15,
+                   6, 6, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
+                   6, 6, 2, 2, 0.6,	0.6, 15, 15, 10, 10),
+                 nrow = 3, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -47,9 +50,9 @@ for (INDEX in 1:nrow(params)){
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
-  A_ThreshM      <- c(10, 10) #population threshold means for clone line A !!Change!!
+  A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
-  B_ThreshM      <- c(10, 10) #population threshold means for clone line B !!Change!!
+  B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
   B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
@@ -60,7 +63,6 @@ for (INDEX in 1:nrow(params)){
   A_alpha        <- c(params[INDEX,1], params[INDEX,2])
   B_alpha        <- c(params[INDEX,3], params[INDEX,4])
   quitP          <- c(0.2, 0.2) #probability of quitting task once active !!Change!!
-  
   
   file_name1 <- sprintf("N16only_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
                         A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 
