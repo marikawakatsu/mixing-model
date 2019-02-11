@@ -40,7 +40,7 @@ rm(list = ls())
 #                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10),
+params <- matrix(c(2, 2, 6, 6, 0.6,	0.6, 10, 10, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){

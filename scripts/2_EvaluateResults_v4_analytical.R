@@ -37,11 +37,14 @@ rm(list = ls())
 #                  nrow = 8, ncol = 10, byrow = TRUE)
 
 # vary both alphas and deltas, v2
-params <- matrix(c(2, 2, 6, 6, 1.0,	1.0, 10, 10, 10, 10,
-                   2, 6, 6, 2, 1.0,	1.0, 10, 10, 10, 10,
-                   2, 2, 1, 1, 1.0,	1.0, 10, 10, 10, 10,
-                   2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
-                 nrow = 4, ncol = 10, byrow = TRUE)
+# params <- matrix(c(2, 2, 6, 6, 1.0,	1.0, 10, 10, 10, 10,
+#                    2, 6, 6, 2, 1.0,	1.0, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 1.0,	1.0, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
+#                  nrow = 4, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(2, 2, 6, 6, 1,	1, 10, 10, 10, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
