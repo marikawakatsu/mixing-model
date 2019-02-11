@@ -1,4 +1,4 @@
-\documentclass[11pt]{article}
+\documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
 
 \usepackage{latexsym}
@@ -16,6 +16,7 @@
 \usepackage{times}
 \usepackage{array}
 \usepackage{lscape}
+\usepackage{xcolor}
 
 \usepackage[margin=1in]{geometry}
 \newcommand{\newword}[1]{\textbf{\emph{#1}}}
@@ -191,9 +192,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document-specific settings
 
-\title{\vspace{-10pt}Some Notes on Mixing Model Calculations\vspace{-10pt}}
+\title{\vspace{-30pt}\Large Analytical Mixing Model, v2\vspace{-10pt}}
 \author{Mari Kawakatsu\vspace{-15pt}}
-\date{Last updated: February 5, 2019}
+\date{Last updated: \today\vspace{-15pt}}
 
 \graphicspath{ {../output/Task_dist/} }
 \usepackage[margin=.3in]{caption}
@@ -203,6 +204,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \section{Overview}
 \begin{itemize}
     \item Following up on the last Skype with Yuko \& Daniel, I ran additional simulations in which I varied a combination of parameters, namely the task efficiencies $\alpha$ and the demand rates $\delta$ (results on slides).
@@ -211,13 +214,17 @@
     
     \item A preliminary analysis of the model seems to suggest that, assuming that the system reaches/has a steady state, varying only $\delta$ and $\alpha$ can result in a downward contagion but not an upward contagion (see Section~\ref{sec:contagion}). If this is true, then in order for the FTM to capture the experimental data, it must be the case that the two genetic lines differ in some trait other than their task efficiency.
     
+    \item (Update 2/9) I extended the model to capture non-50-50 mixes (highlighted in {\color{orange}orange}).
+    
 \end{itemize}
 
 \section{Model} \label{sec:model}
 
 To consider the dynamics of division of labor in mixed colonies, we extend the fixed threshold model in \cite{ulrich18} to incorporate ants of two genetic lines, \A\ and \B. 
 
-The model considers $n$ individuals and $m$ tasks. The $n$ individuals consist of equal numbers of genetic line \A\ and genetic line \B\ individuals.
+The model considers $n$ individuals and $m$ tasks. 
+{\color{orange}Let $f$ and $1=f$ be the fractions of genetic line \A\ and \B\ individuals in the colony, respectively.}
+% The $n$ individuals consist of equal numbers of genetic line \A\ and genetic line \B\ individuals.
 We assume that each task $j$ has an associated stimulus, $s_{j,t}$, at every time $t$, indicating group-level demand for that task. We model the change in stimulus over discrete time as
 \begin{equation}
     s_{j,t+1} - s_{j,t} = \delta_j - \frac{\alpha_j^{\A} x_{j,t}^{\A} + \alpha_j^{\B} x_{j,t}^{\B} }{n}, \label{eq:stim}
@@ -237,12 +244,13 @@ With this assumption, the probabilities $P_{ij,t}^{\A}$ and $P_{ij,t}^{\B}$ that
 \end{equation}
 where $\eta$ is the threshold response parameter as in the original model. Finally, at a given time $t$, active individuals quit their tasks with a constant quit probability $\tau$. In the case of two tasks ($m = 2$), the change in the number of line \A\ and line \B\ individuals working on task $j$ is given by\footnote{explain this more in English}
 \begin{align}
-    x_{j,t+1}^{\A} - x_{j,t}^{\A} & = \frac{1}{2} \bigg[ P_{j,t}^{\A}(s_{j,t}) + (1 - P_{j',t}^{\A}(s_{j',t}))P_{j,t}^{\A}(s_{j,t})\bigg] \bigg( \frac{n}{2} - (x_{j,t}^{\A} + x_{j',t}^{\A}) \bigg) - \tau x_{j,t}^{\A} \nonumber\\
-    x_{j,t+1}^{\B} - x_{j,t}^{\B} & = \frac{1}{2} \bigg[ P_{j,t}^{\B}(s_{j,t}) + (1 - P_{j',t}^{\B}(s_{j',t}))P_{j,t}^{\B}(s_{j,t})\bigg] \bigg( \frac{n}{2} - (x_{j,t}^{\B} + x_{j',t}^{\B}) \bigg) - \tau x_{j,t}^{\B} \label{eq:active}
+    x_{j,t+1}^{\A} - x_{j,t}^{\A} & = \frac{1}{2} \bigg[ P_{j,t}^{\A}(s_{j,t}) + (1 - P_{j',t}^{\A}(s_{j',t}))P_{j,t}^{\A}(s_{j,t})\bigg] \bigg( {\color{orange}fn}
+ - (x_{j,t}^{\A} + x_{j',t}^{\A}) \bigg) - \tau x_{j,t}^{\A} \nonumber\\
+    x_{j,t+1}^{\B} - x_{j,t}^{\B} & = \frac{1}{2} \bigg[ P_{j,t}^{\B}(s_{j,t}) + (1 - P_{j',t}^{\B}(s_{j',t}))P_{j,t}^{\B}(s_{j,t})\bigg] \bigg( {\color{orange}(1-f)n} - (x_{j,t}^{\B} + x_{j',t}^{\B}) \bigg) - \tau x_{j,t}^{\B} \label{eq:active}
 \end{align}
-for $(j,j')=(1,2), (2,1)$.
+for $(j,j')=(1,2), (2,1)$. {\color{orange}The sums in square brackets capture the possible ways in which individuals can initiate task $j$: they can either encounter the stimulus for task $j$ immediately and begin performing that task, or they can first encounter the stimulus for the other task $j'$, decide not to perform that task, subsequently encounter the stimulus for task $j$, and begin performing task $j$.}
 
-The full model (for $m=2$) thus consists of the six equations describing changes in $s_1, s_2$ (Eq.~\eqref{eq:stim}) and $ x_1^{\A}, x_1^{\B}, x_2^{\A}, x_2^{\B}$ (Eq.~\eqref{eq:active}).
+The full model for $m=2$ consists of the six equations describing changes in $s_1, s_2$ (Eq.~\eqref{eq:stim}) and $ x_1^{\A}, x_1^{\B}, x_2^{\A}, x_2^{\B}$ (Eq.~\eqref{eq:active}), {\color{orange}under the constraint $x_1^{\A}+ x_1^{\B}+x_2^{\A}+ x_2^{\B} \leq n$}.
 
 \section{Steady-state predictions} \label{sec:ss}
 One way to understand what is happening in the simulations is to consider the equilbria of the above model. My intent here is not (yet) to prove the stability etc. rigorously but to get a sense for what we should expect to see in the simulations.
@@ -263,13 +271,18 @@ Note that the sum of the fractions \eqref{eq:ss1} across tasks should not exceed
 \end{equation}
 If this condition is not met, then we would expect the stimuli to continue growing (i.e., the system will not reach a steady state). \textbf{A ``symptom'' of this phenomenon, I think, is that the ants become ``maxed out'' (I can explain this more when we Skype)}.
 
-\subsection{Mixed colonies: 2 tasks, 2 lines}
+\subsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes}
 
-First, assume that the mean thresholds are identical for both tasks and lines ($\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$), as we have done in the simulations with varied $\delta$ and $\alpha$ values. Setting Eq.~\eqref{eq:stim} and Eq.~\eqref{eq:active} equal to zero, we find\footnote{This is the expression I get when I set $1\leq \eta \leq 20, \eta \in \ZZ$. There seems to be something numerically tricky when $\eta$ takes non-integer values.} the expression for the steady-state fractions of individuals performing task $j$:%\footnote{}
+{\color{orange}We first consider the 50-50 mixes ($f=0.5$), i.e. mixed colonies consisting of an equal number of \A\ and \B\ ants.}
+Moreover, we assume that the mean thresholds and the quit probabilities are identical for both tasks and lines ($\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$), as we have done in the simulations with varied $\delta$ and $\alpha$ values. Setting Eq.~\eqref{eq:stim} and Eq.~\eqref{eq:active} equal to zero, we find\footnote{This is the expression I get when I set $1\leq \eta \leq 20, \eta \in \ZZ$. There seems to be something numerically tricky when $\eta$ takes non-integer values.} the expression for the steady-state numbers of individuals performing task $j$:%\footnote{}
 \begin{equation}
-     \frac{x_j^{\A}}{(n/2)} =  \frac{x_j^{\B}}{(n/2)} = \frac{2\delta_j}{\alpha_j^{\A} + \alpha_j^{\B}} \label{eq:ss2}
+     x_j^{\A} =  x_j^{\B} = n\bigg(\frac{\delta_j}{\alpha_j^{\A} + \alpha_j^{\B}}\bigg) \label{eq:ss2a}
 \end{equation}
 for $j = 1, 2$.
+Alternatively, as fractions of each genetic type of individuals,
+\begin{equation}
+     \frac{x_j^{\A}}{(n/2)} =  \frac{x_j^{\B}}{(n/2)} = \frac{2\delta_j}{\alpha_j^{\A} + \alpha_j^{\B}}. \label{eq:ss2}
+\end{equation}
 The necessary condition for this steady state to exist is
 \begin{equation}
      \sum_{j=1}^2 \frac{x_j^{\A}}{n} + \frac{x_j^{\B}}{n} 
@@ -281,7 +294,32 @@ Again, if this condition is not met, then we would expect the stimuli to continu
 
 While $\mu$ doesn't explicitly appear in the expression \eqref{eq:ss2} when we assume that the mean thresholds are identical for all individuals and both tasks, we expect\footnote{I haven't been able to get Mathematica to compute the expressions explicitly, but we can infer this from the form of the threshold functions.} the general form of steady state fractions of active individuals to be functions of $\mu_j^{\A}$ and $\mu_j^{\B}$ as well as $\tau^{\A}$ and $\tau^{\B}$. \textbf{So one question to investigate using simulations (numerical or computational) would be \textbf{how the mean thresholds ($\mu$) interact with either the demand rates ($\delta$) or the task efficiencies ($\alpha$)}.}
 
-\section{Downward vs. upward contagion} \label{sec:contagion}
+{\color{orange}
+\subsection{Mixed colonies: 2 tasks, 2 lines, non-50-50 mixes (NEW)}
+We now generalize to the case in which a fraction $f$ of individuals in a mixed colony are of genetic line} \A. In the simplified case where $\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$, the steady-state fractions of individuals performing task $j$ are
+\begin{equation}
+     x_j^{\A} =  \frac{fn\delta_j}{f\alpha_j^{\A} + (1-f)\alpha_j^{\B}}, 
+     \quad
+     x_j^{\B} =  \frac{(1-f)n\delta_j}{f\alpha_j^{\A} + (1-f)\alpha_j^{\B}}, 
+     \label{eq:ss3a}
+\end{equation}
+or, as fractions of the individuals of each genetic type (recall that there are $fn$ individuals of type \A\ and $(1-f)n$ individuals of type \B),
+\begin{equation}
+     \frac{x_j^{\A}}{fn} =  \frac{x_j^{\B}}{(1-f)n} = \frac{\delta_j}{f\alpha_j^{\A} + (1-f)\alpha_j^{\B}} \ \bigg(= \frac{x_j^{\A} + x_j^{\B}}{n}\bigg). \label{eq:ss3}
+\end{equation}
+The last equality highlights the fact that the fraction of individuals \textit{of each type} performing task $j$ is identical to the fraction \textit{of the whole colony} performing that task. As expected, the expressions \eqref{eq:ss3} reduce to \eqref{eq:ss2} when $f=0.5$ (50-50 mixes) and to \eqref{eq:ss1} when $f=1$ (pure \A\ colonies).
+
+Again, we would expect to see this equilibria only when $x_1^{\A} + x_1^{\B} + x_2^{\A}+ x_2^{\B} \leq n$ is satisfied.
+
+{\color{orange}
+From these results, we would expect the steady-state fraction of task $j$ performance frequency (which corresponds to \eqref{eq:ss3}) to depend \textbf{nonlinearly} on the fraction of \A\ individuals ($f$). 
+}
+
+\section{Comparing model predictions with simulation results}
+
+
+
+\section{Downward vs. upward contagion in the 50-50 mixes} \label{sec:contagion}
 
 A focus during our last Skype with Daniel and Yuko was how the model could qualitatively capture the two contagion patterns in Fig.~1 (bottom row) of Yuko's document. Specifically, they were interested in \textbf{whether varying both the task efficiencies $\alpha$ and the demand rates $\delta$ would capture the difference in the directions of contagion (downward or upward) when the larvae differed.}
 
@@ -305,8 +343,8 @@ By manipulating the inequality \eqref{eq:down}, however, we see that \textbf{onl
     & = \frac{\delta_j}{2} \Bigg( 
     \frac{\alpha_j^{\B} (\alpha_j^{\A} + \alpha_j^{\B}) + \alpha_j^{\A} (\alpha_j^{\A} + \alpha_j^{\B}) - 4\alpha_j^{\A}\alpha_j^{\B}}{\alpha_j^{\A}\alpha_j^{\B}(\alpha_j^{\A} + \alpha_j^{\B})} \Bigg) \nonumber\\
     & = \frac{\delta_j}{2} \Bigg( 
-    \frac{ (\alpha_j^{\A})^2 + (\alpha_j^{\B})^2 - 2\alpha_j^{\A}\alpha_j^{\B}}{\alpha_j^{\A}\alpha_j^{\B}(\alpha_j^{\A} + \alpha_j^{\B})} \Bigg) \nonumber\\
-    & = \frac{\delta_j}{2} \Bigg( 
+    \frac{ (\alpha_j^{\A})^2 + (\alpha_j^{\B})^2 - 2\alpha_j^{\A}\alpha_j^{\B}}{\alpha_j^{\A}\alpha_j^{\B}(\alpha_j^{\A} + \alpha_j^{\B})} \Bigg) 
+    = \frac{\delta_j}{2} \Bigg( 
     \frac{ (\alpha_j^{\A} - \alpha_j^{\B})^2 }{\alpha_j^{\A}\alpha_j^{\B}(\alpha_j^{\A} + \alpha_j^{\B})} \Bigg) > 0
 \end{align}
 
@@ -323,7 +361,7 @@ Upward contagion is still possible if we relax some of our assumptions. In the s
     \item From our earlier simulations, we know that both the mean threshold ($\mu$) or the quit probability ($\tau$) lead to ``behavioral amplification'' in the mixed case.
     Biologically speaking, which is more likely to vary by genetic line? Also, what happens when $\alpha$ AND either $\mu$ and $\tau$ are varied?
     
-    \item What do these ``upward'' and ``downward'' contagions imply? As in, why might they be biologically interesting?
+    \item What do these ``upward'' and ``downward'' contagions imply? As in, why might they be biologically interesting? {\color{orange}We will ask Yuko et al. when we send them the summary document.}
 \end{itemize}
 
 \begin{thebibliography}{99}
