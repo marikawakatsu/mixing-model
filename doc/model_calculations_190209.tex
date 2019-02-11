@@ -250,7 +250,7 @@ where $\eta$ is the threshold response parameter as in the original model. Final
 \end{align}
 for $(j,j')=(1,2), (2,1)$. {\color{orange}The sums in square brackets capture the possible ways in which individuals can initiate task $j$: they can either encounter the stimulus for task $j$ immediately and begin performing that task, or they can first encounter the stimulus for the other task $j'$, decide not to perform that task, subsequently encounter the stimulus for task $j$, and begin performing task $j$.}
 
-The full model for $m=2$ consists of the six equations describing changes in $s_1, s_2$ (Eq.~\eqref{eq:stim}) and $ x_1^{\A}, x_1^{\B}, x_2^{\A}, x_2^{\B}$ (Eq.~\eqref{eq:active}), {\color{orange}under the constraint $x_1^{\A}+ x_1^{\B}+x_2^{\A}+ x_2^{\B} \leq n$}.
+The full model for $m=2$ consists of the six equations describing changes in $s_1, s_2$ (Eq.~\eqref{eq:stim}) and $ x_1^{\A}, x_1^{\B}, x_2^{\A}, x_2^{\B}$ (Eq.~\eqref{eq:active}), {\color{orange}under the constraints $x_{1,t}^{\A}+x_{2,t}^{\A} \leq fn$ and $x_{1,t}^{\B}+ x_{2,t}^{\B} \leq (1-f)n$}.
 
 \section{Steady-state predictions} \label{sec:ss}
 One way to understand what is happening in the simulations is to consider the equilbria of the above model. My intent here is not (yet) to prove the stability etc. rigorously but to get a sense for what we should expect to see in the simulations.
@@ -294,6 +294,8 @@ Again, if this condition is not met, then we would expect the stimuli to continu
 
 While $\mu$ doesn't explicitly appear in the expression \eqref{eq:ss2} when we assume that the mean thresholds are identical for all individuals and both tasks, we expect\footnote{I haven't been able to get Mathematica to compute the expressions explicitly, but we can infer this from the form of the threshold functions.} the general form of steady state fractions of active individuals to be functions of $\mu_j^{\A}$ and $\mu_j^{\B}$ as well as $\tau^{\A}$ and $\tau^{\B}$. \textbf{So one question to investigate using simulations (numerical or computational) would be \textbf{how the mean thresholds ($\mu$) interact with either the demand rates ($\delta$) or the task efficiencies ($\alpha$)}.}
 
+\subsubsection{Comparing with simulation results}
+
 {\color{orange}
 \subsection{Mixed colonies: 2 tasks, 2 lines, non-50-50 mixes (NEW)}
 We now generalize to the case in which a fraction $f$ of individuals in a mixed colony are of genetic line} \A. In the simplified case where $\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$, the steady-state fractions of individuals performing task $j$ are
@@ -315,17 +317,17 @@ Again, we would expect to see this equilibria only when $x_1^{\A} + x_1^{\B} + x
 From these results, we would expect the steady-state fraction of task $j$ performance frequency (which corresponds to \eqref{eq:ss3}) to depend \textbf{nonlinearly} on the fraction of \A\ individuals ($f$). 
 }
 
-\section{Comparing model predictions with simulation results}
-\subsection{Pure colonies and 50-50 mixes}
-
-\subsection{Non-50-50 mixes}
+\subsubsection{Comparing with simulation results}
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1in 0 0.5in}, clip, width=0.8\linewidth]{output/Task_dist/mixes_comparison.pdf}
-    \caption{Comparison of simulation results (left) and analytical predictions (right) according to the model above.}
+    \includegraphics[trim={0 1in 0 0.75in}, clip, width=0.95\linewidth]{output/Task_dist/mixes_comparison.pdf}
+    \caption{Comparison of simulation results (left) and analytical predictions of steady states (right) according to the model above. The parameters used in both columns are as follows: $\alpha_1^{\A} = \alpha_2^{\A} = 2, \delta= 0.6, \mu=10, \sigma = 0.1$. 
+    \textbf{Top row}: The \B\ ants are ``super-efficient'' at both tasks ($\alpha_1^{\B} = \alpha_2^{\B} = 2$, top row). In the simulations, task performance \textit{increases nonlinearly} as the fraction of \A\ ants in the colony increases (left), as predicted qualitatively by the model (right).
+    \textbf{Bottom row}: The \B\ ants are ``inefficient'' at both tasks ($\alpha_1^{\B} = \alpha_2^{\B} = 1$). 
+    Similar to the 50-50 cases, when the colony primarily consists of the inefficient \B\ ants ($f = 0, 0.25$ in the simulations), the model \textit{overpredicts} the colony activity.
+    Where there are sufficiently many \A\ ants in the colony ($f = 0.5, 0.75, 1$ in the simulations), however, both the simulations and model predictions show a \textit{nonlinear negative} relationship in task performance.}
     \label{fig:mixes_comp}
 \end{figure}
-
 
 \section{Downward vs. upward contagion in the 50-50 mixes} \label{sec:contagion}
 
@@ -364,7 +366,7 @@ Upward contagion is still possible if we relax some of our assumptions. In the s
 
 \section{Questions}
 \begin{itemize}
-    \item How reasonable is it to assume that the empirically observed behavior corresponds to the steady state of the model?
+    \item How reasonable is it to assume that the empirically observed behavior corresponds to the steady state of the model? {\color{orange}Need to make this assumption for steady-state analysis, but should also consider cases where this assumption does not hold and }
     
     \item From our earlier simulations, we know that both the mean threshold ($\mu$) or the quit probability ($\tau$) lead to ``behavioral amplification'' in the mixed case.
     Biologically speaking, which is more likely to vary by genetic line? Also, what happens when $\alpha$ AND either $\mu$ and $\tau$ are varied?
