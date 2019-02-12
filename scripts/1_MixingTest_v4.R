@@ -40,7 +40,7 @@ rm(list = ls())
 #                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 2, 6, 6, 1,	1, 10, 10, 10, 10),
+params <- matrix(c(2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
@@ -54,9 +54,9 @@ for (INDEX in 1:nrow(params)){
   # Base parameters
   Ns             <- c(16) #vector of number of individuals to simulate
   m              <- 2 #number of tasks
-  gens           <- 100000 #number of generations to run simulation 
+  gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A") #c("A", "B", "AB")
