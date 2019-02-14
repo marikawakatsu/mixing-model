@@ -7,7 +7,7 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_1.00_1.00_quitP_0.20.Rdata")
+load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20.Rdata")
 
 file_name <- "Mix_Alphas_B-super-efficient"
 
@@ -31,7 +31,11 @@ task_dist_summary <- task_dist %>%
   summarise(Task1_mean = mean(Task1),
             Task1_SD = sd(Task1),
             Task2_mean = mean(Task2),
-            Task2_SD = sd(Task2))
+            Task2_SD = sd(Task2)) %>% 
+  filter(!Mix %in% c(0, 1)) %>% 
+  mutate(Line = "Mixed",
+         Group_mean = TRUE)
+
 
 # Mix x Line means
 task_dist_lines <- task_dist %>% 
@@ -42,7 +46,13 @@ task_dist_lines <- task_dist %>%
   summarise(Task1_mean = mean(Task1),
             Task1_SD = sd(Task1),
             Task2_mean = mean(Task2),
-            Task2_SD = sd(Task2))
+            Task2_SD = sd(Task2)) %>% 
+  mutate(Group_mean = Mix %in% c(0, 1))
+
+#Bind
+task_dist_summary <- task_dist_summary %>% 
+  bind_rows(task_dist_lines) %>% 
+  mutate(Group_mean = as.numeric(Group_mean))
 
 ###### Plot ######
 # Plot raw data
@@ -63,4 +73,21 @@ gg_dist
 ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 4, height = 2, dpi = 400)
 
 # Plot summary points
+gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, color = Line)) +
+  geom_errorbar(aes(ymin = Task1_mean - Task1_SD, ymax = Task1_mean + Task1_SD), 
+                position = position_dodge(width = 0.05),
+                width = 0,
+                size = 0.3) +
+  geom_point(aes(size = Group_mean),
+             position = position_dodge(width = 0.05)) +
+  theme_classic() +
+  labs(x = "Frac. of A individuals in colony",
+       y = "Frequency Task 1") +
+  scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
+  scale_size_continuous(range = c(0.3, 1), 
+                        guide = FALSE) +
+  scale_y_continuous(limits = c(0, 0.5), breaks = seq(0, 1, 0.1)) +
+  theme_ctokita()
+gg_dist_sum
 
+ggsave(filename = paste0("output/Task_dist/", file_name, "_Means.png"), width = 4, height = 2, dpi = 400)
