@@ -7,21 +7,45 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_6.00_6.00_quitP_0.20.Rdata")
+load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_2.00_2.00_Balpha_1.00_1.00_quitP_0.20.Rdata")
 
 file_name <- "Mix_Alphas_B-super-efficient"
 
 ####################
 # Final task distributions
 ####################
-# Prepare
+###### Prepare ######
+# Raw data
 task_dist <- task_dist %>% 
   group_by(n) %>% 
   mutate(set = paste0(Mix, "-", replicate)) %>% 
   mutate(set = factor(set, 
                       levels = c(sort(apply(expand.grid(unique(Mix), unique(replicate)), 1, paste, collapse = "-")))))
 
-# Plot
+# Mix means
+task_dist_summary <- task_dist %>% 
+  group_by(Mix, set) %>% 
+  summarise(Task1 = mean(Task1),
+            Task2 = mean(Task2)) %>% 
+  group_by(Mix) %>% 
+  summarise(Task1_mean = mean(Task1),
+            Task1_SD = sd(Task1),
+            Task2_mean = mean(Task2),
+            Task2_SD = sd(Task2))
+
+# Mix x Line means
+task_dist_lines <- task_dist %>% 
+  group_by(set, Mix, Line) %>% 
+  summarise(Task1 = mean(Task1),
+            Task2 = mean(Task2)) %>% 
+  group_by(Mix, Line) %>% 
+  summarise(Task1_mean = mean(Task1),
+            Task1_SD = sd(Task1),
+            Task2_mean = mean(Task2),
+            Task2_SD = sd(Task2))
+
+###### Plot ######
+# Plot raw data
 gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
   geom_point(size = 0.3) +
   theme_classic() +
@@ -37,4 +61,6 @@ gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
 gg_dist
 
 ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 4, height = 2, dpi = 400)
+
+# Plot summary points
 
