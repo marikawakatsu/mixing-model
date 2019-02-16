@@ -8,6 +8,9 @@
 \usepackage{color}
 \usepackage{authblk}
 
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+
 \usepackage[hidelinks]{hyperref}
 \usepackage{empheq}
 \usepackage{blkarray}
@@ -285,7 +288,7 @@ A formal proof of the statement(s) require an induction on $t$ using the inequal
 One way to understand what is happening in the simulations is to consider the equilbria of the above model. My intent here is not (yet) to prove the stability etc. rigorously but to get a sense for what we should expect to see in the simulations.
 
 \subsection{Pure colonies: 2 tasks, 1 line}
-For pure (\A-only) colonies, we set $n_{j,t}^{\B} = 0$ for all time $t$. Setting Eq.~\eqref{eq:stim} to zero, we obtain
+For pure (\A-only) colonies, we set $f = 1$ and $n_{j,t}^{\B} = 0$ for all time $t$. Setting Eq.~\eqref{eq:stim} to zero, we obtain
 \begin{equation}
     \frac{n_j^{\A}}{n} = \frac{\delta_j}{\alpha_j^{\A}}
     \label{eq:ss1}
@@ -300,7 +303,7 @@ Note that the sum of the fractions \eqref{eq:ss1} across tasks should not exceed
 \end{equation}
 If this condition is not met, then we would expect the stimuli to continue growing (i.e., the system will not reach a steady state). \textbf{A ``symptom'' of this phenomenon, I think, is that the ants become ``maxed out'' (I can explain this more when we Skype)}.
 
-\subsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes}
+\subsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes} \label{sec:5050}
 
 {\color{black}We first consider the 50-50 mixes ($f=0.5$), i.e., mixed colonies consisting of an equal number of \A\ and \B\ ants.}
 Moreover, we assume that the mean thresholds and the quit probabilities are identical for both tasks and lines ($\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$), as we have done in the simulations with varied $\delta$ and $\alpha$ values. Setting Eq.~\eqref{eq:stim} and Eq.~\eqref{eq:active} equal to zero, we find\footnote{This is the expression I get when I set $1\leq \eta \leq 20, \eta \in \ZZ$. There seems to be something numerically tricky when $\eta$ takes non-integer values.} the expression for the steady-state numbers of individuals performing task $j$:%\footnote{}
@@ -372,6 +375,170 @@ From these results, we would expect the steady-state fraction of task $j$ perfor
     Where there are sufficiently many \A\ ants in the colony ($f = 0.5, 0.75, 1$ in the simulations), however, both the simulations and model predictions show a \textit{nonlinear negative} relationship in task performance.}
     \label{fig:mixes_comp}
 \end{figure}
+
+\subsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes, symmetric task thresholds (NEW 2/15)}
+
+In Section~\ref{sec:5050}, we assumed that the mean thresholds $\mu_{j}^{\A}$ and $\mu_{j}^{\B}$ were identically for both lines and tasks ($\mu_{1}^{\A} = \mu_{2}^{\A} = \mu_{1}^{\B} = \mu_{2}^{\B}$)
+and derived steady-state fractions of individuals performing the two tasks. Notably, such fractions were independent of $\mu_{j}$ and dependent only on $\delta_j$ and $\alpha_{j}$.  To understand the full dynamics of the model, however, we also need to study \textbf{how the mean thresholds $\mu_{j}^{\A}$ and $\mu_{j}^{\B}$ affect the steady states}.
+
+Below are the set of 6 equations describing the dynamics, assuming 50-50 mixes ($f=0.5$).
+\begin{align}
+    s_{1,t+1} - s_{1,t} & = \delta_1 - \frac{\alpha_1^{\A} n_{1,t}^{\A} + \alpha_1^{\B} n_{1,t}^{\B} }{n} \label{eq:full1}\\
+    s_{2,t+1} - s_{2,t} & = \delta_j - \frac{\alpha_2^{\A} n_{2,t}^{\A} + \alpha_2^{\B} n_{2,t}^{\B} }{n} \label{eq:full2}\\
+    n_{1,t+1}^{\A} - n_{1,t}^{\A} 
+    % & = \frac{1}{2} \bigg[ P_{j,t}^{\A}(s_{j,t}) + (1 - P_{j',t}^{\A}(s_{j',t}))P_{j,t}^{\A}(s_{j,t})\bigg] \bigg( \frac{n}{2}
+    % - (n_{j,t}^{\A} + n_{j',t}^{\A}) \bigg) - \tau n_{j,t}^{\A} \nonumber\\
+    & = \frac{1}{2} 
+    \bigg( \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\A})}^\eta} \bigg)
+    \bigg[ 2 - \bigg( \frac{s_{2,t}^\eta}{s_{2,t}^\eta + {(\mu_2^{\A})}^\eta} \bigg) \bigg] \bigg(\frac{n}{2}
+    - (n_{1,t}^{\A} + n_{2,t}^{\A}) \bigg) - \tau n_{1,t}^{\A}
+    \label{eq:full3}\\
+    n_{2,t+1}^{\A} - n_{2,t}^{\A} 
+    & = \frac{1}{2} 
+    \bigg( \frac{s_{2,t}^\eta}{s_{2,t}^\eta + {(\mu_2^{\A})}^\eta} \bigg) 
+    \bigg[ 2 - \bigg( \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\A})}^\eta} \bigg) \bigg] 
+    \bigg(\frac{n}{2} - (n_{1,t}^{\A} + n_{2,t}^{\A}) \bigg) - \tau n_{2,t}^{\A}
+    \label{eq:full4}\\
+    n_{1,t+1}^{\B} - n_{1,t}^{\B} 
+    & = \frac{1}{2} 
+    \bigg( \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\B})}^\eta} \bigg)
+    \bigg[ 2 - \bigg( \frac{s_{2,t}^\eta}{s_{2,t}^\eta + {(\mu_2^{\B})}^\eta} \bigg) \bigg]
+    \bigg(\frac{n}{2} - (n_{1,t}^{\B} + n_{2,t}^{\B}) \bigg) - \tau n_{1,t}^{\B}
+    \label{eq:full5}\\
+    n_{2,t+1}^{\B} - n_{2,t}^{\B} 
+    & = \frac{1}{2} 
+    \bigg( \frac{s_{2,t}^\eta}{s_{2,t}^\eta + {(\mu_2^{\B})}^\eta} \bigg) 
+    \bigg[ 2 - \bigg( \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\B})}^\eta} \bigg) \bigg]
+    \bigg(\frac{n}{2} - (n_{1,t}^{\B} + n_{2,t}^{\B}) \bigg) - \tau n_{2,t}^{\B}
+    \label{eq:full6}
+\end{align}
+At steady state, equations \eqref{eq:full1}--\eqref{eq:full6} must equal zero. Our goal is to find the steady-state values $s_{1}$, $s_{2}$, $n_{1}^{\A}$, $n_{2}^{\A}$, $n_{1}^{\B}$, and $n_{2}^{\B}$ such this condition is satisfied. 
+% Setting equations \eqref{eq:full1} to \eqref{eq:full6} to zero gives a set of 6 linearly dependent equations for 6 variables ($s_{1,t}, s_{2,t}$, $n_{1,t}^{\A}$, $n_{2,t}^{\A}$, $n_{1,t}^{\B}$, $n_{2,t}^{\B}$), so in theory we can solve exactly for the variables and obtain the full steady state.
+
+Setting \eqref{eq:full1} and \eqref{eq:full2} equal to zero, we obtain the relations
+\begin{equation}
+    n_{1}^{\A} + \bigg( \frac{\alpha_1^{\B}}{\alpha_1^{\A}} \bigg) n_{1}^{\B} 
+    = n\bigg(\frac{\delta_1}{\alpha_1^{\A}} \bigg),
+    \quad     
+    n_{2}^{\A} + \bigg( \frac{\alpha_2^{\B}}{\alpha_2^{\A}} \bigg) n_{2}^{\B} 
+    = n\bigg(\frac{\delta_2}{\alpha_2^{\A}}\bigg)
+    \label{eq:sol1}
+\end{equation}
+By substituting \eqref{eq:sol1} into \eqref{eq:full3} and \eqref{eq:full4}, we can eliminate $n_{1}^{\A}$ and $n_{2}^{\A}$. The four equations we then obtain for $s_1$, $s_2$, $n_{1}^{\B}$, and $n_{2}^{\B}$ can in theory be solved, but their solutions are too complicated to write down exactly. 
+
+Since our goal is to gain analytical insight into the model, we will first consider a special case in which 1) the task efficiencies are the same for both lines and tasks ($\alpha_{1}^{\A} = \alpha_{2}^{\A} = \alpha_{1}^{\B} = \alpha_{2}^{\B} = \alpha$); 2) the quit probabilities are the same for both tasks ($\tau^{\A} = \tau^{\B} = \tau$); 3) the task demand rates are the same for both tasks ($\delta_1 = \delta_2  = \delta$); 4) the task thresholds are ``symmetric'': $\mu_{1}^{\A} = \mu_{2}^{\B} = a$ and $\mu_{2}^{\A} = \mu_{1}^{\B} = b$. 
+% Under these assumptions, \eqref{eq:sol1} becomes
+% \begin{equation}
+%     n_{1}^{\A} +  n_{1}^{\B} 
+%     = n_{2}^{\A} +  n_{2}^{\B} 
+%     = n\bigg(\frac{\delta}{\alpha} \bigg)
+%     \label{eq:sol2}
+% \end{equation}
+
+\textbf{The symmetry of the parameters means that the dynamics of the stimuli are identical. Therefore, at steady state, the stimulus levels should be equal ($s_1 = s_2 = s$). Moreover, the number of \A\ ants performing task 1 should be identical to that of \B\ ants performing task 2 ($n_{1}^{\A} = n_{2}^{\B}$) and the number of \B\ ants performing task 1 should be identical to that of \A\ ants performing task 2 ($n_{1}^{\B} = n_{2}^{\A}$).}\footnote{Can explain this more if needed} This in turn implies that
+\begin{equation}
+    n_{1}^{\A} +  n_{2}^{\A} 
+    = n_{1}^{\B} +  n_{2}^{\B} 
+    = n\bigg(\frac{\delta}{\alpha} \bigg)
+    \label{eq:sol3}
+\end{equation}
+
+To apply \eqref{eq:sol3}, we first combine \eqref{eq:full3} and \eqref{eq:full4} as well as \eqref{eq:full5} and \eqref{eq:full6} and set both equal to zero:
+\begin{align}
+    \eqref{eq:full3} + \eqref{eq:full4}:&
+    %  & (n_{1,t+1}^{\A} + n_{2,t+1}^{\A}) - (n_{1,t}^{\A} + n_{2,t}^{\A} )
+    \nonumber\\
+    & \bigg[\frac{s_{1}^\eta}{s_{1}^\eta + {(\mu_1^{\A})}^\eta}
+    + \frac{s_{2}^\eta}{s_{2}^\eta + {(\mu_2^{\A})}^\eta}
+    - \frac{s_{1}^\eta}{s_{1}^\eta + {(\mu_1^{\A})}^\eta}  \frac{s_{2}^\eta}{s_{2}^\eta + {(\mu_2^{\A})}^\eta} \bigg]
+    \bigg(\frac{n}{2} - (n_{1}^{\A} + n_{2}^{\A}) \bigg) - \tau (n_{1}^{\A} + n_{2}^{\A}) = 0
+    \label{eq:sum1}\\
+    \eqref{eq:full5} + \eqref{eq:full6}:&
+    % & (n_{1+1}^{\B} + n_{2+1}^{\B}) - (n_{1}^{\B} + n_{2}^{\B} )
+     \nonumber\\
+    & \bigg[\frac{s_{1}^\eta}{s_{1}^\eta + {(\mu_1^{\B})}^\eta} 
+    + \frac{s_{2}^\eta}{s_{2}^\eta + {(\mu_2^{\B})}^\eta}
+    - \frac{s_{1}^\eta}{s_{1}^\eta + {(\mu_1^{\B})}^\eta}  \frac{s_{2}^\eta}{s_{2}^\eta + {(\mu_2^{\B})}^\eta} \bigg]
+    \bigg(\frac{n}{2} - (n_{1}^{\B} + n_{2}^{\B}) \bigg) - \tau (n_{1}^{\B} + n_{2}^{\B}) = 0
+     \label{eq:sum2}
+\end{align}
+Substituting $\mu_{1}^{\A} = \mu_{2}^{\B} = a$, $\mu_{2}^{\A} = \mu_{1}^{\B} = b$, and $s_1 = s_2 = s$, \eqref{eq:sum1} and \eqref{eq:sum2} become
+\begin{align}
+    & \bigg[\frac{s^\eta}{s^\eta + {a}^\eta}
+    + \frac{s^\eta}{s^\eta + {b}^\eta}
+    - \frac{s^\eta}{s^\eta + {a}^\eta}  \frac{s^\eta}{s^\eta + {b}^\eta} \bigg]
+    \bigg(\frac{n}{2} - (n_{1}^{\A} + n_{2}^{\A}) \bigg) - \tau (n_{1}^{\A} + n_{2}^{\A}) = 0
+    \label{eq:sum3}\\
+    & \bigg[\frac{s^\eta}{s^\eta + {b}^\eta} 
+    + \frac{s^\eta}{s^\eta + {a}^\eta}
+    - \frac{s^\eta}{s^\eta + {b}^\eta}  \frac{s^\eta}{s^\eta + {a}^\eta} \bigg]
+    \bigg(\frac{n}{2} - (n_{1}^{\B} + n_{2}^{\B}) \bigg) - \tau (n_{1}^{\B} + n_{2}^{\B}) = 0
+     \label{eq:sum4}
+\end{align}
+Finally, substituting \eqref{eq:sol3} into equations \eqref{eq:sum3} and \eqref{eq:sum4} gives us a single equation
+\begin{align}
+        \bigg[\frac{s^\eta}{s^\eta + {b}^\eta} 
+    + \frac{s^\eta}{s^\eta + {a}^\eta}
+    - \frac{s^\eta}{s^\eta + {b}^\eta}  \frac{s^\eta}{s^\eta + {a}^\eta} \bigg] \bigg(\frac{n}{2} - \frac{n\delta}{\alpha} \bigg) - \tau\cdot \frac{n\delta}{\alpha}
+    & = n\bigg[ \frac{s^\eta (s^\eta + {a}^\eta + {b}^\eta)}{(s^\eta + {a}^\eta)(s^\eta + {b}^\eta)} \bigg(\frac{1}{2} - \frac{\delta}{\alpha} \bigg) - \frac{\tau \delta}{\alpha}\bigg]
+    = 0 \nonumber\\
+   1 - \frac{{a}^\eta {b}^\eta}{(s^\eta + {a}^\eta)(s^\eta + {b}^\eta)}  & = \frac{\tau \delta/\alpha}{1/2 - \delta/\alpha }
+   = \frac{2\tau\delta}{\alpha - 2\delta}\nonumber\\
+   \frac{{a}^\eta {b}^\eta}{(s^\eta + {a}^\eta)(s^\eta + {b}^\eta)}
+   & = \frac{\alpha - 2\delta (1+\tau)}{\alpha - 2\delta}
+    \label{eq:sum5}
+\end{align}
+Rewriting \eqref{eq:sum5},
+\begin{equation}
+    (s^\eta)^2 + ({a}^\eta + {b}^\eta) s^\eta + ({a}^\eta {b}^\eta) \bigg(1 - \frac{\alpha - 2\delta}{\alpha - 2\delta (1+\tau)}\bigg) 
+    = (s^\eta)^2 + ({a}^\eta + {b}^\eta) s^\eta + ({a}^\eta {b}^\eta) \bigg(\frac{- 2\delta \tau}{\alpha - 2\delta (1+\tau)}\bigg)
+    = 0
+\end{equation}
+Thus, the steady-state stimulus level $s$ $(=s_1 = s_2)$ is given by
+\begin{equation}
+\boxed{
+    s^* = \bigg[\frac{1}{2} \bigg( -({a}^\eta + {b}^\eta) 
+    \pm \sqrt{
+    ({a}^\eta + {b}^\eta)^2 + ({a}^\eta {b}^\eta)\cdot \frac{8\delta \tau}{\alpha - 2\delta (1+\tau)}
+    } \bigg)\bigg]^\frac{1}{\eta}
+    }
+\end{equation}
+and the corresponding steady-state fractions of \A\ and \B\ ants performing tasks 1 and 2 are
+\begin{equation}
+\boxed{
+    \frac{n_1^{\A}}{(n/2)} =  \frac{n_2^{\B}}{(n/2)} = \frac{1}{\tau} \bigg(\frac{(s^*)^\eta}{(s^*)^\eta + {a}^\eta} \bigg)\bigg[2 - \frac{(s^*)^\eta}{(s^*)^\eta + {b}^\eta}  \bigg] \bigg(\frac{1}{2} - \frac{\delta}{\alpha} \bigg)
+    \label{eq:sol4}
+    }
+\end{equation}
+\begin{equation}
+\boxed{
+    \frac{n_2^{\A}}{(n/2)} =  \frac{n_1^{\B}}{(n/2)}  = \frac{1}{\tau} \bigg(\frac{(s^*)^\eta}{(s^*)^\eta + {b}^\eta} \bigg)\bigg[2 - \frac{(s^*)^\eta}{(s^*)^\eta + {a}^\eta}  \bigg] \bigg(\frac{1}{2} - \frac{\delta}{\alpha} \bigg)
+    \label{eq:sol5}
+    }
+\end{equation}
+When $a = b$ (i.e., when all $\mu$'s are the same), \eqref{eq:sol4} and \eqref{eq:sol5} reduce to the steady-state values predicted in \eqref{eq:ss2}.
+
+Biologically, the stimulus levels should take a non-negative value at all times. Mathematically, this is reflected in the fact that, when $s_{1,t} = 0$ ($s_{2,t} = 0$), equations \eqref{eq:full3} and \eqref{eq:full5} (\eqref{eq:full4} and \eqref{eq:full6}) take negative values, indicating that the number of ants performing task 1 (task 2) will decrease at time $t+1$. Thus, we expect the steady-state stimulus level to be non-negative as well.\footnote{Is this rigorous enough as an argument?} The required condition for $s \geq 0$ is
+\begin{equation}
+    \frac{8\delta \tau}{\alpha - 2\delta (1+\tau)} \geq 0 \quad\Longleftrightarrow\quad \alpha > 2\delta (1+\tau) \quad\Longleftrightarrow\quad 2\cdot \frac{\delta}{\alpha} < \frac{1}{1+\tau} \label{eq:cond3}
+\end{equation}
+
+\begin{remark}
+Recall condition \eqref{eq:cond2}, given by $2\delta/\alpha \leq 1$, which must be satisfied in order for a biologically feasible steady-state to exist. 
+Observe that \eqref{eq:cond3} is a strictly stricter condition compared to \eqref{eq:cond2}. This gives us a hint as to why we observe the discrepancy in Fig.~\ref{fig:5050_comp}\textbf{B} when $1/(1+\tau) \leq 2\delta_j/(\alpha_j^{\A}+\alpha_j^{\B}) \leq 1$.
+\end{remark}
+% Letting $T \equiv \frac{8\delta \tau}{\alpha - 2\delta (1+\tau)}$,
+% \begin{equation}
+% \boxed{
+%     s = \bigg[\frac{1}{2} \bigg( -({a}^\eta + {b}^\eta) 
+%     \pm \sqrt{
+%     ({a}^\eta + {b}^\eta)^2 + ({a}^\eta {b}^\eta)\cdot T
+%     } \bigg)\bigg]^\frac{1}{\eta}
+%     }
+% \end{equation}
+
+    % & = \frac{1}{2} \bigg[ \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\A})}^\eta} + (1 - \frac{s_{j',t}^\eta}{s_{j',t}^\eta + {(\mu_{j'}^{\A})}^\eta})\frac{s_{j,t}^\eta}{s_{j,t}^\eta + {(\mu_j^{\A})}^\eta}\bigg] \bigg( \frac{n}{2}
+    % - (n_{j,t}^{\A} + n_{j',t}^{\A}) \bigg) - \tau n_{j,t}^{\A}
 
 \newpage
 \section{Downward vs. upward contagion in the 50-50 mixes} \label{sec:contagion}
