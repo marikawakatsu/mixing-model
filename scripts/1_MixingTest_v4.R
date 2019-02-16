@@ -29,18 +29,15 @@ rm(list = ls())
 #                    6, 6, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
 #                    6, 6, 2, 2, 0.6,	0.6, 15, 15, 10, 10),
 #                    nrow = 3, ncol = 10, byrow = TRUE)
-
-# params <- matrix(c(2, 2, 6, 6, 1,	1, 10, 10, 10, 10,
-#                    2, 6, 6, 2, 1,	1, 10, 10, 10, 10,
-#                    2, 2, 1, 1, 1,	1, 10, 10, 10, 10,
-#                    2, 1, 1, 2, 1,	1, 10, 10, 10, 10),
+# params <- matrix(c(2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
 #                  nrow = 4, ncol = 10, byrow = TRUE)
-
 # params <- matrix(c(3, 3, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
 #                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
-
-params <- matrix(c(2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10),
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
@@ -59,7 +56,7 @@ for (INDEX in 1:nrow(params)){
   reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
-  mixes          <- c("A") #c("A", "B", "AB")
+  mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
@@ -338,6 +335,6 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
-  
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+
 }
