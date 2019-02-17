@@ -51,9 +51,10 @@ params <- matrix(c(2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
                    2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10,
                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
                  nrow = 4, ncol = 10, byrow = TRUE)
-# 
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10),
-#                  nrow = 1, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
+                   2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
+                 nrow = 2, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -173,6 +174,9 @@ for (INDEX in 1:nrow(params)){
     n2A_pred <- (1 / quitP[[1]])*(s^threshSlope / (s^threshSlope + b^threshSlope))*(2 - (s^threshSlope / (s^threshSlope + a^threshSlope)) )*(1/2 - deltas[[1]]/A_alpha[[1]])
     n1B_pred <- n2A_pred
     n2B_pred <- n1A_pred
+    c <- 0.8
+    w <- 0.7
+    print(paste0(c,w))
     
     }else if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
       print("Varying delta and alpha")
@@ -180,6 +184,8 @@ for (INDEX in 1:nrow(params)){
       n2A_pred <- 2*deltas[[1]]/(A_alpha[[2]]+B_alpha[[2]])
       n1B_pred <- n1A_pred
       n2B_pred <- n2A_pred
+      c <- 1.0
+      w <- 0.4
   
     }else{
       print("Check your conditions!")
@@ -210,7 +216,7 @@ for (INDEX in 1:nrow(params)){
   gg_dist3 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Line, shape = Type)) +
     geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean1),
-               size = 1, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
+               size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 1") +
@@ -220,7 +226,7 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.05, width = 0.4, position = position_dodge(width = 0.7)) 
+                  size = 0.05, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist3
   ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = 1.5, dpi = 400)
@@ -228,7 +234,7 @@ for (INDEX in 1:nrow(params)){
   gg_dist4 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
     geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean2),
-               size = 1, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
+               size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 2") +
@@ -238,7 +244,7 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.05, width = 0.4, position = position_dodge(width = 0.7)) 
+                  size = 0.05, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist4
   ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = 1.5, dpi = 400)
