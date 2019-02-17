@@ -210,7 +210,7 @@ for (INDEX in 1:nrow(params)){
   gg_dist3 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Line, shape = Type)) +
     geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean1),
-               size = 0.4, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
+               size = 1, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 1") +
@@ -228,7 +228,7 @@ for (INDEX in 1:nrow(params)){
   gg_dist4 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
     geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean2),
-               size = 0.4, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
+               size = 1, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 2") +
