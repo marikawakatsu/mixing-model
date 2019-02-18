@@ -331,7 +331,7 @@ While $\mu$ doesn't explicitly appear in \eqref{eq:ss2} when we assume that the 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{5050_comparison.pdf}
-    \caption{Comparison of simulation results (solid dots with error bars) and analytical predictions of steady states (opaque rings). The following parameters are shared among the four cases (\textbf{A}-\textbf{D}): $\mu = 10, \sigma = 0.1, \eta = 7$. The other parameters are as indicated in the figure: the top row (\textbf{A} and \textbf{B}) has $\delta = 0.6$ while the bottom row (\textbf{C} and \textbf{D}) has $\delta = 1.0$; the left column (\textbf{A} and \textbf{C}) has super-efficient ants (with $\alpha = 6$) while the right column (\textbf{B} and \textbf{D}) has inefficient ants (with $\alpha = 1$). \textbf{Case A and C}: The model predictions of steady state task performance frequencies agree with simulation results. \textbf{Case D}: The model predictions and simulation results disagree in all cases, but the discrepancy was expected: since conditions \eqref{eq:cond1} (for pure colonies) and \eqref{eq:cond2} (for mixed colonies) are violated, we do not expect the system to be in equilibrium in the first place (in particular, the stimuli keep growing). \textbf{Case B}: The model overpredicts the steady-state task performance frequencies for the tasks at which the ants are less efficient (i.e., Task 2 for \A\ and Task 1 for \B), but in all other cases the model agrees with the simulation results.}
+    \caption{Comparison of simulation results (solid dots with error bars) and analytical predictions of steady states (opaque rings). The following parameters are shared among the four cases (\textbf{A}-\textbf{D}): $\mu = 10, \sigma = 0, \eta = 7$. The other parameters are as indicated in the figure: the top row (\textbf{A} and \textbf{B}) has $\delta = 0.6$ while the bottom row (\textbf{C} and \textbf{D}) has $\delta = 1.0$; the left column (\textbf{A} and \textbf{C}) has super-efficient ants (with $\alpha = 6$) while the right column (\textbf{B} and \textbf{D}) has inefficient ants (with $\alpha = 1$). \textbf{Case A and C}: The model predictions of steady state task performance frequencies agree with simulation results. \textbf{Case D}: The model predictions and simulation results disagree in all cases, but the discrepancy was expected: since conditions \eqref{eq:cond1} (for pure colonies) and \eqref{eq:cond2} (for mixed colonies) are violated, we do not expect the system to be in equilibrium in the first place (in particular, the stimuli keep growing). \textbf{Case B}: The model overpredicts the steady-state task performance frequencies for the tasks at which the ants are less efficient (i.e., Task 2 for \A\ and Task 1 for \B), but in all other cases the model agrees with the simulation results.}
     \label{fig:5050_comp}
 \end{figure}
 \vspace{-5pt}
@@ -362,7 +362,7 @@ The last equality highlights the fact that the fraction of individuals \textit{o
 
 Again, we would expect to see this equilibria only when $n_1^{\A} + n_1^{\B} + n_2^{\A}+ n_2^{\B} \leq n$ is satisfied.
 
-From these results, we would expect the steady-state fraction of task $j$ performance frequency (which corresponds to \eqref{eq:ss3}) to depend \textbf{nonlinearly} on the fraction of \A\ individuals ($f$). \\
+From these results, we would expect the steady-state fraction of task $j$ performance frequency (which corresponds to \eqref{eq:ss3}) to depend \textbf{nonlinearly} on the fraction of \A\ individuals ($f$). 
 
 \subsubsection{Comparing with simulation results}
 \begin{figure}[H]
@@ -539,6 +539,15 @@ Observe that \eqref{eq:cond3} is a strictly stricter condition compared to \eqre
 
     % & = \frac{1}{2} \bigg[ \frac{s_{1,t}^\eta}{s_{1,t}^\eta + {(\mu_1^{\A})}^\eta} + (1 - \frac{s_{j',t}^\eta}{s_{j',t}^\eta + {(\mu_{j'}^{\A})}^\eta})\frac{s_{j,t}^\eta}{s_{j,t}^\eta + {(\mu_j^{\A})}^\eta}\bigg] \bigg( \frac{n}{2}
     % - (n_{j,t}^{\A} + n_{j',t}^{\A}) \bigg) - \tau n_{j,t}^{\A}
+\subsubsection{Comparing with simulation results}
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 1.25in 0 1.25in}, clip, width=0.9\linewidth]{5050_comparison_mu.pdf}
+    \caption{Comparison of simulation results (solid dots with error bars) and analytical predictions of steady states (opaque rings). Both cases \textbf{A} and \textbf{B} have the following parameters: $\sigma = 0, \eta = 7, \tau = 0.2, \delta = 0.6$. The task efficiency is assumed to be the same for both tasks and lines ($\alpha = 2$). 
+    %Overall, the analytical predictions agree well with the simulation results.
+    }
+    \label{fig:5050_comp_mu}
+\end{figure}
 
 \newpage
 \section{Downward vs. upward contagion in the 50-50 mixes} \label{sec:contagion}
