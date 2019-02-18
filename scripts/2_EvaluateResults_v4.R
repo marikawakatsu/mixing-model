@@ -43,13 +43,22 @@ rm(list = ls())
 #                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
 # 
-# params <- matrix(c(2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
+# params <- matrix(c(2, 2, 6, 6, 0.6,	0.6, 10, 10, 10, 10,
 #                    2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
-#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10,
-#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
-#                  nrow = 4, ncol = 10, byrow = TRUE)
-params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10),
-                 nrow = 1, ncol = 10, byrow = TRUE)
+#                    2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 2, 6, 6, 1.0, 1.0, 10, 10, 10, 10,
+#                    2, 6, 6, 2, 1.0, 1.0, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 1.0, 1.0, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 1.0, 1.0, 10, 10, 10, 10),
+#                  nrow = 8, ncol = 10, byrow = TRUE)
+params <- matrix(c(2, 2, 6, 6, 0.8,	0.8, 10, 10, 10, 10,
+                   2, 6, 6, 2, 0.8,	0.8, 10, 10, 10, 10,
+                   2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10,
+                   2, 1, 1, 2, 0.8,	0.8, 10, 10, 10, 10),
+                 nrow = 4, ncol = 10, byrow = TRUE)
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10),
+#                  nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -169,7 +178,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist1
   
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = 3, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = 3, dpi = 400)
   
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -187,7 +196,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist2
   
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = 3, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
@@ -205,7 +214,7 @@ for (INDEX in 1:nrow(params)){
                   size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary.png"), width = 3, height = 3, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary.png"), width = 3, height = 3, dpi = 400)
   
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Line)) +
     geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
@@ -222,8 +231,7 @@ for (INDEX in 1:nrow(params)){
                   size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = 3, dpi = 400)
-  
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = 3, dpi = 400)
   
 }
 
