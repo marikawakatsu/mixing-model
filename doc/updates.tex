@@ -192,6 +192,10 @@
 \bibliographystyle{plain}
 \usepackage{float}
 
+\newcommand{\A}{{\color{red}A}}
+\newcommand{\B}{{\color{blue}B}}
+\newcommand{\later}{{\color{red}(Add later)}}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document-specific settings
@@ -207,28 +211,75 @@
 \begin{document}
 
 \maketitle
-\noindent
-{\color{red}I am thinking that we can make this an internal document for our records, since I think most of the theoretical results we have are useful for our understanding but don't need to be included in whatever we share with Yuko et al. We can make a separate document for them with key points and questions.}
+% \noindent
+% {\color{red}I am thinking that we can make this an internal document for our records, since I think most of the theoretical results we have are useful for our understanding but don't need to be included in whatever we share with Yuko et al. We can make a separate document for them with key points and questions.}
 
 \tableofcontents
 
 \section{Overview}
 
-\section{Varying combinations of parameters (Mari)}
+\newpage
+\section{Varying both the task demand rate and the task efficiency (Mari)}
+
+To capture the effects of the different larvae on task performance, we varied the task demand rate ($\delta$) in addition to the task performance efficiency ($\alpha$). In particular, we were interested in whether this combination could give rise to the different directions of contagion (upward or downward) observed in the data. 
+For simplicity, these simulations assume that the tasks associated with a given type of larvae (\A\ or \B) have the same demand rate.
+
+When both lines are sufficiently efficient, changing the demand rate makes no qualitative difference in the relative levels of the mean colony activity in the different mixes (pure \A, pure \B, and 50-50 mixes of \A\ and \B). Within each mix, the more demanding the tasks (higher $\delta$), the higher the mean activity \later.  Moreover, the difference in the mean activity levels for pure-\A\ and pure-\B\ colonies (i.e., the gap between the pure-\A\ and pure-\B\ means) is more pronounced for the more demanding tasks. Despite these quantitative differences, the qualitative picture remains unchanged:
+we observe a downward contagion \textit{both} when the tasks are less demanding ($\delta = 0.6$, \later) and more demanding ($\delta = 0.8$, \later).
+
+However, when one line is inefficient, changing the demand rate changes the picture qualitatively. When the tasks are less demanding ($\delta = 0.6$), we observe an upward contagion \later. When the tasks are more demanding ($\delta = 0.8$), however, the task performance levels become nearly indistinguishable among the three mixes \later. This qualitative changes appears to result from the fact that the less efficient ants are unable to keep the stimuli at a steady level: the task performance level for the colony consisting entirely of the inefficient line (pure~\B) remains unchanged for $\delta = 0.6$ and $\delta = 0.8$, which suggests that the ants are working at maximum capacity. When we check the simulation results, we observe that indeed both stimuli keep increasing over time (as opposed to reaching a steady state).
+
+These observations are based on the case in which one line is more efficient at both tasks than the other line. We also tested the case in which each line is more efficient at one task but less efficient at the other task (e.g., $\alpha_{1}^{\A} = \alpha_{2}^{\B} = 2, \alpha_{1}^{\B} = \alpha_{2}^{\A} = 6$ or $1$)\footnote{We would be happy to discuss these results if you are interested.}. We arrive at the same overall conclusion: \textbf{the difficulty of the task (as measured by the demand rate) has no qualitative effect when all ants are sufficiently efficient; however, when some ants are inefficient, the demand rate has a nontrivial effect.}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[trim={0 0.4in 0 0.2in}, clip, width=0.9\linewidth]{{doc/deltas_0.6_0.6_comparison}.pdf}
+%     \caption{Caption}
+%     \label{fig:deltas0606}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[trim={0 0.4in 0 0}, clip, width=0.9\linewidth]{{doc/deltas_1.0_1.0_comparison}.pdf}
+%     \caption{Caption}
+%     \label{fig:deltas1010}
+% \end{figure}
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[trim={0 0 0 0}, clip, width=0.9\linewidth]{{doc/deltas_0.6_1.0_comparison}.pdf}
+%     \caption{Caption}
+%     \label{fig:deltas0610}
+% \end{figure}
 
 \section{Varying ratios of the genetic lines (Chris)}
+Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line A as "average" in task efficiency (i.e., $\alpha_j^A = 2$) and varied the task efficiency of genetic line B. For line B, we assumed either high efficiency (i.e., $\alpha_j^B = 6$) or inefficiency (i.e., $\alpha_j^B = 1$). When B is highly efficient the frequency of task 1 performance increases exponentially as the proportion line B increases. On the other hand, when B is inefficient task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-super-efficient_Means.png}
+    \caption{Simulation results for mixing of genetic lines when line B is highly efficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 6,$}
+    \label{fig:Mix_Alphas_B-efficient}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{Mix_Alphas_B-inefficient_Means.png}
+    \caption{Simulation results for mixing of genetic lines when line B is inefficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 1,$}
+    \label{fig:Mix_Alphas_B-inefficient}
+\end{figure}
 
 \section{Analytical model (Mari)}
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=1\linewidth]{5050_comparison.pdf}
+    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{5050_comparison.pdf}
     \caption{Sim results + predictions need to be separated}
     \label{fig:5050comp}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1in 0 1.1in},clip,width=1\linewidth]{mixes_comparison.pdf}
+    \includegraphics[trim={0 1in 0 1.1in},clip,width=0.9\linewidth]{mixes_comparison.pdf}
     \caption{Gray text still needs to be updated}
     \label{fig:mixescomp}
 \end{figure}
