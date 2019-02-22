@@ -29,16 +29,23 @@ rm(list = ls())
 #                    6, 6, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
 #                    6, 6, 2, 2, 0.6,	0.6, 15, 15, 10, 10),
 #                    nrow = 3, ncol = 10, byrow = TRUE)
-params <- matrix(c(2, 2, 6, 6, 0.8,	0.8, 10, 10, 10, 10,
-                   2, 6, 6, 2, 0.8,	0.8, 10, 10, 10, 10,
-                   2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10,
-                   2, 1, 1, 2, 0.8,	0.8, 10, 10, 10, 10),
-                 nrow = 4, ncol = 10, byrow = TRUE)
+# params <- matrix(c(2, 2, 6, 6, 0.8,	0.8, 10, 10, 10, 10,
+#                    2, 6, 6, 2, 0.8,	0.8, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 0.8,	0.8, 10, 10, 10, 10),
+#                  nrow = 4, ncol = 10, byrow = TRUE)
 # params <- matrix(c(3, 3, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
 #                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
-#                  nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(1.19, 1.19, 1.19, 1.19, 0.6,	0.6, 10, 15, 15, 10,    # expect to explode
+#                    1.21, 1.21, 1.21, 1.21, 0.6,	0.6, 10, 15, 15, 10,    # old condition predicts SS, new condition predicts explode
+#                    1.30, 1.30, 1.30, 1.30, 0.6,	0.6, 10, 15, 15, 10,    # same as above
+#                    1.43, 1.43, 1.43, 1.43, 0.6,	0.6, 10, 15, 15, 10,    # same as above
+#                    1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
+#                  nrow = 5, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -335,6 +342,6 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 }

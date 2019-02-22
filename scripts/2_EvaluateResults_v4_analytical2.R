@@ -2,7 +2,7 @@
 #
 # Evaluate ensemble model outputs
 # Updated 02/16/19:
-#     Plot mixes with means and predictions by line
+#       Plot mixes with means and predictions by line
 #       
 ################################################################################
 
@@ -46,15 +46,24 @@ rm(list = ls())
 # params <- matrix(c(2, 2, 6, 6, 1,	1, 10, 10, 10, 10),
 #                  nrow = 1, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
-                   2, 6, 6, 2, 1.0,	1.0, 10, 10, 10, 10,
-                   2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10,
-                   2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
-                 nrow = 4, ncol = 10, byrow = TRUE)
+# params <- matrix(c(2, 6, 6, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 6, 6, 2, 1.0,	1.0, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 1, 1, 2, 1.0,	1.0, 10, 10, 10, 10),
+#                  nrow = 4, ncol = 10, byrow = TRUE)
+# 
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
+#                    2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
+#                  nrow = 2, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
-                   2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
-                 nrow = 2, ncol = 10, byrow = TRUE)
+# params <- matrix(c(1.19, 1.19, 1.19, 1.19, 0.6,	0.6, 10, 15, 15, 10,    # expect to explode
+#                    1.21, 1.21, 1.21, 1.21, 0.6,	0.6, 10, 15, 15, 10,    # old condition predicts SS, new condition predicts explode
+#                    1.30, 1.30, 1.30, 1.30, 0.6,	0.6, 10, 15, 15, 10,    # same as above
+#                    1.43, 1.43, 1.43, 1.43, 0.6,	0.6, 10, 15, 15, 10,    # same as above
+#                    1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
+#                  nrow = 5, ncol = 10, byrow = TRUE)
+params <- matrix(c(1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -74,9 +83,9 @@ for (INDEX in 1:nrow(params)){
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
-  A_ThreshSD     <- A_ThreshM * 0. #1 #population threshold standard deviations for clone line A !!Change!!
+  A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0. #1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -174,7 +183,7 @@ for (INDEX in 1:nrow(params)){
     n2A_pred <- (1 / quitP[[1]])*(s^threshSlope / (s^threshSlope + b^threshSlope))*(2 - (s^threshSlope / (s^threshSlope + a^threshSlope)) )*(1/2 - deltas[[1]]/A_alpha[[1]])
     n1B_pred <- n2A_pred
     n2B_pred <- n1A_pred
-    c <- 0.8
+    c <- 1.0
     w <- 0.7
     print(paste0(c,w))
     
@@ -226,10 +235,10 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.05, width = w, position = position_dodge(width = 0.7)) 
+                  size = 0.1, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = 1.5, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = 1.5, dpi = 400)
   
   gg_dist4 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
@@ -244,9 +253,11 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.05, width = w, position = position_dodge(width = 0.7)) 
+                  size = 0.1, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist4
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = 1.5, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = 1.5, dpi = 400)
   
 }
+
+gg_dist3
