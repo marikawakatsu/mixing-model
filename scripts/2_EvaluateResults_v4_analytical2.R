@@ -64,6 +64,12 @@ rm(list = ls())
 #                  nrow = 5, ncol = 10, byrow = TRUE)
 params <- matrix(c(1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
                  nrow = 1, ncol = 10, byrow = TRUE)
+ddd <- 0.6
+params <- matrix(c(#2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
+                   2, 2, 2, 2, ddd,	ddd, 10, 12, 12, 10,
+                   #2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
+                   2, 2, 2, 2, ddd,	ddd, 10, 20, 20, 10),
+                 nrow = 2, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -83,9 +89,9 @@ for (INDEX in 1:nrow(params)){
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
-  A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
+  A_ThreshSD     <- A_ThreshM * 0#.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0#.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -110,6 +116,11 @@ for (INDEX in 1:nrow(params)){
   rm(file_name1, file_name2)
   
   load(paste0("output/Rdata/", file_name, ".Rdata"))
+  
+  # Plotting
+  ymax <- 0.6 # max y for plotting
+  yinc <- 0.1 # y-axis increments
+  figH <- 1.5 # figure height for printing; default width is 3
   
   ####################
   # Final task distributions
@@ -185,7 +196,6 @@ for (INDEX in 1:nrow(params)){
     n2B_pred <- n1A_pred
     c <- 1.0
     w <- 0.7
-    print(paste0(c,w))
     
     }else if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
       print("Varying delta and alpha")
@@ -193,7 +203,7 @@ for (INDEX in 1:nrow(params)){
       n2A_pred <- 2*deltas[[1]]/(A_alpha[[2]]+B_alpha[[2]])
       n1B_pred <- n1A_pred
       n2B_pred <- n2A_pred
-      c <- 1.0
+      c <- 1.2
       w <- 0.4
   
     }else{
@@ -231,14 +241,14 @@ for (INDEX in 1:nrow(params)){
          y = "Frequency Task 1") +
     scale_color_manual(values = c("#ca0020", "#0571b0","#80007F")) +
     scale_shape_manual(values = rep(c(1,16),3)) +
-    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
+    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.1, width = w, position = position_dodge(width = 0.7)) 
+                  size = 0.3, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = 1.5, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = figH, dpi = 400)
   
   gg_dist4 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
@@ -249,15 +259,13 @@ for (INDEX in 1:nrow(params)){
          y = "Frequency Task 2") +
     scale_color_manual(values = c("#ca0020", "#0571b0","#80007F")) +
     scale_shape_manual(values = rep(c(1,16),3)) +
-    scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
+    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.1, width = w, position = position_dodge(width = 0.7)) 
+                  size = 0.3, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = 1.5, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = figH, dpi = 400)
   
 }
-
-gg_dist3

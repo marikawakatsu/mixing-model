@@ -34,18 +34,21 @@ rm(list = ls())
 #                    2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10,
 #                    2, 1, 1, 2, 0.8,	0.8, 10, 10, 10, 10),
 #                  nrow = 4, ncol = 10, byrow = TRUE)
-# params <- matrix(c(3, 3, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
-#                    3,	1, 1,	3, 0.6,	0.6, 10, 10, 10, 10),
-#                  nrow = 2, ncol = 10, byrow = TRUE)
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 12, 12, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
 # params <- matrix(c(1.19, 1.19, 1.19, 1.19, 0.6,	0.6, 10, 15, 15, 10,    # expect to explode
 #                    1.21, 1.21, 1.21, 1.21, 0.6,	0.6, 10, 15, 15, 10,    # old condition predicts SS, new condition predicts explode
 #                    1.30, 1.30, 1.30, 1.30, 0.6,	0.6, 10, 15, 15, 10,    # same as above
 #                    1.43, 1.43, 1.43, 1.43, 0.6,	0.6, 10, 15, 15, 10,    # same as above
 #                    1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
 #                  nrow = 5, ncol = 10, byrow = TRUE)
+ddd <- 0.6
+# params <- matrix(c(2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
+#                    2, 6, 6, 2, ddd,	ddd, 10, 10, 10, 10,
+#                   2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
+#                   2, 1, 1, 2, ddd,	ddd, 10, 10, 10, 10),
+#                 nrow = 2, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
-                 nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -65,9 +68,9 @@ for (INDEX in 1:nrow(params)){
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
-  A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
+  A_ThreshSD     <- A_ThreshM * 0#.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0#.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -342,6 +345,6 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 }
