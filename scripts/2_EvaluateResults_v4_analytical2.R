@@ -66,10 +66,10 @@ params <- matrix(c(1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect
                  nrow = 1, ncol = 10, byrow = TRUE)
 ddd <- 0.6
 params <- matrix(c(#2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
-                   2, 2, 2, 2, ddd,	ddd, 10, 12, 12, 10,
+                   #2, 2, 2, 2, ddd,	ddd, 10, 10, 10, 10,
                    #2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
-                   2, 2, 2, 2, ddd,	ddd, 10, 20, 20, 10),
-                 nrow = 2, ncol = 10, byrow = TRUE)
+                   2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -89,9 +89,9 @@ for (INDEX in 1:nrow(params)){
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
-  A_ThreshSD     <- A_ThreshM * 0#.1 #population threshold standard deviations for clone line A !!Change!!
+  A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0#.1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -248,7 +248,7 @@ for (INDEX in 1:nrow(params)){
                   size = 0.3, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = figH, dpi = 400)
   
   gg_dist4 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
@@ -266,6 +266,6 @@ for (INDEX in 1:nrow(params)){
                   size = 0.3, width = w, position = position_dodge(width = 0.7)) 
   
   gg_dist4
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = figH, dpi = 400)
   
 }
