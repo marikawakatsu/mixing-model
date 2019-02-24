@@ -206,7 +206,7 @@
 \date{Last updated: \today}
 
 \graphicspath{ {../output/Task_dist/} }
-\usepackage[labelfont=bf,margin=.3in]{caption}
+\usepackage[labelfont=bf,margin=.2in]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
@@ -217,10 +217,10 @@
 
 \tableofcontents
 
-\section{Overview}
+% \section{Overview}
 
 \newpage
-\section{Varying both the task demand rate and the task efficiency (Mari)} \label{sec:varyalphadelta}
+\section{Varying both task demand rate and task efficiency} \label{sec:varyalphadelta}
 
 To capture the effects of the different larvae on task performance, we varied the task demand rate ($\delta$) in addition to the task performance efficiency ($\alpha$). In particular, we were interested in whether this combination could give rise to the different directions of contagion (upward or downward) observed in the data. 
 For simplicity, these simulations assumed that the tasks associated with a given type of larvae (\A\ or \B) have the same demand rate.
@@ -244,31 +244,11 @@ However, when one line is inefficient, changing the demand rate changes the pict
     \label{fig:deltasinefficient}
 \end{figure}
 
-The above observations are based on the case in which one line is more efficient at both tasks than the other line. We also tested the case in which each line is more efficient at one task but less efficient at the other task (e.g., $\alpha_{1}^{\A} = \alpha_{2}^{\B} = 2, \alpha_{1}^{\B} = \alpha_{2}^{\A} = 6$ or $1$)\footnote{We would be happy to discuss these results if you are interested.}. Taken together, the results suggest that \textbf{the demand rate has \textit{no qualitative effect} when all ants are sufficiently efficient but \textit{a nontrivial effect} when some ants are inefficient.}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[trim={0 0.4in 0 0.2in}, clip, width=0.9\linewidth]{{doc/deltas_0.6_0.6_comparison}.pdf}
-%     \caption{Caption}
-%     \label{fig:deltas0606}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[trim={0 0.4in 0 0}, clip, width=0.9\linewidth]{{doc/deltas_1.0_1.0_comparison}.pdf}
-%     \caption{Caption}
-%     \label{fig:deltas1010}
-% \end{figure}
-
-% \begin{figure}[H]
-%     \centering
-%     \includegraphics[trim={0 0 0 0}, clip, width=0.9\linewidth]{{doc/deltas_0.6_1.0_comparison}.pdf}
-%     \caption{Caption}
-%     \label{fig:deltas0610}
-% \end{figure}
+The above observations are based on the case in which one line is more efficient at both tasks than the other line. We also tested the case in which each line is more efficient at one task but less efficient at the other task (e.g., $\alpha_{1}^{\A} = \alpha_{2}^{\B} = 2, \alpha_{1}^{\B} = \alpha_{2}^{\A} = 6$ or $1$). 
+Taken together, the results suggest that \textbf{the demand rate has \textit{no qualitative effect} when all ants are sufficiently efficient but \textit{a nontrivial effect} when some ants are inefficient.}
 
 \newpage
-\section{Varying ratios of the genetic lines (Chris)}
+\section{Varying ratios of the genetic lines} \label{sec:varyratios}
 Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line A as "average" in task efficiency (i.e., $\alpha_j^A = 2$) and varied the task efficiency of genetic line B. For line B, we assumed either high efficiency (i.e., $\alpha_j^B = 6$) or inefficiency (i.e., $\alpha_j^B = 1$). When B is highly efficient the frequency of task 1 performance increases exponentially as the proportion line B increases. On the other hand, when B is inefficient task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
 
 \begin{figure}[H]
@@ -285,7 +265,7 @@ Increasing the number of mix ratios demonstrates a non-linear effect with regard
     \label{fig:Mix_Alphas_B-inefficient}
 \end{figure}
 
-\section{Analytical model (Mari)}
+\section{Analytical model} \label{sec:analytical}
 % \begin{itemize}
 %     \item This is the model
 %     \item Here are the predictions that the model makes
@@ -294,47 +274,75 @@ Increasing the number of mix ratios demonstrates a non-linear effect with regard
 
 To better understand our simulation results, we have developed and conducted a preliminary analysis of an analytical model with two different types of ants.  The details of the model and the analysis are outlined in the \hyperref[sec:appendix]{Appendix}; this section summarizes the most important takeaways.
 
-\textbf{Model summary}. The model considers $n$ individuals and $m$ tasks. The fractions of line \A\ and \B\ individuals are given by $f$ and $1-f$, respectively. For example, $f=1$ corresponds to a pure \A\ colony, $f = 0.5$ to a 50-50 mixed colony, and $f = 0$ to a pure \B\ colony. 
+% \textbf{Model summary}.
+The model considers $n$ individuals and $m$ tasks. The fractions of line \A\ and \B\ individuals are given by $f$ and $1-f$, respectively. For example, $f=1$ corresponds to a pure \A\ colony, $f = 0.5$ to a 50-50 mixed colony, and $f = 0$ to a pure \B\ colony. 
 % As before, $\delta_j$ is the task-specific demand rate, and $\alpha_j^{\A}$ and $\alpha_j^{\B}$ are the task-specific performance efficiencies of lines \A\ and \B, respectively.
 The model captures the dynamics of 1) the number of line \A\ and line \B\ individuals performing task $j$ at a given time, denoted $n_{j,t}^{\A}$ and $n_{j,t}^{\B}$ respectively, as well as 2) the stimuli associated with the two tasks. See Appendix~\ref{sec:model} for details.
 
-\textbf{Prediction 1}: The ants must be sufficiently efficient in order for the system to reach a steady state (See Section~\ref{sec:maxactivity}). Specifically, the model parameters must satisfy the following conditon \later
+\subsection{Steady-state predictions 1: varying task efficiency ($\alpha$) and demand rate ($\delta$)} \label{sec:sspred1}
+We can analytically predict the task performance level in the steady state when only the task efficiency ($\alpha$) and the demand rate ($\delta$) are varied. Moreover, we can compute the condition under which the system is expected to reach a steady state (See Appendix~\ref{sec:maxactivity} for details). 
 
-\textbf{Prediction 2}: Steady state values
-
-\textbf{Prediction 3}: Non-50-50 mixes
-
-\textbf{Prediction 4}: No downward contagion possible for equal $\mu$ and $\tau$.
-
-
-Upward contagion is still possible if we relax some of our assumptions. In the simulations I've run so far, upward contagion appears
-\begin{itemize}
-    \item when the mean thresholds ($\mu$) are varied in addition to the task efficiencies ($\alpha$), or
-    \item when at least one of the lines is not sufficiently efficient to maintain the stimuli at constant levels (i.e., reach steady state).
-\end{itemize}
-
+Overall, our predictions perform well against the simulations. Figure~\ref{fig:5050_comp} gives two illustrative comparisons. When all the ants in the colony are sufficiently efficient, there is strong agreement between the predicted levels of task performance in the steady state (Fig.~\ref{fig:5050_comp}\textbf{A}). When some ants are inefficient (Fig.~\ref{fig:5050_comp}\textbf{B}), however, colonies violate the necessary condition for reaching a steady state; in this case, our steady-state predictions do not match the simulation results (as we would expect, since the system is not in equilibrium in the first place). A signature of this mismatch is that the stimuli run away (i.e., keep increasing over time).
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.95\linewidth]{5050_comparison.pdf}
-    \caption{Sim results + predictions need to be separated}
-    \label{fig:5050comp}
+    \includegraphics[trim={0 2.5in 0 2.4in}, clip, width=1\linewidth]{doc/model_comparison_deltaalpha.pdf}
+    \caption{Comparison of simulation results and analytical predictions of steady states when line \B\ is highly efficient (\textbf{A}, $\alpha_j^{\B} = 6$) and inefficient (\textbf{B}, $\alpha_j^{\B} = 1$). Parameters: $\mu = 10, \sigma = 0, \eta = 7, \delta = 0.8,  \alpha_j^{\A} = 2$. }
+    \label{fig:5050_comp}
 \end{figure}
+
+\subsection{Steady-state predictions 2: symmetric mean thresholds} \label{sec:sspred2}
+We can also predict the task performance level when the mean thresholds $\mu$ are varied symmetrically ($\mu_{1}^{\A} = \mu_{2}^{\B}$ and $\mu_{2}^{\A} = \mu_{1}^{\B}$) and all other parameters are the same between the two lines and tasks. Figure~\ref{fig:5050_comp_mu} compares two sets of simulation results and predictions. Again, our predictions show strong agreement with the simulation results.
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 2.6in 0 2.5in}, clip, width=1\linewidth]{doc/model_comparison_mu.pdf}
+    \caption{Comparison of simulation results and analytical predictions of steady states
+    with symmetric mean thresholds. For both \textbf{A} and \textbf{B}: $\mu_1^{\A} = \mu_2^{\B} = 10$; for \textbf{A}: $\mu_1^{\B} = \mu_2^{\A} = 12$; for \textbf{B}: $\mu_1^{\B} = \mu_2^{\A} = 12$. Other parameters: $\mu = 10, \sigma = 0, \eta = 7, \delta = 0.6, \alpha = 2$. }
+    \label{fig:5050_comp_mu}
+\end{figure}
+
+% \textbf{Prediction 1}: The ants must be sufficiently efficient in order for the system to reach a steady state (See Section~\ref{sec:maxactivity}). Specifically, the model parameters must satisfy the following condition \later
+
+% \textbf{Prediction 2}: Steady state values
+
+% \textbf{Prediction 3}: Non-50-50 mixes
+
+% \textbf{Prediction 4}: No downward contagion possible for equal $\mu$ and $\tau$.
+
+\subsection{Steady-state predictions 3: varying ratios of genetic lines} \label{sec:sspred3}
+
+As an extension of Section~\ref{sec:sspred1}, we can predict the steady-state task performance level with varied $\delta$ and $\alpha$ across colonies with different genetic ratios.
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 1in 0 1.1in},clip,width=0.95\linewidth]{mixes_comparison.pdf}
-    \caption{Yay}
+    \caption{Comparison of simulation results (\textbf{left}) and analytical predictions (\textbf{right}) with varying ratios of line \A\ and \B\ ants in the colony. \textbf{Top row}: \B\ ants are highly efficient ($\alpha_j^{\B}=6$). \textbf{Bottom row}: \B\ ants are inefficient ($\alpha_j^{\B}=1$). The gray lines indicate the theoretically predicted maximal activity level for the given parameters (see Appendix~\ref{sec:maxactivity}).
+    Parameters: $\mu = 10$, $\delta = 0.6$, $\alpha_j^{\A} = 2$. }
     \label{fig:mixescomp}
 \end{figure}
-\footnote{How picky are we about matching font sizes?}
+
+\subsection{Upward vs. downward contagion} \label{sec:sspred4}
+
+In our previous discussions, we discussed whether varying both the task efficiency $\alpha$ and the demand rate $\delta$ could capture the difference in the directions of contagion (downward or upward) when the larvae differed. Using the analytical model, we can actually show that, \textit{if the system reaches its steady state, then varying \textbf{only} the demand rate ($\delta$) and task efficiency ($\alpha$) can result in a downward contagion but not an upward contagion} (see Appendix~\ref{sec:updown} for details).
+
+However, the FTM can still produce an upward contagion if 1) the mean thresholds ($\mu$) are varied in addition to the task efficiencies ($\alpha$) or 2) when at least one of the lines is not sufficiently efficient to maintain the stimuli at constant levels (i.e., reach steady state).
 
 \section{Conclusions \& Questions} \label{sec:conclusions}
 
-Questions for them:
+The key takeaways from our theoretical exploration are as follows:
 \begin{itemize}
-    \item Which line is dominant? In other words, which line is more likely to survive long-term?
-    \item Are both lines feasible long-term, given that such two-line genetic mixes don’t occur in nature?
-    \item What are the interpretations of upward vs. downward contagion? 
+    \item The effect of the demand rate on the system behavior (in particular, the direction of contagion) changes qualitatively depending on whether the system reaches a steady state (Section~\ref{sec:varyalphadelta}).
+    
+    \item There is a nonlinear relationship between mix ratios and task performance (Sections~\ref{sec:varyratios} and \ref{sec:sspred3}).
+    
+    \item Our analytical model shows good agreement with the simulation results and provides insight into how the different parameters of the FTM affect the dynamics of mixed colonies (Section~\ref{sec:analytical}, plus more details in the \hyperref[sec:appendix]{Appendix}).
+\end{itemize}
+\noindent Based on these conclusions, we have several questions for you:
+\begin{itemize}
+    \item \textbf{Are both lines feasible long-term}, given that two-line genetic mixes such as those in the experiments do not occur in nature? If not, \textbf{which genetic line is dominant}? In other words, which line is more likely to survive long-term? We are interested in this question because both our simulations and analytical predictions suggest that whether the system reaches a steady state makes a significant difference.
+    
+    \item \textbf{Would it be possible to run additional experiments with different mixes?} We think that the nonlinear relationship between the mix ratio and task performance is particularly interesting (Sections~\ref{sec:varyratios}). Having even a few additional data points (e.g., 25-75 and 75-25) would allow for a more convincing test as to whether the FTM correctly captures the mixed colony dynamics.
+    
+    \item \textbf{What are the biological interpretations of upward vs. downward contagion}? We have made progress in determining which parameters combinations might produce the different directions of convergence (Section~\ref{sec:sspred4}), but there appear to be multiple conditions that can give rise to the patterns. Knowing the biological story would help us narrow down the most plausible mechanisms.
 \end{itemize}
 
 \begin{thebibliography}{99}
@@ -344,7 +352,7 @@ Questions for them:
 \bibitem{gautrais02} J. Gautrais, G. Theraulaz, J. L. Deneubourg, C. Anderson, ``Emergent polyethism as a consequence of increased colony size in insect societies,'' \textit{Journal of Theoretical Biology}, vol. 215, pp. 363–373, Apr. 2002.
 
 \end{thebibliography}
-
+\newpage
 \begin{appendices}
 
 \section{Analytical model details} \label{sec:appendix}
@@ -486,8 +494,7 @@ The corresponding steady-state fractions of \A\ and \B\ ants performing tasks 1 
 \end{equation}
 When $a = b$ (i.e., when all $\mu$'s are the same), \eqref{eq:sol4} and \eqref{eq:sol5} reduce to the steady-state values predicted in \eqref{eq:ss2}.
 
-
-\subsection{Downward vs. upward contagion}
+\subsection{Downward vs. upward contagion} \label{sec:updown}
 
 One question that was raised during our previous discussion was whether varying both the task efficiency $\alpha$ and the demand rate $\delta$ would capture the difference in the directions of contagion (downward or upward) when the larvae differed. In Section~\ref{sec:varyalphadelta}, we presented simulation results that suggest that upward contagion only occurs when some of the ants are inefficient and therefore the colony cannot maintain the stimuli at a steady level. Here we show analytically that, \textit{if the system reaches its steady state (i.e., condition \eqref{eq:maxactivity} is satisfied), then varying \textbf{only} the demand rate ($\delta$) and task efficiency ($\alpha$) can result in a downward contagion but not an upward contagion.}
 
