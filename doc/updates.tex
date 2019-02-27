@@ -222,24 +222,25 @@
 \newpage
 \section{Varying both task demand rate and task efficiency} \label{sec:varyalphadelta}
 
-To capture the effects of the different larvae on task performance, we varied the task demand rate ($\delta$) in addition to the task performance efficiency ($\alpha$). In particular, we were interested in whether this combination could give rise to the different directions of contagion (upward or downward) observed in the data. 
+To capture the effects of the different larvae on task performance, we varied the task demand rate ($\delta$) in addition to the task performance efficiency ($\alpha$). In particular, we were interested in whether this combination could give rise to the different directions of contagion (upward or downward\footnote{We use ``upward contagion'' and ``downward contagion'' to refer to contagion patterns in which the mean task performance of the mixed colonies is higher or lower than the mean task performance of the pure colonies. See Fig.~\ref{fig:schematic} for a schematic.}) observed in the data. 
 For simplicity, these simulations assumed that the tasks associated with a given type of larvae (\A\ or \B) have the same demand rate.
 
-When both lines are sufficiently efficient, changing the demand rate makes no qualitative difference in the relative levels of the mean colony activity in the different mixes (pure \A, pure \B, and 50-50 mixes of \A\ and \B). Within each mix, the more demanding the tasks (higher $\delta$), the higher the mean activity (Fig.~\ref{fig:deltassuperefficient}).  Moreover, the difference in the mean activity levels for pure-\A\ and pure-\B\ colonies (i.e., the gap between the pure-\A\ and pure-\B\ means) is more pronounced for the more demanding tasks. Despite these quantitative differences, the qualitative picture remains unchanged:
+When both lines are sufficiently efficient\footnote{We use ``sufficiently efficient'' to mean that ants are able to meet the demand for both tasks (i.e., stimuli hover around the same value) and ``inefficient'' to mean that the ants are unable to do so (i.e., stimuli keep increasing over time).}, changing the demand rate makes no qualitative difference in the relative levels of the mean colony activity in the different mixes (pure \A, pure \B, and 50-50 mixes of \A\ and \B). Within each mix, the more demanding the tasks (higher $\delta$), the higher the mean activity (Fig.~\ref{fig:deltassuperefficient}).  Moreover, the difference in the mean activity levels for pure-\A\ and pure-\B\ colonies (i.e., the gap between the pure-\A\ and pure-\B\ means) is more pronounced for the more demanding tasks. Despite these quantitative differences, the qualitative picture remains unchanged:
 we observe a downward contagion \textit{both} when the tasks are less demanding ($\delta = 0.6$, Fig.~\ref{fig:deltassuperefficient}\textbf{A}) and more demanding ($\delta = 0.8$, Fig.~\ref{fig:deltassuperefficient}\textbf{B}).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1.1in 0 1.1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_superefficient}.pdf}
+    \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_superefficient}.pdf}
     \caption{Simulation results for varying both the demand rate ($\delta$) line \B\ is highly efficient ($\alpha_{j}^{\B} = 6$). \textbf{A}:~Tasks are less demanding ($\delta = 0.6$). \textbf{B}:~Tasks are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltassuperefficient}
 \end{figure}
 
+\newpage
 However, when one line is inefficient, changing the demand rate changes the picture qualitatively. When the tasks are less demanding ($\delta = 0.6$), we observe an upward contagion (Fig.~\ref{fig:deltasinefficient}\textbf{A}). When the tasks are more demanding ($\delta = 0.8$), however, the task performance levels become nearly indistinguishable among the three mixes (Fig.~\ref{fig:deltasinefficient}\textbf{B}). We think that this qualitative changes appears because the less efficient ants are unable to keep the stimuli at a steady level: the task performance level for the colony consisting entirely of the inefficient line (pure~\B) remains unchanged for $\delta = 0.6$ and $\delta = 0.8$, which suggests that the ants are working at maximum capacity. When we check the simulation results, we observe that indeed both stimuli keep increasing over time (i.e., do not reach a steady state).
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1.1in 0 1.1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_inefficient}.pdf}
+    \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_inefficient}.pdf}
     \caption{Simulation results for varying both the demand rate ($\delta$) line \B\ is inefficient ($\alpha_{j}^{\B} = 1$). \textbf{A}:~Tasks are less demanding ($\delta = 0.6$). \textbf{B}:~Tasks are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltasinefficient}
 \end{figure}
@@ -502,7 +503,7 @@ If we only vary $\delta$ and $\alpha$, then the mean thresholds and the quit pro
 \begin{equation}
     \frac{1}{2} \bigg( \frac{\delta_j}{\alpha_j^{\A}} + \frac{\delta_j}{\alpha_j^{\B}} \bigg) > \frac{2\delta_j}{\alpha_j^{\A} + \alpha_j^{\B}} \label{eq:down}
 \end{equation}
-and ``upward'' if the inequality is reversed (the schematic below should help).
+and ``upward'' if the inequality is reversed (the schematic in Fig.~\ref{fig:schematic} should help).
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\linewidth]{doc/schematic_contagion.pdf}
