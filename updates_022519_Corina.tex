@@ -272,7 +272,7 @@ In our previous theoretical investigation, we had found the following results:
 \end{itemize}
 
 \newpage
-\section{Varying both task demand rate and task efficiency} \label{sec:varyalphadelta}
+\section{Varying task demand rate and task efficiency} \label{sec:varyalphadelta}
 
 To capture the effects of the different larvae on task performance, we varied the task demand rate ($\delta$) in addition to the task performance efficiency ($\alpha$). In particular, we were interested in whether this combination could give rise to the different directions of contagion (upward or downward) observed in the data. 
 For simplicity, these simulations assumed that both tasks associated with a given type of larvae (\A\ or \B) have the same demand rate (i.e. $\delta_1=\delta_2=\delta$).
@@ -311,18 +311,32 @@ Increasing the number of mix ratios demonstrates a non-linear effect with regard
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-super-efficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line \B is efficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 6,$}
+    \caption{Simulation results for mixing of genetic lines when line \B\ is efficient. Parameters: $\alpha_j^{\A} = 2, \alpha_j^{\B} = 6.$}
     \label{fig:Mix_Alphas_B-efficient}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-inefficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line \B is inefficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 1,$}
+    \caption{Simulation results for mixing of genetic lines when line \B\ is inefficient. Parameters: $\alpha_j^{\A} = 2, \alpha_j^{\B} = 1.$}
     \label{fig:Mix_Alphas_B-inefficient}
 \end{figure}
 
-\section{Varying both task efficiency and mean threshold} \label{sec:varyalphamu}
+\section{Varying task efficiency and mean threshold or threshold variance} \label{sec:varyalphamusigma}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{{doc/AThreshM_14.00_BThreshM_10.00_Task1Morph}.png}
+    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and mean threshold ($\mu$). Groups could represent demographic (young/old) or morphological (workers/intercastes) classes. Parameters: $\alpha_j^{\C} = 2, \alpha_j^{\D} = 2.$}
+    \label{fig:varyalphamu}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{{doc/AThreshSD_0.10_BThreshSD_0.50_Task1Morph}.png}
+    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and mean threshold ($\mu$). Parameters: $\alpha_j^{\A} = 2, \alpha_j^{\B} = 1.$}
+    \label{fig:varyalphasigma}
+\end{figure}
 
 \section{Analytical model} \label{sec:analytical}
 % \begin{itemize}
