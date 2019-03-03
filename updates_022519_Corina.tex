@@ -212,8 +212,8 @@
 \begin{document}
 
 \maketitle
-% \noindent
 
+\vspace{-10pt}
 \tableofcontents
 
 \section{Summary}
@@ -287,7 +287,7 @@ In this case, the ants in the pure-\B\ colonies are less active than those in th
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_superefficient}.pdf}
-    \caption{Simulation results for varying both the demand rate ($\delta$) and task efficiency ($\alpha$). For a fixed $\delta$, line \B\ is more efficient ($\alpha_{j}^{\B} = 6$) than line \A\ ($\alpha_{j}^{\A} = 2$). \textbf{a}:~Tasks are less demanding ($\delta = 0.6$). \textbf{b}:~Tasks are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
+    \caption{Simulation results for varying both the demand rate ($\delta$) and the task efficiency ($\alpha$). For a fixed~$\delta$, line \B\ is more efficient than line \A. \textbf{a}:~Larvae are less demanding ($\delta = 0.6$). \textbf{b}:~Larvae are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A} = 2$, $\alpha_{j}^{\B} = 6$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltassuperefficient}
 \end{figure}
 
@@ -297,7 +297,7 @@ Next we explore the scenario where one line is efficient (line \A) and the other
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_inefficient}.pdf}
-    \caption{Simulation results for varying both the demand rate ($\delta$) line \B\ is inefficient ($\alpha_{j}^{\B} = 1$). \textbf{a}:~Tasks are less demanding ($\delta = 0.6$). \textbf{b}:~Tasks are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
+    \caption{Simulation results for varying both the demand rate ($\delta$) and the task efficiency ($\alpha$). For both values of~$\delta$, line \A\ is efficient while line \B\ is inefficient. \textbf{a}:~Larvae are less demanding ($\delta = 0.6$). \textbf{b}:~Larvae are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\alpha_{j}^{\B}  = 1$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltasinefficient}
 \end{figure}
 
@@ -306,19 +306,19 @@ Taken together, the results suggest that \textbf{the demand rate has \textit{no 
 
 \newpage
 \section{Varying ratios of the genetic lines} \label{sec:varyratios}
-Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line A as "average" in task efficiency (i.e., $\alpha_j^A = 2$) and varied the task efficiency of genetic line B. For line B, we assumed either high efficiency (i.e., $\alpha_j^B = 6$) or inefficiency (i.e., $\alpha_j^B = 1$). When B is efficient the frequency of task 1 performance increases exponentially as the proportion line B increases. On the other hand, when B is inefficient task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
+Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line \A\ as ``average'' in task efficiency (i.e., $\alpha_j^{\A} = 2$) and varied the task efficiency of genetic line \B. For line \B, we assumed either high efficiency (i.e., $\alpha_j^{\B} = 6$) or inefficiency (i.e., $\alpha_j^{\B} = 1$). When \B\ is efficient the frequency of task 1 performance increases exponentially as the proportion line B increases. On the other hand, when \B\ is inefficient task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-super-efficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line B is efficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 6,$}
+    \caption{Simulation results for mixing of genetic lines when line \B is efficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 6,$}
     \label{fig:Mix_Alphas_B-efficient}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-inefficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line B is inefficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 1,$}
+    \caption{Simulation results for mixing of genetic lines when line \B is inefficient. Parameters: $\alpha_j^A = 2, \alpha_j^B = 1,$}
     \label{fig:Mix_Alphas_B-inefficient}
 \end{figure}
 
@@ -338,14 +338,14 @@ The model considers $n$ individuals and $m$ tasks. The fractions of line \A\ and
 % As before, $\delta_j$ is the task-specific demand rate, and $\alpha_j^{\A}$ and $\alpha_j^{\B}$ are the task-specific performance efficiencies of lines \A\ and \B, respectively.
 The model captures the dynamics of 1) the number of line \A\ and line \B\ individuals performing task $j$ at a given time, denoted $n_{j,t}^{\A}$ and $n_{j,t}^{\B}$ respectively, as well as 2) the stimuli associated with the two tasks. See Appendix~\ref{sec:model} for details.
 
-\subsection{Steady-state predictions 1: varying task efficiency ($\alpha$) and demand rate ($\delta$)} \label{sec:sspred1}
+\subsection{Steady-state predictions 1: varying task efficiency and demand rate} \label{sec:sspred1}
 We can analytically predict the task performance level in the steady state when only the task efficiency ($\alpha$) and the demand rate ($\delta$) are varied. Moreover, we can compute the condition under which the system is expected to reach a steady state (See Appendix~\ref{sec:maxactivity} for details). 
 
 Overall, our predictions perform well against the simulations. Figure~\ref{fig:5050_comp} gives two illustrative comparisons. When all the ants in the colony are sufficiently efficient, there is strong agreement between the predicted levels of task performance in the steady state (Fig.~\ref{fig:5050_comp}\textbf{a}). When some ants are inefficient (Fig.~\ref{fig:5050_comp}\textbf{b}), however, colonies violate the necessary condition for reaching a steady state; in this case, our steady-state predictions do not match the simulation results (as we would expect, since the system is not in equilibrium in the first place). A signature of this mismatch is that the stimuli run away (i.e., keep increasing over time).
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 2.5in 0 2.4in}, clip, width=1\linewidth]{doc/model_comparison_deltaalpha.pdf}
-    \caption{Comparison of simulation results and analytical predictions of steady states when line \B\ is efficient (\textbf{a}, $\alpha_j^{\B} = 6$) and inefficient (\textbf{b}, $\alpha_j^{\B} = 1$). Parameters: $\mu = 10, \sigma = 0, \eta = 7, \delta = 0.8,  \alpha_j^{\A} = 2$. }
+    \caption{Comparison of simulation results and analytical predictions of steady states when line \B\ is efficient (\textbf{a}, $\alpha_j^{\B} = 6$) and inefficient (\textbf{b}, $\alpha_j^{\B} = 1$). Line \A\ is efficient in both \textbf{a} and \textbf{b}. Parameters: $\mu = 10, \sigma = 0, \eta = 7, \delta = 0.8$. }
     \label{fig:5050_comp}
 \end{figure}
 
