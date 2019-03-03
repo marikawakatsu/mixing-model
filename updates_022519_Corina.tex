@@ -193,10 +193,11 @@
 \bibliographystyle{plain}
 \usepackage{float}
 
-\newcommand{\A}{{\color{red}A}}
-\newcommand{\B}{{\color{blue}B}}
+% \newcommand{\A}{{\color{red}A}}
+% \newcommand{\B}{{\color{blue}B}}
+\newcommand{\A}{A}
+\newcommand{\B}{B}
 \newcommand{\later}{{\color{red}(Add later)}}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Document-specific settings
@@ -287,12 +288,12 @@ In this case, the ants in the pure-\B\ colonies are less active than those in th
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_superefficient}.pdf}
+    \includegraphics[trim={0 2.75in 0 2.6in}, clip, width=\linewidth]{{doc/deltas_comparison_superefficient}.pdf}
     \caption{Simulation results for varying both the demand rate ($\delta$) and the task efficiency ($\alpha$). For a fixed~$\delta$, line \B\ is more efficient than line \A. \textbf{a}:~Larvae are less demanding ($\delta = 0.6$). \textbf{b}:~Larvae are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A} = 2$, $\alpha_{j}^{\B} = 6$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltassuperefficient}
 \end{figure}
 
-\newpage
+% \newpage
 Next we explore the scenario where one line is efficient (line \A) and the other is inefficient (line \B); we consider two larval lines (i.e. two values of $\delta$) that maintain this relationship (Fig.~\ref{fig:deltasinefficient}). 
 In this case, the ants in the pure-\B\ colonies are more active than those in the pure-\A\ colonies; in the mixed colonies, we observe upward contagions. Changing the demand rate makes no qualitative difference in this relative ordering. 
 Note that the task performance level for the inefficient pure-\B\ colonies does not change when $\delta$ changes. This happens because the inefficient \B\ ants---which, by definition (see \hyperref[sec:summary]{Summary}), are unable to meet the colony demands---end up working at maximum capacity in both cases.
@@ -301,7 +302,7 @@ Note that the task performance level for the inefficient pure-\B\ colonies does 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[trim={0 1in 0 1in}, clip, width=0.95\linewidth]{{doc/deltas_comparison_inefficient}.pdf}
+    \includegraphics[trim={0 2.75in 0 2.6in}, clip, width=\linewidth]{{doc/deltas_comparison_inefficient}.pdf}
     \caption{Simulation results for varying both the demand rate ($\delta$) and the task efficiency ($\alpha$). For both values of~$\delta$, line \A\ is efficient while line \B\ is inefficient. \textbf{a}:~Larvae are less demanding ($\delta = 0.6$). \textbf{b}:~Larvae are more demanding ($\delta = 0.8$). Parameters: $\alpha_{j}^{\A}  = 2$, $\alpha_{j}^{\B}  = 1$, $\sigma = 0.1$, $\mu = 10$, $\eta = 7$.}
     \label{fig:deltasinefficient}
 \end{figure}
@@ -311,19 +312,23 @@ Note that the task performance level for the inefficient pure-\B\ colonies does 
 
 \newpage
 \section{Varying ratios of the genetic lines} \label{sec:varyratios}
-Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line \A\ as ``average'' in task efficiency (i.e., $\alpha_j^{\A} = 2$) and varied the task efficiency of genetic line \B. For line \B, we assumed either high efficiency (i.e., $\alpha_j^{\B} = 6$) or inefficiency (i.e., $\alpha_j^{\B} = 1$). When \B\ is efficient the frequency of task 1 performance increases exponentially as the proportion line B increases. On the other hand, when \B\ is inefficient task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
+Increasing the number of mix ratios demonstrates a non-linear effect with regard to task performance. When exploring these mixes, we held genetic line \A\ as efficient ($\alpha_j^{\A} = 2$) and varied the task efficiency of genetic line \B. The larval type was fixed ($\delta = 0.6$).
+When \B\ is more efficient than \A\ ($\alpha_j^{\B} = 6$, Fig.~\ref{fig:Mix_Alphas_B-efficient}), the frequency of task 1 performance increases nonlinearly as the proportion of line \A\ increases. On the other hand, when \B\ is inefficient ($\alpha_j^{\B} = 1$, Fig.~\ref{fig:Mix_Alphas_B-inefficient}), task 1 performance decreases nonlinearly as the proportion of \A\ increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the only difference between the two lines. 
+
+% we held genetic line \A\ as ``average'' in task efficiency (i.e., $\alpha_j^{\A} = 2$) and varied the task efficiency of genetic line \B. For line \B, we assumed either high efficiency (i.e., $\alpha_j^{\B} = 6$) or inefficiency (i.e., $\alpha_j^{\B} = 1$). 
+% When \B\ is more efficient than \A\ (Fig.~\ref{fig:Mix_Alphas_B-efficient}), the frequency of task 1 performance increases exponentially as the proportion line \B\ decreases. On the other hand, when \B\ is inefficient (Fig.~\ref{fig:Mix_Alphas_B-inefficient}), task 1 performance decreases non-linearly as the proportion of B increases. Overall, this predicts that experiments with more mixing ratios will show a nonlinear trend, assuming that task efficiency is the main difference between the two lines. 
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-super-efficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line \B\ is efficient. Parameters: $\alpha_j^{\A} = 2, \alpha_j^{\B} = 6.$}
+    \caption{Simulation results for mixing of genetic lines when line \B\ is efficient. Parameters: $\alpha_j^{\A}~=~2, \alpha_j^{\B}~=~6.$}
     \label{fig:Mix_Alphas_B-efficient}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{doc/Mix_Alphas_B-inefficient_Means.png}
-    \caption{Simulation results for mixing of genetic lines when line \B\ is inefficient. Parameters: $\alpha_j^{\A} = 2, \alpha_j^{\B} = 1.$}
+    \caption{Simulation results for mixing of genetic lines when line \B\ is inefficient. Parameters: $\alpha_j^{\A}~=~2, \alpha_j^{\B}~=~1.$}
     \label{fig:Mix_Alphas_B-inefficient}
 \end{figure}
 
@@ -332,17 +337,18 @@ Increasing the number of mix ratios demonstrates a non-linear effect with regard
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{{doc/AThreshM_14.00_BThreshM_10.00_Task1Morph}.png}
-    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and mean threshold ($\mu$). Groups could represent demographic (young/old) or morphological (workers/intercastes) classes. Parameters: $\alpha_j^{C} = 6, \alpha_j^{D} = 2.$}
+    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and mean threshold ($\mu$). Groups C and D represent demographic (young/old) or morphological {(workers/intercastes)} classes. Parameters: $\alpha_j^{C} = 6, \alpha_j^{D} = 2$, $\mu_j^{C} = 14$, $\mu_j^{D} = 10$.}
     \label{fig:varyalphamu}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[trim={0 0.25in 0 0.2in}, clip, width=0.9\linewidth]{{doc/AThreshSD_0.10_BThreshSD_0.50_Task1Morph}.png}
-    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and mean threshold ($\mu$). Parameters: $\alpha_j^{C} = 6, \alpha_j^{D} = 2.$}
+    \caption{Simulation results for the mixing of two groups differing in task efficiency ($\alpha$) and threshold variance ($\sigma$). Groups C and D represent demographic (young/old) or morphological {(workers/intercastes)} classes. Parameters: $\alpha_j^{C} = 6, \alpha_j^{D} = 2$, $\sigma_j^{C} = 0.1$, $\sigma_j^{D} = 0.5$.}
     \label{fig:varyalphasigma}
 \end{figure}
 
+\newpage
 \section{Analytical model} \label{sec:analytical}
 % \begin{itemize}
 %     \item This is the model
@@ -353,7 +359,7 @@ Increasing the number of mix ratios demonstrates a non-linear effect with regard
 To better understand our simulation results, we have developed and conducted a preliminary analysis of an analytical model with two different types of ants.  The details of the model and the analysis are outlined in the \hyperref[sec:appendix]{Appendix}; this section summarizes the most important takeaways.
 
 % \textbf{Model summary}.
-The model considers $n$ individuals and $m$ tasks. The fractions of line \A\ and \B\ individuals are given by $f$ and $1-f$, respectively. For example, $f=1$ corresponds to a pure \A\ colony, $f = 0.5$ to a 50-50 mixed colony, and $f = 0$ to a pure \B\ colony. 
+The model considers $n$ individuals and $m$ tasks. The fractions of line \A\ and \B\ individuals are given by $f$ and $1-f$, respectively. For example, $f=1$ corresponds to a pure \A\ colony, $f = 0.5$ to a 50:50 mixed colony, and $f = 0$ to a pure \B\ colony. 
 % As before, $\delta_j$ is the task-specific demand rate, and $\alpha_j^{\A}$ and $\alpha_j^{\B}$ are the task-specific performance efficiencies of lines \A\ and \B, respectively.
 The model captures the dynamics of 1) the number of line \A\ and line \B\ individuals performing task $j$ at a given time, denoted $n_{j,t}^{\A}$ and $n_{j,t}^{\B}$ respectively, as well as 2) the stimuli associated with the two tasks. See Appendix~\ref{sec:model} for details.
 
@@ -382,7 +388,7 @@ We can also predict the task performance level when the mean thresholds $\mu$ ar
 
 % \textbf{Prediction 2}: Steady state values
 
-% \textbf{Prediction 3}: Non-50-50 mixes
+% \textbf{Prediction 3}: Non-50:50 mixes
 
 % \textbf{Prediction 4}: No downward contagion possible for equal $\mu$ and $\tau$.
 
@@ -486,9 +492,9 @@ According to condition \eqref{eq:maxactivity}, this steady state is biologically
 If this condition is not met, then we would expect the stimuli to continue growing (i.e., the system will not reach a steady state).
 
 
-\subsubsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes} \label{sec:5050}
+\subsubsection{Mixed colonies: 2 tasks, 2 lines, 50:50 mixes} \label{sec:5050}
 
-We now consider the 50-50 mixes ($f=0.5$), i.e., mixed colonies consisting of an equal number of \A\ and \B\ ants.
+We now consider the 50:50 mixes ($f=0.5$), i.e., mixed colonies consisting of an equal number of \A\ and \B\ ants.
 Here we assume that the mean thresholds and the quit probabilities are identical for both tasks and lines ($\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$)\footnote{The parameters $\mu$ and $\tau$ do not explicitly appear in \eqref{eq:ss2} when we assume that the mean thresholds are identical for all individuals and both tasks. However, based on the Eqs.~\eqref{eq:active}, we expect the general form of steady state fractions of active individuals to be explicit functions of $\mu_j^{\A}$ and $\mu_j^{\B}$ as well as $\tau^{\A}$ and $\tau^{\B}$. The steady states can be computed numerically for the case when these parameters vary, but the analytical expression is too complicated to write down.}, as we have done in the simulations with varied $\delta$ and $\alpha$ values. Setting Eqs.~\eqref{eq:stim} and \eqref{eq:active} equal to zero, we find the steady-state numbers of individuals performing task $j$ as
 \begin{equation}
      n_j^{\A} =  n_j^{\B} = n\bigg(\frac{\delta_j}{\alpha_j^{\A} + \alpha_j^{\B}}\bigg). \label{eq:ss2a}
@@ -506,7 +512,7 @@ Applying condition \eqref{eq:maxactivity}, this state state exists only if
 \end{equation}
 Again, if this condition is not met, then we would expect the stimuli to continue growing over time and for the ants to be working at max capacity.
 
-\subsubsection{Mixed colonies: 2 tasks, 2 lines, non-50-50 mixes}
+\subsubsection{Mixed colonies: 2 tasks, 2 lines, non-50:50 mixes}
 
 We now generalize to the case in which a fraction $f$ of individuals in a mixed colony are of genetic line \A. In the simplified case where $\mu_1^{\A} = \mu_2^{\A} = \mu_1^{\B} = \mu_2^{\B}$ and $\tau^{\A} = \tau^{\B}$, the steady-state fractions of individuals performing task $j$ are
 \begin{equation}
@@ -519,10 +525,10 @@ or, as fractions of the individuals of each genetic type (recall that there are 
 \begin{equation}
      \frac{n_j^{\A}}{fn} =  \frac{n_j^{\B}}{(1-f)n} = \frac{\delta_j}{f\alpha_j^{\A} + (1-f)\alpha_j^{\B}} \ \bigg(= \frac{n_j^{\A} + n_j^{\B}}{n}\bigg). \label{eq:ss3}
 \end{equation}
-The last equality highlights the fact that the fraction of individuals \textit{of each type} performing task $j$ is identical to the fraction \textit{of the whole colony} performing that task. As expected, the expressions \eqref{eq:ss3} reduce to \eqref{eq:ss2} when $f=0.5$ (50-50 mixes) and to \eqref{eq:ss1} when $f=1$ (pure \A\ colonies). Again, we would expect to see this equilibrium only when condition \eqref{eq:maxactivity} is satisfied. 
+The last equality highlights the fact that the fraction of individuals \textit{of each type} performing task $j$ is identical to the fraction \textit{of the whole colony} performing that task. As expected, the expressions \eqref{eq:ss3} reduce to \eqref{eq:ss2} when $f=0.5$ (50:50 mixes) and to \eqref{eq:ss1} when $f=1$ (pure \A\ colonies). Again, we would expect to see this equilibrium only when condition \eqref{eq:maxactivity} is satisfied. 
 
 From these results, we would expect the steady-state fraction of task $j$ performance frequency (which corresponds to \eqref{eq:ss3}) to depend \textit{nonlinearly} on the fraction of \A\ individuals ($f$). 
-\subsubsection{Mixed colonies: 2 tasks, 2 lines, 50-50 mixes, symmetric mean thresholds}
+\subsubsection{Mixed colonies: 2 tasks, 2 lines, 50:50 mixes, symmetric mean thresholds}
 
 So far we have assumed that the mean thresholds $\mu_{j}^{\A}$ and $\mu_{j}^{\B}$ were identically for both lines and tasks ($\mu_{1}^{\A} = \mu_{2}^{\A} = \mu_{1}^{\B} = \mu_{2}^{\B}$). While the system of equations can be solved numerically even when we vary $\mu$, the steady-state expressions quickly become too complicated to write down.
 
