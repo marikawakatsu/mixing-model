@@ -8,8 +8,14 @@
 
 rm(list = ls())
 
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), 
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 14, 14, 10, 10), 
                  nrow = 1, ncol = 10, byrow = TRUE)
+
+# Plotting
+ymax <- 0.5 # max y for plotting
+yinc <- 0.1 # y-axis increments
+figH <- 1.5 # figure height for printing; default width is 3
+
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -31,7 +37,7 @@ for (INDEX in 1:nrow(params)){
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.5 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -56,11 +62,6 @@ for (INDEX in 1:nrow(params)){
   rm(file_name1, file_name2)
   
   load(paste0("output/Rdata/", file_name, ".Rdata"))
-  
-  # Plotting
-  ymax <- 0.4 # max y for plotting
-  yinc <- 0.1 # y-axis increments
-  figH <- 1.5 # figure height for printing; default width is 3
   
   ####################
   # Final task distributions
@@ -121,6 +122,7 @@ for (INDEX in 1:nrow(params)){
   # 1) "Line" -> "Group"
   colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
   colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
+  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
   
   # 2) "A" -> "I", "B" -> "W", "AB" -> "IW" in "Mix" and "Group" columns
   task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group C"
@@ -141,6 +143,15 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group D"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Groups C+D"
   
+  task_dist$Group[task_dist$Group == "A"] <- "Group C"
+  task_dist$Group[task_dist$Group == "B"] <- "Group D"
+  task_dist$Group[task_dist$Group == "AB"] <- "Groups C+D"
+  
+  task_dist$Mix <- as.character(task_dist$Mix)
+  task_dist$Mix[task_dist$Mix == "A"] <- "Group C"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Group D"
+  task_dist$Mix[task_dist$Mix == "AB"] <- "Groups C+D"
+  
   # Means of replicates
   gg_dist1 <- ggplot(data = task_dist, aes(colour = Group)) +
     geom_point(aes(y = Task1, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -158,7 +169,7 @@ for (INDEX in 1:nrow(params)){
 
   gg_dist1
 
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
 
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Group)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -176,7 +187,7 @@ for (INDEX in 1:nrow(params)){
 
   gg_dist2
 
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
@@ -194,7 +205,7 @@ for (INDEX in 1:nrow(params)){
                   size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Morph.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Morph.png"), width = 3, height = figH, dpi = 400)
 
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
     geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +

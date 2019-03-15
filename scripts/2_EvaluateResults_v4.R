@@ -58,16 +58,27 @@ params <- matrix(c(2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
                    2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
                    2, 1, 1, 2, ddd,	ddd, 10, 10, 10, 10),
                  nrow = 4, ncol = 10, byrow = TRUE)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10),
-#                  nrow = 1, ncol = 10, byrow = TRUE)
+
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 15, 15, 10,
 #                    2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
 
 # params <- matrix(c(2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), 
 #                  nrow = 1, ncol = 10, byrow = TRUE)
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
-                 nrow = 1, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
+                   2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
+                   6, 6, 2, 2, 0.8,	0.8, 10, 10, 10, 10,
+                   2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10),
+                 nrow = 4, ncol = 10, byrow = TRUE)
+
+# params <- matrix(c(2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10), 
+#                  nrow = 1, ncol = 10, byrow = TRUE)
+
+# Plotting
+ymax <- 0.75 # max y for plotting
+yinc <- 0.1 # y-axis increments
+figH <- 1.5 # figure height for printing; default width is 3
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -89,7 +100,7 @@ for (INDEX in 1:nrow(params)){
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.5 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -114,11 +125,6 @@ for (INDEX in 1:nrow(params)){
   rm(file_name1, file_name2)
   
   load(paste0("output/Rdata/", file_name, ".Rdata"))
-  
-  # Plotting
-  ymax <- 0.5 # max y for plotting
-  yinc <- 0.1 # y-axis increments
-  figH <- 1.5 # figure height for printing; default width is 3
   
   ####################
   # Final task distributions
@@ -182,7 +188,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "Replicate",
          y = "Frequency Task 1") +
     scale_color_manual(values = c("#ca0020", "#0571b0")) +
-    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_y_continuous(limits = c(-0.2, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     theme(axis.text.x = element_blank()) +
     geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
@@ -192,7 +198,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist1
   
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
   
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -200,7 +206,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "Replicate",
          y = "Frequency Task 2") +
     scale_color_manual(values = c("#ca0020", "#0571b0")) +
-    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_y_continuous(limits = c(-0.2, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     theme(axis.text.x = element_blank()) +
     geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
@@ -210,7 +216,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist2
   
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
@@ -229,8 +235,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist3
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary.png"), width = 3, height = figH, dpi = 400)
-  # OLD ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary.png"), width = 3, height = 3, dpi = 400)
-  
+
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Line)) +
     geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
     theme_classic() +
@@ -247,8 +252,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist4
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = figH, dpi = 400)
-  # OLD ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = 3, dpi = 400)
-  
+
 }
 
 
