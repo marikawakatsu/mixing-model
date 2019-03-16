@@ -16,7 +16,7 @@ Ns             <- c(16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 20 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mix_ratios     <- seq(0, 1, 0.125) # %line A
@@ -27,8 +27,8 @@ B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for 
 InitialStim    <- c(0, 0) #intital vector of stimuli
 deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
 threshSlope    <- 7 #exponent parameter for threshold curve shape
-A_alpha        <- c(m, m) #efficiency of task performance
-B_alpha        <- c(6, 6)
+A_alpha        <- c(6, 6) #efficiency of task performance
+B_alpha        <- c(2, 2)
 quitP          <- c(0.2, 0.2) #probability of quitting task once active 
 
 file_name1 <- sprintf("Mix_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
