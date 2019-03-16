@@ -76,7 +76,7 @@ params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
 #                  nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
-ymax <- 0.75 # max y for plotting
+ymax <- 0.7 # max y for plotting
 yinc <- 0.1 # y-axis increments
 figH <- 1.5 # figure height for printing; default width is 3
 
@@ -188,7 +188,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "Replicate",
          y = "Frequency Task 1") +
     scale_color_manual(values = c("#ca0020", "#0571b0")) +
-    scale_y_continuous(limits = c(-0.2, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     theme(axis.text.x = element_blank()) +
     geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
@@ -206,7 +206,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "Replicate",
          y = "Frequency Task 2") +
     scale_color_manual(values = c("#ca0020", "#0571b0")) +
-    scale_y_continuous(limits = c(-0.2, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     theme(axis.text.x = element_blank()) +
     geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
@@ -216,7 +216,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist2
   
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
