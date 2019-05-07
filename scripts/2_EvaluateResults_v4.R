@@ -72,11 +72,11 @@ params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
                    2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10),
                  nrow = 4, ncol = 10, byrow = TRUE)
 
-# params <- matrix(c(2, 1, 1, 2, 0.6,	0.6, 10, 10, 10, 10), 
-#                  nrow = 1, ncol = 10, byrow = TRUE)
+params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10), 
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
-ymax <- 0.7 # max y for plotting
+ymax <- 0.5 # max y for plotting
 yinc <- 0.1 # y-axis increments
 figH <- 1.5 # figure height for printing; default width is 3
 
@@ -198,7 +198,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist1
   
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
   
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -220,7 +220,7 @@ for (INDEX in 1:nrow(params)){
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
-    geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
+    # geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 1") +
@@ -229,15 +229,15 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
-               size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.55, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
+                  size = 0.2, width = 0.5, position = position_dodge(width = 0.7))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/pres_", file_name, "_Task1Summary.png"), width = 2.5, height = figH, dpi = 400)
 
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Line)) +
-    geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
+    # geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 2") +
@@ -246,9 +246,9 @@ for (INDEX in 1:nrow(params)){
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
-               size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.55, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
+                  size = 0.2, width = 0.5, position = position_dodge(width = 0.7))
   
   gg_dist4
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = figH, dpi = 400)
