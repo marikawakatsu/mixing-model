@@ -61,7 +61,7 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   
   ####################
   # Final task distributions
@@ -169,7 +169,7 @@ for (INDEX in 1:nrow(params)){
 
   gg_dist1
 
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
 
   gg_dist2 <- ggplot(data = task_dist, aes(colour = Group)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
@@ -187,11 +187,11 @@ for (INDEX in 1:nrow(params)){
 
   gg_dist2
 
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
-    geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
+    geom_point(size = 0.4, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
     theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 1") +
@@ -199,13 +199,15 @@ for (INDEX in 1:nrow(params)){
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_ctokita() +
     # theme(axis.text.x = Mix) +
+    geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "AB",]$Mean1 ),
+                lty = 2, size = 0.1, color = "darkgray" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
-               size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.5, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
                   size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Morph.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Morph.png"), width = 3, height = figH, dpi = 400)
 
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
     geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
