@@ -127,30 +127,30 @@ for (INDEX in 1:nrow(params)){
   # 2) "A" -> "I", "B" -> "W", "AB" -> "IW" in "Mix" and "Group" columns
   task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group C"
   task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"] <- "Group D"
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Groups C+D"
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
   
   task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Group C"
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Group D"
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Groups C+D"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"] <- "Group C"
   task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"] <- "Group D"
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Groups C+D"
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Group C"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group D"
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Groups C+D"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
   
   task_dist$Group[task_dist$Group == "A"] <- "Group C"
   task_dist$Group[task_dist$Group == "B"] <- "Group D"
-  task_dist$Group[task_dist$Group == "AB"] <- "Groups C+D"
+  task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
   
   task_dist$Mix <- as.character(task_dist$Mix)
   task_dist$Mix[task_dist$Mix == "A"] <- "Group C"
   task_dist$Mix[task_dist$Mix == "B"] <- "Group D"
-  task_dist$Mix[task_dist$Mix == "AB"] <- "Groups C+D"
+  task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
   # Means of replicates
   gg_dist1 <- ggplot(data = task_dist, aes(colour = Group)) +
@@ -191,32 +191,34 @@ for (INDEX in 1:nrow(params)){
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
-    geom_point(size = 0.4, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
-    theme_classic() +
+    geom_point(size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
     labs(x = "Mix",
          y = "Frequency Task 1") +
     scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_ctokita() +
+    theme_mk() +
+    theme(axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
     # theme(axis.text.x = Mix) +
-    geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "AB",]$Mean1 ),
+    geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 2, size = 0.1, color = "darkgray" ) +
+    # geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
+    #            size = 0.5, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
-               size = 0.5, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.6, alpha = 1, stroke = 0.4, shape = 21, fill = NA, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
+                  size = 0.25, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Morph.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Morph.png"), width = 2.25, height = figH, dpi = 400)
 
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
     geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
-    theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 2") +
     scale_color_manual(values = c("#E09B23", "#8FB032", "#967D1E")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_ctokita() +
+    theme_mk() +
+    theme(axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
     # theme(axis.text.x = Mix) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
                size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +

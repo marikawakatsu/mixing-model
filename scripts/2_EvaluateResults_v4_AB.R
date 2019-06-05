@@ -1,39 +1,21 @@
 ################################################################################
 #
 # Evaluate ensemble model outputs
-# Updated 01/21/19: 
-#       Excludes the gray strip on the right (with colony size)
-#       Includes mean and SD markers
+# Updated 06/05/19: 
+#       Formatting same as "v4_nonAB", but for "Group A" and "Group B"
 #
 ################################################################################
 
 rm(list = ls())
 
-ddd <- 0.6
-params <- matrix(c(2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
-                   2, 6, 6, 2, ddd,	ddd, 10, 10, 10, 10,
-                   2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
-                   2, 1, 1, 2, ddd,	ddd, 10, 10, 10, 10),
-                 nrow = 4, ncol = 10, byrow = TRUE)
-
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), 
                  nrow = 1, ncol = 10, byrow = TRUE)
-
-# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
-#                    2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
-#                    6, 6, 2, 2, 0.8,	0.8, 10, 10, 10, 10,
-#                    2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10),
-#                  nrow = 4, ncol = 10, byrow = TRUE)
-
-# params <- matrix(c(6, 6, 2, 2, 0.6, 0.6, 10, 10, 10, 10), 
-#                  nrow = 1, ncol = 10, byrow = TRUE)
-# params <- matrix(c(2, 2, 1, 1, 0.05, 0.05, 10, 10, 10, 10), 
-#                  nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
 ymax <- 0.5 # max y for plotting
 yinc <- 0.1 # y-axis increments
 figH <- 1.5 # figure height for printing; default width is 3
+
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -121,7 +103,7 @@ for (INDEX in 1:nrow(params)){
               SD2 = sd(Mean2rep),
               Mean1 = mean(Mean1rep),
               Mean2 = mean(Mean2rep))
-    
+  
   task_VarMean_byMixABonly <- task_dist %>% # stats by Mix, mixed colonies only
     filter(Mix == "AB") %>%
     group_by(n, Mix, replicate, set) %>%
@@ -136,37 +118,71 @@ for (INDEX in 1:nrow(params)){
   
   task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
   
+  # !!! NEW !!! change 
+  # 1) "Line" -> "Group"
+  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
+  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
+  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
+  
+  # 2) "A" -> "I", "B" -> "W", "AB" -> "IW" in "Mix" and "Group" columns
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group A"
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"] <- "Group B"
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
+  
+  task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Group A"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Group B"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
+  
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"] <- "Group A"
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"] <- "Group B"
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
+  
+  task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Group A"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group B"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
+  
+  task_dist$Group[task_dist$Group == "A"] <- "Group A"
+  task_dist$Group[task_dist$Group == "B"] <- "Group B"
+  task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
+  
+  task_dist$Mix <- as.character(task_dist$Mix)
+  task_dist$Mix[task_dist$Mix == "A"] <- "Group A"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Group B"
+  task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
+  
   # Means of replicates
-  gg_dist1 <- ggplot(data = task_dist, aes(colour = Line)) +
+  gg_dist1 <- ggplot(data = task_dist, aes(colour = Group)) +
     geom_point(aes(y = Task1, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
     theme_classic() +
     labs(x = "Replicate",
          y = "Frequency Task 1") +
-    scale_color_manual(values = c("#ca0020", "#0571b0")) +
+    scale_color_manual(values = c("#ca0020","#0571b0")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_mk() +
+    theme_ctokita() +
     theme(axis.text.x = element_blank()) +
-    geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
+    geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Group != "Mixed", ],
                aes(x = set, y = Mean1), size = 0.8, alpha = 1, stroke = 0.5) +
-    geom_errorbar(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
+    geom_errorbar(data = task_VarMean_byrep[task_VarMean_byrep$Group != "Mixed", ],
                   aes(x = set, ymin = Mean1 - SD1, ymax = Mean1 + SD1), size = 0.3, width = 0.4)
   
   gg_dist1
   
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Reps.png"), width = 3, height = figH, dpi = 400)
   
-  gg_dist2 <- ggplot(data = task_dist, aes(colour = Line)) +
+  gg_dist2 <- ggplot(data = task_dist, aes(colour = Group)) +
     geom_point(aes(y = Task2, x = set), size = 0.6, alpha = 0.4, stroke = 0) +
     theme_classic() +
     labs(x = "Replicate",
          y = "Frequency Task 2") +
-    scale_color_manual(values = c("#ca0020", "#0571b0")) +
+    scale_color_manual(values = c("#ca0020","#0571b0")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_mk() +
+    theme_ctokita() +
     theme(axis.text.x = element_blank()) +
-    geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], aes(x = set, y = Mean2), 
-               size = 0.6, alpha = 1, stroke = 0.4, shape = 21, fill = NA) +
-    geom_errorbar(data = task_VarMean_byrep[task_VarMean_byrep$Line != "Mixed", ], 
+    geom_point(data = task_VarMean_byrep[task_VarMean_byrep$Group != "Mixed", ],
+               aes(x = set, y = Mean2), size = 0.8, alpha = 1, stroke = 0.5) +
+    geom_errorbar(data = task_VarMean_byrep[task_VarMean_byrep$Group != "Mixed", ],
                   aes(x = set, ymin = Mean2 - SD2, ymax = Mean2 + SD2), size = 0.3, width = 0.4)
   
   gg_dist2
@@ -174,44 +190,43 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Reps.png"), width = 3, height = figH, dpi = 400)
   
   # Means of means
-  gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Line)) +
+  gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
     geom_point(size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
-    theme_classic() +
     labs(x = "Mix",
          y = "Frequency Task 1") +
-    scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
+    scale_color_manual(values = c("#ca0020","#0571b0","#80007F")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
-    theme(axis.text.x = element_text(colour = c("#ca0020", "#0571b0", "#80007F"))) +
+    theme(axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
     # theme(axis.text.x = Mix) +
-    geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "AB",]$Mean1 ),
-                lty = 2, size = 0.1, color = "darkgray" ) +
+    # geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
+    #             lty = 2, size = 0.1, color = "darkgray" ) +
+    # geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
+    #            size = 0.5, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
-               size = 0.5, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.6, alpha = 1, stroke = 0.4, shape = 21, fill = NA, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.2, width = 0.5, position = position_dodge(width = 0.7))
-
+                  size = 0.25, width = 0.4, position = position_dodge(width = 0.7))
+  
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary.png"), width = 3, height = figH, dpi = 400)
-
-  gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Line)) +
-    geom_point(size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
-    theme_classic() +
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary.png"), width = 2.25, height = figH, dpi = 400)
+  
+  gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
+    geom_point(size = 0.7, alpha = 0.4, stroke = 0, position = position_dodge(width = 0.7)) +
     labs(x = "Mix",
          y = "Frequency Task 2") +
     scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
-    theme(axis.text.x = element_text(colour = c("#ca0020", "#0571b0", "#80007F"))) +
+    theme(axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
     # theme(axis.text.x = Mix) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
-               size = 0.55, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
+               size = 0.9, alpha = 1, stroke = 0.5, position = position_dodge(width = 0.7)) +
     geom_errorbar(data = task_VarMean_byMix, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.2, width = 0.5, position = position_dodge(width = 0.7))
+                  size = 0.3, width = 0.4, position = position_dodge(width = 0.7))
   
   gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Summary.png"), width = 3, height = figH, dpi = 400)
-
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task2Morph.png"), width = 3, height = figH, dpi = 400)
+  
 }
-
 
