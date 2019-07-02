@@ -8,12 +8,20 @@
 
 rm(list = ls())
 
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 14, 14, 10, 10), 
-                 nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10),
+#                  nrow = 2, ncol = 10, byrow = TRUE)
+
+# params <- matrix(c(2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
+                   2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
+                   2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10),
+                 nrow = 3, ncol = 10, byrow = TRUE)
 
 # Plotting
-ymax <- 0.5 # max y for plotting
-yinc <- 0.1 # y-axis increments
+ymax <- 0.2 # max y for plotting
+yinc <- 0.05 # y-axis increments
 figH <- 1.5 # figure height for printing; default width is 3
 
 
@@ -177,7 +185,7 @@ for (INDEX in 1:nrow(params)){
                   position = position_dodge(width = 1))
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
   #   geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
@@ -244,22 +252,50 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   gg_corr
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
 
   ####################
   # Task variance by group size
   ####################
   # Calculate average SD by mix
-  task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Group,] %>%
+  
+  # WITHOUT per-group lines
+  # task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Group,] %>%
+  #   mutate(SD = (SD1 + SD2)/2)
+  # 
+  # task_VarMean_SD <- task_VarMean_byrep %>%
+  #   group_by(n, Mix) %>%
+  #   summarise(SDMean = mean(SD),
+  #             SDSE = sd(SD) / sqrt(length(SD)))
+  
+  # WITH per-group lines
+  task_VarMean_byrep <- task_VarMean_byrep %>%
     mutate(SD = (SD1 + SD2)/2)
   
   task_VarMean_SD <- task_VarMean_byrep %>%
-    group_by(n, Mix) %>%
+    group_by(n, Mix, Group) %>%
     summarise(SDMean = mean(SD),
               SDSE = sd(SD) / sqrt(length(SD)))
   
-  # Plot behavioral variation by mix
-  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Mix)) +
+  # # Plot behavioral variation by mix -- WITHOUT per-group line in the Mixed case
+  # gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Mix)) +
+  #   geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
+  #              size = 0.3, alpha = 0.2, stroke = 0, 
+  #              position = position_dodge(width = 1)) +
+  #   theme_mk() +
+  #   theme(legend.position = "none",
+  #         axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
+  #   xlab("Mix") +
+  #   ylab("Behavioral variation") +
+  #   scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
+  #   scale_y_continuous(limits = c(0, 0.25), breaks = seq(-1, 1, 0.05)) +
+  #   # Mean and SE portion of plot
+  #   geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE, colour = Mix),
+  #                 size = 0.2, width = 0.4) +
+  #   geom_point(size = 0.8, alpha = 1, stroke = 0.2)
+  
+  # Plot behavioral variation by mix -- WITH per-group line in the Mixed case
+  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Group)) +
     geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
                size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
@@ -269,14 +305,17 @@ for (INDEX in 1:nrow(params)){
     xlab("Mix") +
     ylab("Behavioral variation") +
     scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
-    scale_y_continuous(limits = c(0, 0.25), breaks = seq(-1, 1, 0.05)) +
+    scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
     # Mean and SE portion of plot
-    geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE, colour = Mix),
-                  size = 0.2, width = 0.4) +
-    geom_point(size = 0.8, alpha = 1, stroke = 0.2)
+    geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
+                  size = 0.2, width = 0.6, 
+                  position = position_dodge(width = 1)) +
+    geom_point(size = 0.8, alpha = 1, stroke = 0.2, 
+               position = position_dodge(width = 1))
   
   gg_var
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
- 
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
+  
 }
 

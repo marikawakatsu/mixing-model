@@ -16,7 +16,7 @@ params <- matrix(c(2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
                    2, 1, 1, 2, ddd,	ddd, 10, 10, 10, 10),
                  nrow = 4, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 # params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
@@ -79,7 +79,7 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   ####################
   # Final task distributions
@@ -192,7 +192,7 @@ for (INDEX in 1:nrow(params)){
                   size = 0.2, width = 0.5, position = position_dodge(width = 0.7))
 
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary.png"), width = 3, height = figH, dpi = 400)
 
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Line)) +
     geom_point(size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
