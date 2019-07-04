@@ -19,9 +19,11 @@ params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
                    2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10),
                  nrow = 3, ncol = 10, byrow = TRUE)
 
+params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 13, 13, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+
 # Plotting
-ymax <- 0.2 # max y for plotting
-yinc <- 0.05 # y-axis increments
+ymax <- 0.5 # max y for plotting
+yinc <- 0.1 # y-axis increments
 figH <- 1.5 # figure height for printing; default width is 3
 
 
@@ -68,7 +70,9 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  
   
   ####################
   # Final task distributions
@@ -187,26 +191,26 @@ for (INDEX in 1:nrow(params)){
   gg_dist3
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   
-  # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
-  #   geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
-  #              position = position_dodge(width = 1)) +
-  #   labs(x = "Mix",
-  #        y = "Frequency Task 2") +
-  #   scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
-  #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-  #   theme_mk() +
-  #   theme(axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
-  #   # theme(axis.text.x = Mix) +
-  #   geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
-  #              size = 0.8, alpha = 1, stroke = 0.2, 
-  #              # shape = 21, fill = NA, 
-  #              position = position_dodge(width = 1)) +
-  #   geom_errorbar(data = task_VarMean_byMix, 
-  #                 aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
-  #                 size = 0.2, width = 0.4, 
-  #                 position = position_dodge(width = 1))
-  # 
-  # gg_dist4
+  gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
+    geom_point(size = 0.3, alpha = 0.2, stroke = 0,
+               position = position_dodge(width = 1)) +
+    labs(x = "Mix",
+         y = "Frequency Task 2") +
+    scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
+    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+    theme_mk() +
+    theme(axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
+    # theme(axis.text.x = Mix) +
+    geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
+               size = 0.8, alpha = 1, stroke = 0.2,
+               # shape = 21, fill = NA,
+               position = position_dodge(width = 1)) +
+    geom_errorbar(data = task_VarMean_byMix,
+                  aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
+                  size = 0.2, width = 0.4,
+                  position = position_dodge(width = 1))
+
+  gg_dist4
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task2BehavVar.png"), width = 3, height = figH, dpi = 400)
   
   ####################
@@ -315,7 +319,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
   
 }
 

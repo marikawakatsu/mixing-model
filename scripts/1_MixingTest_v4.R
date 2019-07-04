@@ -34,7 +34,7 @@ rm(list = ls())
 #                    2, 2, 1, 1, 0.8,	0.8, 10, 10, 10, 10,
 #                    2, 1, 1, 2, 0.8,	0.8, 10, 10, 10, 10),
 #                  nrow = 4, ncol = 10, byrow = TRUE)
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10),
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 13, 13, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 
@@ -51,7 +51,7 @@ for (INDEX in 1:nrow(params)){
   m              <- 2 #number of tasks
   gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 1 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
@@ -334,6 +334,6 @@ for (INDEX in 1:nrow(params)){
   # Save run
   ####################
   # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 }
