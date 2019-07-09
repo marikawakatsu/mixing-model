@@ -19,7 +19,20 @@ params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
                    2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10),
                  nrow = 3, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 13, 13, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+params <- matrix(c(2, 2, 1, 1, 0.6,	0.6,  7,  7, 10, 10,
+                   2, 2, 1, 1, 0.6,	0.6, 13, 13, 10, 10,
+                   2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
+                   2, 2, 1, 1, 0.6,	0.6, 10, 10,  7,  7,
+                   2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
+                   2, 2, 1, 1, 0.4,	0.4,  7,  7, 10, 10,
+                   2, 2, 1, 1, 0.4,	0.4, 13, 13, 10, 10,
+                   2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10,
+                   2, 2, 1, 1, 0.4,	0.4, 10, 10,  7,  7,
+                   2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10),
+                 nrow = 10, ncol = 10, byrow = TRUE)
+
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -46,7 +59,7 @@ for (INDEX in 1:nrow(params)){
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.5 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -186,9 +199,12 @@ for (INDEX in 1:nrow(params)){
     geom_errorbar(data = task_VarMean_byMix, 
                   aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
                   size = 0.2, width = 0.6, 
-                  position = position_dodge(width = 1))
+                  position = position_dodge(width = 1)) #+
+    #theme(legend.position="none")
   
   gg_dist3
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = figH, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
@@ -256,6 +272,7 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   gg_corr
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
 
   ####################
