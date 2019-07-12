@@ -16,7 +16,7 @@ Ns             <- c(16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 20 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 100 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mix_ratios     <- seq(0, 1, 0.125) # %line A
