@@ -70,11 +70,11 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Initial paramters: Free to change
   # Base parameters
-  Ns             <- c(16) #vector of number of individuals to simulate
+  Ns             <- c(8) #vector of number of individuals to simulate
   m              <- 2 #number of tasks
   gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 100 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
@@ -96,7 +96,7 @@ for (INDEX in 1:nrow(params)){
                         A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 
                         A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP[1])  # for quitp[1] = quitP[2]
   
-  file_name2 <- sprintf("N16only_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
+  file_name2 <- sprintf("N8only_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
                        A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
                        B_ThreshM[1], B_ThreshM[2], B_ThreshSD[1]/B_ThreshM[1], B_ThreshSD[2]/B_ThreshM[2],
                        deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
@@ -356,7 +356,7 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
 
 }
