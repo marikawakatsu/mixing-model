@@ -30,8 +30,10 @@ task_dist_summary <- task_dist %>%
   group_by(Mix) %>% 
   summarise(Task1_mean = mean(Task1),
             Task1_SD = sd(Task1),
+            Task1_SE = sd(Task1) / sqrt(length(Task1)),
             Task2_mean = mean(Task2),
-            Task2_SD = sd(Task2)) %>% 
+            Task2_SD = sd(Task2),
+            Task1_SE = sd(Task2) / sqrt(length(Task2))) %>% 
   filter(!Mix %in% c(0, 1)) %>% 
   mutate(Line = "Mixed",
          Group_mean = TRUE)
@@ -45,8 +47,10 @@ task_dist_lines <- task_dist %>%
   group_by(Mix, Line) %>% 
   summarise(Task1_mean = mean(Task1),
             Task1_SD = sd(Task1),
+            Task1_SE = sd(Task1) / sqrt(length(Task1)),
             Task2_mean = mean(Task2),
-            Task2_SD = sd(Task2)) %>% 
+            Task2_SD = sd(Task2),
+            Task1_SE = sd(Task2) / sqrt(length(Task2))) %>% 
   mutate(Group_mean = Mix %in% c(0, 1))
 
 #Bind
@@ -74,20 +78,21 @@ ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 4, hei
 
 # Plot summary points
 gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, color = Line)) +
-  geom_errorbar(aes(ymin = Task1_mean - Task1_SD, ymax = Task1_mean + Task1_SD), 
+  geom_errorbar(aes(ymin = Task1_mean - Task1_SE, ymax = Task1_mean + Task1_SE), 
                 position = position_dodge(width = 0.05),
-                width = 0,
-                size = 0.3) +
+                width = 0.035,
+                size = 0.2) +
   geom_point(aes(size = Group_mean),
              position = position_dodge(width = 0.05)) +
   theme_classic() +
-  labs(x = "Frac. of A individuals in colony",
-       y = "Frequency Task 1") +
+  labs(x = "Fraction of A individuals in colony",
+       y = "Frequency Task 1, mean \u00B1 s.e.") +
   scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
-  scale_size_continuous(range = c(0.3, 1), 
+  scale_size_continuous(range = c(0.1, 1), 
                         guide = FALSE) +
-  scale_y_continuous(limits = c(0, 0.5), breaks = seq(0, 1, 0.1)) +
-  theme_ctokita()
+  scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
+  theme_ctokita() +
+  theme(legend.position = c(0.9, 0.8))
 gg_dist_sum
 
 ggsave(filename = paste0("output/Task_dist/", file_name, "_Means.png"), width = 4, height = 2, dpi = 400)
