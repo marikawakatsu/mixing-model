@@ -14,24 +14,24 @@ rm(list = ls())
 
 # params <- matrix(c(2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
-                   2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
-                   2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10),
-                 nrow = 3, ncol = 10, byrow = TRUE)
-
-params <- matrix(c(2, 2, 1, 1, 0.6,	0.6,  7,  7, 10, 10,
-                   2, 2, 1, 1, 0.6,	0.6, 13, 13, 10, 10,
-                   2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
-                   2, 2, 1, 1, 0.6,	0.6, 10, 10,  7,  7,
-                   2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
-                   2, 2, 1, 1, 0.4,	0.4,  7,  7, 10, 10,
-                   2, 2, 1, 1, 0.4,	0.4, 13, 13, 10, 10,
-                   2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10,
-                   2, 2, 1, 1, 0.4,	0.4, 10, 10,  7,  7,
-                   2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10),
-                 nrow = 10, ncol = 10, byrow = TRUE)
-
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
+#                    2, 2, 1, 1, 0.1,	0.1, 10, 10, 10, 10),
+#                  nrow = 3, ncol = 10, byrow = TRUE)
+# 
+# params <- matrix(c(2, 2, 1, 1, 0.6,	0.6,  7,  7, 10, 10,
+#                    2, 2, 1, 1, 0.6,	0.6, 13, 13, 10, 10,
+#                    2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
+#                    2, 2, 1, 1, 0.6,	0.6, 10, 10,  7,  7,
+#                    2, 2, 1, 1, 0.6,	0.6, 16, 16, 10, 10,
+#                    2, 2, 1, 1, 0.4,	0.4,  7,  7, 10, 10,
+#                    2, 2, 1, 1, 0.4,	0.4, 13, 13, 10, 10,
+#                    2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10,
+#                    2, 2, 1, 1, 0.4,	0.4, 10, 10,  7,  7,
+#                    2, 2, 1, 1, 0.4,	0.4, 16, 16, 10, 10),
+#                  nrow = 10, ncol = 10, byrow = TRUE)
+# 
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
@@ -59,7 +59,7 @@ for (INDEX in 1:nrow(params)){
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
   A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.5 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -83,8 +83,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   
   ####################
@@ -185,7 +185,7 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "Mix",
-         y = "Frequency Task 1") +
+         y = "Frequency task 1, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#ca0020","#0571b0","#80007F")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
@@ -199,19 +199,20 @@ for (INDEX in 1:nrow(params)){
     geom_errorbar(data = task_VarMean_byMix, 
                   aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
                   size = 0.2, width = 0.6, 
-                  position = position_dodge(width = 1)) #+
-    #theme(legend.position="none")
+                  position = position_dodge(width = 1)) +
+    theme(legend.position="none")
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = figH, height = figH, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0,
                position = position_dodge(width = 1)) +
     labs(x = "Mix",
-         y = "Frequency Task 2") +
+         y = "Frequency task 2, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
@@ -263,7 +264,7 @@ for (INDEX in 1:nrow(params)){
     theme(legend.position = "none",
           axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
     labs(x = "Mix",
-         y = "Specialization") +
+         y = "Specialization, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
     scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
     # Mean and SE portion of plot
@@ -274,7 +275,8 @@ for (INDEX in 1:nrow(params)){
   gg_corr
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
-
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  
   ####################
   # Task variance by group size
   ####################
@@ -324,7 +326,7 @@ for (INDEX in 1:nrow(params)){
     theme(legend.position = "none",
           axis.text.x = element_text(colour = c("#ca0020","#0571b0","#80007F"))) +
     xlab("Mix") +
-    ylab("Behavioral variation") +
+    ylab("Behavioral variation, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
     scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
     # Mean and SE portion of plot
@@ -337,6 +339,8 @@ for (INDEX in 1:nrow(params)){
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+
   
 }
 

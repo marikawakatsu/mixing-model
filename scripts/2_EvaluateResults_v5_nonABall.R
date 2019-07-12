@@ -60,8 +60,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   
   ####################
   # Final task distributions
@@ -161,7 +161,7 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "Mix",
-         y = "Frequency Task 1") +
+         y = "Frequency task 1, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
@@ -175,16 +175,18 @@ for (INDEX in 1:nrow(params)){
     geom_errorbar(data = task_VarMean_byMix, 
                   aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
                   size = 0.2, width = 0.6, 
-                  position = position_dodge(width = 1))
+                  position = position_dodge(width = 1)) +
+    theme(legend.position="none")
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
   #   geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
   #              position = position_dodge(width = 1)) +
   #   labs(x = "Mix",
-  #        y = "Frequency Task 2") +
+  #        y = "Frequency task 2, mean \u00B1 s.e.") +
   #   scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
   #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
   #   theme_mk() +
@@ -236,7 +238,7 @@ for (INDEX in 1:nrow(params)){
     theme(legend.position = "none",
           axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
     labs(x = "Mix",
-         y = "Specialization") +
+         y = "Specialization, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
     scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
     # Mean and SE portion of plot
@@ -246,6 +248,8 @@ for (INDEX in 1:nrow(params)){
   
   gg_corr
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  
   
   ####################
   # Task variance by group size
@@ -296,7 +300,7 @@ for (INDEX in 1:nrow(params)){
     theme(legend.position = "none",
           axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
     xlab("Mix") +
-    ylab("Behavioral variation") +
+    ylab("Behavioral variation, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
     scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
     # Mean and SE portion of plot
@@ -309,6 +313,7 @@ for (INDEX in 1:nrow(params)){
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   
 }
