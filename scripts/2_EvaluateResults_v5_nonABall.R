@@ -8,8 +8,18 @@
 
 rm(list = ls())
 
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10),
-                 nrow = 1, ncol = 10, byrow = TRUE)
+# Fig. 3c-d
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 14, 14, 10, 10,  # 3c
+                   6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), # 3d
+                 nrow = 2, ncol = 10, byrow = TRUE)
+
+palette <- matrix(c("#009640","#2B4B9B","#2B706E", # 3c
+                    "#EE751C","#2B4B9B","#8D615B"), # 3d
+                  nrow = 2, ncol = 3, byrow = TRUE)
+
+# Fig. S4 -- 3d only
+params <- matrix(c(6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+palette <- matrix(c("#EE751C","#2B4B9B","#8D615B"), nrow = 1, ncol = 3, byrow = TRUE)
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -160,12 +170,12 @@ for (INDEX in 1:nrow(params)){
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
-    labs(x = "Mix",
+    labs(x = "",
          y = "Frequency task 1, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
+    scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
-    theme(axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
+    theme(axis.text.x = element_text(colour = palette[INDEX,])) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 1, size = 0.1, color = "gray30" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
@@ -179,7 +189,7 @@ for (INDEX in 1:nrow(params)){
     theme(legend.position="none")
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
@@ -187,10 +197,10 @@ for (INDEX in 1:nrow(params)){
   #              position = position_dodge(width = 1)) +
   #   labs(x = "Mix",
   #        y = "Frequency task 2, mean \u00B1 s.e.") +
-  #   scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
+  #   scale_color_manual(values = palette[INDEX,]) +
   #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
   #   theme_mk() +
-  #   theme(axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
+  #   theme(axis.text.x = element_text(colour = palette[INDEX,])) +
   #   # theme(axis.text.x = Mix) +
   #   geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
   #              size = 0.8, alpha = 1, stroke = 0.2, 
@@ -236,18 +246,17 @@ for (INDEX in 1:nrow(params)){
                position = position_dodge(width = 1)) +
     theme_mk() +
     theme(legend.position = "none",
-          axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
-    labs(x = "Mix",
+          axis.text.x = element_text(colour = palette[INDEX,])) +
+    labs(x = "",
          y = "Specialization, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
+    scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SpecMean - SpecSE, ymax = SpecMean + SpecSE),
-                  size = 0.2, width = 0.4) +
+                  size = 0.2, width = 0.6) +
     geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   gg_corr
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   
@@ -281,10 +290,10 @@ for (INDEX in 1:nrow(params)){
   #              position = position_dodge(width = 1)) +
   #   theme_mk() +
   #   theme(legend.position = "none",
-  #         axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
+  #         axis.text.x = element_text(colour = palette[INDEX,])) +
   #   xlab("Mix") +
   #   ylab("Behavioral variation") +
-  #   scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
+  #   scale_color_manual(values = palette[INDEX,]) +
   #   scale_y_continuous(limits = c(0, 0.25), breaks = seq(-1, 1, 0.05)) +
   #   # Mean and SE portion of plot
   #   geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE, colour = Mix),
@@ -298,10 +307,10 @@ for (INDEX in 1:nrow(params)){
                position = position_dodge(width = 1)) +
     theme_mk() +
     theme(legend.position = "none",
-          axis.text.x = element_text(colour = c("#E09B23","#8FB032","#967D1E"))) +
+          axis.text.x = element_text(colour = palette[INDEX,])) +
     xlab("Mix") +
     ylab("Behavioral variation, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E09B23","#8FB032","#967D1E")) +
+    scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
@@ -312,7 +321,6 @@ for (INDEX in 1:nrow(params)){
   
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   
