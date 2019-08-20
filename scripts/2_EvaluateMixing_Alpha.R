@@ -66,7 +66,7 @@ gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
   labs(x = "Replicate",
        y = "Frequency Task 1") +
   #scale_color_brewer(palette = "Paired") +
-  scale_color_manual(values = c("#ca0020", "#0571b0")) +
+  scale_color_manual(values = c("#E52521", "#2B4B9B")) +
   scale_y_continuous(limits = c(0, 1), breaks = seq(0, 1, 0.2)) +
   theme_ctokita() +
   theme(axis.text.x = element_blank(), 
@@ -87,7 +87,7 @@ gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, col
   theme_classic() +
   labs(x = "Fraction of A individuals in colony",
        y = "Frequency Task 1, mean \u00B1 s.e.") +
-  scale_color_manual(values = c("#ca0020", "#0571b0", "#80007F")) +
+  scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
   scale_size_continuous(range = c(0.1, 1), 
                         guide = FALSE) +
   scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
