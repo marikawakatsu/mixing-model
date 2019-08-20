@@ -107,9 +107,9 @@ prepdata_dist <- function(taskdist){
   
 }
 
-##############
-# Make plots #
-##############
+########################
+## Read data and plot ##
+########################
 
 params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
                  nrow = 1, ncol = 10, byrow = TRUE)
