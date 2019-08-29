@@ -1,8 +1,8 @@
 ################################################################################
 #
 # Evaluate ensemble model outputs
-# Updated 02/16/19:
-#       Plot mixes with means and predictions by line
+# Updated 02/09/19: Plot mixes with means and predictions by line
+# Udpated 08/29/19: Error bars are now SE; removed legend; updated colors
 #       
 ################################################################################
 
@@ -56,20 +56,11 @@ rm(list = ls())
 #                    2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
 #                  nrow = 2, ncol = 10, byrow = TRUE)
 
-# params <- matrix(c(1.19, 1.19, 1.19, 1.19, 0.6,	0.6, 10, 15, 15, 10,    # expect to explode
-#                    1.21, 1.21, 1.21, 1.21, 0.6,	0.6, 10, 15, 15, 10,    # old condition predicts SS, new condition predicts explode
-#                    1.30, 1.30, 1.30, 1.30, 0.6,	0.6, 10, 15, 15, 10,    # same as above
-#                    1.43, 1.43, 1.43, 1.43, 0.6,	0.6, 10, 15, 15, 10,    # same as above
-#                    1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
-#                  nrow = 5, ncol = 10, byrow = TRUE)
-params <- matrix(c(1.45, 1.45, 1.45, 1.45, 0.6,	0.6, 10, 15, 15, 10),   # expect steady state
-                 nrow = 1, ncol = 10, byrow = TRUE)
-ddd <- 0.6
-params <- matrix(c(#2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10,
-                   #2, 2, 2, 2, ddd,	ddd, 10, 10, 10, 10,
-                   #2, 2, 1, 1, ddd,	ddd, 10, 10, 10, 10,
-                   2, 2, 6, 6, ddd,	ddd, 10, 10, 10, 10),
-                 nrow = 1, ncol = 10, byrow = TRUE)
+params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
+                   2, 2, 6, 6, 0.6,	0.6, 10, 10, 10, 10,
+                   2, 2, 2, 2, 0.6,	0.6, 10, 12, 12, 10,
+                   2, 2, 2, 2, 0.6,	0.6, 10, 20, 20, 10),
+                 nrow = 4, ncol = 10, byrow = TRUE)
 
 for (INDEX in 1:nrow(params)){
   # rm(list = ls())
@@ -89,9 +80,9 @@ for (INDEX in 1:nrow(params)){
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
   A_ThreshM      <- c(params[INDEX,7], params[INDEX,8]) #population threshold means for clone line A !!Change!!
-  A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A !!Change!!
+  A_ThreshSD     <- A_ThreshM * 0 #population threshold standard deviations for clone line A !!Change!!
   B_ThreshM      <- c(params[INDEX,9], params[INDEX,10]) #population threshold means for clone line B !!Change!!
-  B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B !!Change!!
+  B_ThreshSD     <- B_ThreshM * 0 #population threshold standard deviations for clone line B !!Change!!
   InitialStim    <- c(0, 0) #intital vector of stimuli
   deltas         <- c(params[INDEX,5], params[INDEX,6]) #vector of stimuli increase rates  
   threshSlope    <- 7 #exponent parameter for threshold curve shape
@@ -125,6 +116,68 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Final task distributions
   ####################
+  # # Prepare data
+  # task_dist <- task_dist %>% 
+  #   group_by(n) %>% 
+  #   mutate(set = paste0(Mix, "-", replicate)) %>% 
+  #   mutate(set = factor(set, 
+  #                       levels = c(paste("A", unique(replicate), sep = "-"),  
+  #                                  paste("B", unique(replicate), sep = "-"),
+  #                                  paste("AB", unique(replicate), sep = "-")) ))
+  # 
+  # # # NEW 02/16/19
+  # task_dist <- as.data.frame(task_dist)
+  # 
+  # # Prepare means and SDs
+  # task_VarMean_byrepbyLine <- task_dist %>% # stats by replicate and Line
+  #   # mutate(Line = paste0(Line," simulation")) %>% 
+  #   group_by(n, Mix, replicate, Line, set) %>%
+  #   summarise(SD1 = sd(Task1),
+  #             SD2 = sd(Task2),
+  #             Mean1 = mean(Task1),
+  #             Mean2 = mean(Task2)) 
+  # 
+  # task_VarMean_byrepABonly <- task_dist %>% # stats by replicate, mixed colonies only
+  #   filter(Mix == "AB") %>%
+  #   group_by(n, Mix, replicate, set) %>%
+  #   summarise(SD1 = sd(Task1),
+  #             SD2 = sd(Task2),
+  #             Mean1 = mean(Task1),
+  #             Mean2 = mean(Task2)) %>% 
+  #   mutate(Line = "Mixed")
+  #   # mutate(Line = "Mixed simulation")
+  # 
+  # task_VarMean_byrep <- rbind(task_VarMean_byrepbyLine, task_VarMean_byrepABonly) %>% group_by(n, Mix) 
+  # 
+  # task_VarMean_byMixbyLine <- task_dist %>% # stats by Mix
+  #   # mutate(Line = paste0(Line," simulation")) %>% 
+  #   group_by(n, Mix, replicate, Line, set) %>%
+  #   summarise(Mean1rep = mean(Task1),
+  #             Mean2rep = mean(Task2)) %>%
+  #   group_by(n, Mix, Line) %>%
+  #   summarise(SD1 = sd(Mean1rep),
+  #             SD2 = sd(Mean2rep),
+  #             Mean1 = mean(Mean1rep),
+  #             Mean2 = mean(Mean2rep))
+  # 
+  # task_VarMean_byMixABonly <- task_dist %>% # stats by Mix, mixed colonies only
+  #   filter(Mix == "AB") %>%
+  #   group_by(n, Mix, replicate, set) %>%
+  #   summarise(Mean1rep = mean(Task1),
+  #             Mean2rep = mean(Task2)) %>%
+  #   group_by(n, Mix) %>%
+  #   summarise(SD1 = sd(Mean1rep),
+  #             SD2 = sd(Mean2rep),
+  #             Mean1 = mean(Mean1rep),
+  #             Mean2 = mean(Mean2rep)) %>%
+  #   mutate(Line = "Mixed")
+  #   # mutate(Line = "Mixed simulation")
+  # 
+  # task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
+  
+  ####################
+  # Final task distributions
+  ####################
   # Prepare data
   task_dist <- task_dist %>% 
     group_by(n) %>% 
@@ -134,17 +187,13 @@ for (INDEX in 1:nrow(params)){
                                    paste("B", unique(replicate), sep = "-"),
                                    paste("AB", unique(replicate), sep = "-")) ))
   
-  # # NEW 02/16/19
-  task_dist <- as.data.frame(task_dist)
-
   # Prepare means and SDs
   task_VarMean_byrepbyLine <- task_dist %>% # stats by replicate and Line
-    # mutate(Line = paste0(Line," simulation")) %>% 
     group_by(n, Mix, replicate, Line, set) %>%
     summarise(SD1 = sd(Task1),
               SD2 = sd(Task2),
               Mean1 = mean(Task1),
-              Mean2 = mean(Task2)) 
+              Mean2 = mean(Task2))
   
   task_VarMean_byrepABonly <- task_dist %>% # stats by replicate, mixed colonies only
     filter(Mix == "AB") %>%
@@ -152,23 +201,23 @@ for (INDEX in 1:nrow(params)){
     summarise(SD1 = sd(Task1),
               SD2 = sd(Task2),
               Mean1 = mean(Task1),
-              Mean2 = mean(Task2)) %>% 
+              Mean2 = mean(Task2)) %>%
     mutate(Line = "Mixed")
-    # mutate(Line = "Mixed simulation")
   
-  task_VarMean_byrep <- rbind(task_VarMean_byrepbyLine, task_VarMean_byrepABonly) %>% group_by(n, Mix) 
+  task_VarMean_byrep <- rbind(task_VarMean_byrepbyLine, task_VarMean_byrepABonly) %>% group_by(n, Mix)
   
   task_VarMean_byMixbyLine <- task_dist %>% # stats by Mix
-    # mutate(Line = paste0(Line," simulation")) %>% 
     group_by(n, Mix, replicate, Line, set) %>%
     summarise(Mean1rep = mean(Task1),
               Mean2rep = mean(Task2)) %>%
     group_by(n, Mix, Line) %>%
     summarise(SD1 = sd(Mean1rep),
               SD2 = sd(Mean2rep),
+              SE1 = sd(Mean1rep) / sqrt(length(Mean1rep)),
+              SE2 = sd(Mean2rep) / sqrt(length(Mean2rep)),
               Mean1 = mean(Mean1rep),
               Mean2 = mean(Mean2rep))
-
+  
   task_VarMean_byMixABonly <- task_dist %>% # stats by Mix, mixed colonies only
     filter(Mix == "AB") %>%
     group_by(n, Mix, replicate, set) %>%
@@ -177,12 +226,47 @@ for (INDEX in 1:nrow(params)){
     group_by(n, Mix) %>%
     summarise(SD1 = sd(Mean1rep),
               SD2 = sd(Mean2rep),
+              SE1 = sd(Mean1rep) / sqrt(length(Mean1rep)),
+              SE2 = sd(Mean2rep) / sqrt(length(Mean2rep)),
               Mean1 = mean(Mean1rep),
               Mean2 = mean(Mean2rep)) %>%
     mutate(Line = "Mixed")
-    # mutate(Line = "Mixed simulation")
   
   task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
+  
+  # !!! NEW !!! change 
+  # 1) "Line" -> "Group"
+  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
+  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
+  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
+  
+  # 2) Change category names
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group A"
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"] <- "Group B"
+  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
+  
+  task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Group A"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Group B"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
+  
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"] <- "Group A"
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"] <- "Group B"
+  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
+  
+  task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Group A"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group B"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
+  
+  task_dist$Group[task_dist$Group == "A"] <- "Group A"
+  task_dist$Group[task_dist$Group == "B"] <- "Group B"
+  task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
+  
+  task_dist$Mix <- as.character(task_dist$Mix)
+  task_dist$Mix[task_dist$Mix == "A"] <- "Group A"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Group B"
+  task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
   # NEW: Analytical predictions
   if( A_ThreshM[[1]]==B_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] & A_alpha[[1]]==A_alpha[[2]] & A_alpha[[1]]==B_alpha[[2]]){
@@ -194,7 +278,7 @@ for (INDEX in 1:nrow(params)){
     n2A_pred <- (1 / quitP[[1]])*(s^threshSlope / (s^threshSlope + b^threshSlope))*(2 - (s^threshSlope / (s^threshSlope + a^threshSlope)) )*(1/2 - deltas[[1]]/A_alpha[[1]])
     n1B_pred <- n2A_pred
     n2B_pred <- n1A_pred
-    c <- 1.0
+    c <- 0.9
     w <- 0.7
     
     }else if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
@@ -203,8 +287,8 @@ for (INDEX in 1:nrow(params)){
       n2A_pred <- 2*deltas[[1]]/(A_alpha[[2]]+B_alpha[[2]])
       n1B_pred <- n1A_pred
       n2B_pred <- n2A_pred
-      c <- 1.2
-      w <- 0.4
+      c <- 0.9
+      w <- 0.7
   
     }else{
       print("Check your conditions!")
@@ -213,59 +297,61 @@ for (INDEX in 1:nrow(params)){
   task_Mean_byMix_pred <- data.frame(
     Mean1 = c(deltas[[1]]/A_alpha[[1]], deltas[[1]]/B_alpha[[1]], n1A_pred, n1B_pred, 2*deltas[[1]]/(A_alpha[[1]]+B_alpha[[1]])),
     Mean2 = c(deltas[[2]]/A_alpha[[2]], deltas[[2]]/B_alpha[[2]], n2A_pred, n2B_pred, 2*deltas[[2]]/(A_alpha[[2]]+B_alpha[[2]])),
-    Line = c("A","B","A","B","Mixed"),
-    Mix = c("A","B","AB","AB","AB"),
+    Group = c("Group A","Group B","Group A","Group B","Mixed"),
+    Mix = c("Group A","Group B","Mixed","Mixed","Mixed"),
     n = 16,
-    SD1 = NA,
-    SD2 = NA
+    SE1 = NA,
+    SE2 = NA
   )
   
   # NEW: only for the varying delta and alpha type
   if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
-    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Line == "Mixed" | (task_VarMean_byrep$Mix %in% c("A","B")), ]
-    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Line == "Mixed" | (task_VarMean_byMix$Mix %in% c("A","B")), ]
-    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Line == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("A","B")), ]
+    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Group == "Mixed" | (task_VarMean_byrep$Mix %in% c("Group A","Group B")), ]
+    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Group == "Mixed" | (task_VarMean_byMix$Mix %in% c("Group A","Group B")), ]
+    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Group == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("Group A","Group B")), ]
   }
   
-  task_Mean_byMix_pred <- task_Mean_byMix_pred %>% mutate("Type" = "Prediction")
-  task_VarMean_byMix <- task_VarMean_byMix %>% mutate("Type" = "Simulation")
+  task_Mean_byMix_pred <- task_Mean_byMix_pred %>% mutate("Data" = "Prediction")
+  task_VarMean_byMix <- task_VarMean_byMix %>% mutate("Data" = "Simulation")
   task_VarMean_comb <- merge(task_VarMean_byMix, task_Mean_byMix_pred, all=TRUE)
   
   # Means of means
   gg_dist3 <- 
-    ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Line, shape = Type)) +
+    ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Group, shape = Data)) +
     geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean1),
                size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
-    labs(x = "Mix",
+    theme_mk() +
+    labs(x = "",
          y = "Frequency Task 1") +
-    scale_color_manual(values = c("#ca0020", "#0571b0","#80007F")) +
+    scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
     scale_shape_manual(values = rep(c(1,16),3)) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_ctokita() +
-    # theme(axis.text.x = Mix) +
-    geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SD1, ymax = Mean1 + SD1),
-                  size = 0.3, width = w, position = position_dodge(width = 0.7)) 
+    geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
+                  size = 0.2, width = w, position = position_dodge(width = 0.7)) +
+    # new 082919
+    theme(legend.position = "none",
+          axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F")))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp.png"), width = 3, height = figH, dpi = 400)
+  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_nolegend.png"), width = figH*1.25, height = figH*0.75, dpi = 800)
   
-  gg_dist4 <- 
-    ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Line, shape = Type)) +
-    geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean2),
-               size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
-    theme_classic() +
-    labs(x = "Mix",
-         y = "Frequency Task 2") +
-    scale_color_manual(values = c("#ca0020", "#0571b0","#80007F")) +
-    scale_shape_manual(values = rep(c(1,16),3)) +
-    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_ctokita() +
-    # theme(axis.text.x = Mix) +
-    geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean2 - SD2, ymax = Mean2 + SD2),
-                  size = 0.3, width = w, position = position_dodge(width = 0.7)) 
-  
-  gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = 3, height = figH, dpi = 400)
+  # gg_dist4 <- 
+  #   ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Group, shape = Data)) +
+  #   geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean2),
+  #              size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 1)) +
+  #   theme_classic() +
+  #   labs(x = "",
+  #        y = "Frequency Task 2") +
+  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
+  #   scale_shape_manual(values = rep(c(1,16),3)) +
+  #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+  #   theme_ctokita() +
+  #   # theme(axis.text.x = Mix) +
+  #   geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
+  #                 size = 0.3, width = w, position = position_dodge(width = 1))
+  # 
+  # gg_dist4
+  # ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task2_comp.png"), width = figH, height = figH*1.15, dpi = 800)
   
 }
