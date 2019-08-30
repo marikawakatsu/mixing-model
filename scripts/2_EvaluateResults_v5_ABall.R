@@ -10,8 +10,11 @@ rm(list = ls())
 
 # Fig. 3a-b
 # params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3a
-params <- matrix(c(2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b
-                 
+# params <- matrix(c(2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b
+# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3a new
+# params <- matrix(c(6, 6, 2, 2, 0.9,	0.9, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b new
+params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b new
+
 # Fig. S1 (1b and 1c require manual changes below)
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # S1a
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # S1b and S1c
@@ -66,8 +69,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   
   ####################
@@ -189,7 +192,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0,
@@ -258,7 +261,7 @@ for (INDEX in 1:nrow(params)){
   gg_corr
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -323,7 +326,7 @@ for (INDEX in 1:nrow(params)){
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
 
   
 }

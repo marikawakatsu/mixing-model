@@ -106,7 +106,7 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   
   # Plotting
   ymax <- 0.6 # max y for plotting
@@ -312,14 +312,16 @@ for (INDEX in 1:nrow(params)){
   }
   
   task_Mean_byMix_pred <- task_Mean_byMix_pred %>% mutate("Data" = "Prediction")
-  task_VarMean_byMix <- task_VarMean_byMix %>% mutate("Data" = "Simulation")
-  task_VarMean_comb <- merge(task_VarMean_byMix, task_Mean_byMix_pred, all=TRUE)
+  task_VarMean_byMix   <- task_VarMean_byMix %>% mutate("Data" = "Simulation")
+  task_VarMean_comb    <- merge(task_VarMean_byMix, task_Mean_byMix_pred, all=TRUE)
+  task_VarMean_byrep   <- task_VarMean_byrep %>% mutate("Data" = "Simulation")
   
   # Means of means
   gg_dist3 <- 
     ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Group, shape = Data)) +
-    geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean1),
-               size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
+    # geom_point(data = task_VarMean_byrep, aes(y = Mean1, x = Mix),
+               # size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
+    geom_point(size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
     theme_classic() +
     theme_mk() +
     labs(x = "",
@@ -334,7 +336,7 @@ for (INDEX in 1:nrow(params)){
           axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F")))
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_nolegend.png"), width = figH*1.25, height = figH*0.75, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_reps_100_nolegend.png"), width = figH*1.25, height = figH*0.75, dpi = 800)
   
   # gg_dist4 <- 
   #   ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Group, shape = Data)) +
