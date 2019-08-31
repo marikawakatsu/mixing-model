@@ -7,12 +7,12 @@
 rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
-# Individual sims
+### Individual sims
 # params <- matrix(c(2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# params <- matrix(c(6, 6, 2, 2, 0.9,	0.9, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 
-# Robustness check
+### Robustness check
 # mu_sweep    <- seq(8, 20, by = 2) # range of AThreshM
 # alpha_sweep <- seq(1.5, 6.5, by = 1)  # range of Aalpha
 # 
@@ -26,7 +26,7 @@ params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, b
 #   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
 # }
 # 
-# # Comparing with analytical predictions
+### Comparing with analytical predictions
 # params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
 #                    2, 2, 6, 6, 0.6,	0.6, 10, 10, 10, 10,
 #                    2, 2, 2, 2, 0.6,	0.6, 10, 12, 12, 10,
@@ -331,7 +331,7 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
   # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_10.Rdata"))
   
