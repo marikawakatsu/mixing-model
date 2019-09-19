@@ -9,16 +9,16 @@
 rm(list = ls())
 
 # Fig. 3a-b
-# params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3a
-# params <- matrix(c(2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b
-# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3a new
-# params <- matrix(c(6, 6, 2, 2, 0.9,	0.9, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b new
-params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # 3b new
+# params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b old
+#                    2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), 
+#                  nrow = 2, ncol = 10, byrow = TRUE) 
+params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b new
+                   6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10),
+                 nrow = 2, ncol = 10, byrow = TRUE)
 
-# Fig. S1 (1b and 1c require manual changes below)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # S1a
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # S1b and S1c
-
+# Fig. S1 and S5 (S5 requires manual changes below)
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # S1
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # S5
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -133,41 +133,47 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
   
   # !!! NEW !!! change 
-  # 1) "Line" -> "Group"
-  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
-  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
-  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
+  # 1) "Line" -> "Type"
+  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Type"
+  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Type"
+  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Type"
   
   # 2) Change category names
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group A"
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"] <- "Group B"
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type A"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type B"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "AB"] <- "Mixed"
   
   task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Group A"
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Group B"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type A"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type B"
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
   
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"] <- "Group A"
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"] <- "Group B"
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type A"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type B"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Group A"
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group B"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type A"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type B"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
   
-  task_dist$Group[task_dist$Group == "A"] <- "Group A"
-  task_dist$Group[task_dist$Group == "B"] <- "Group B"
-  task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
+  task_dist$Type[task_dist$Type == "A"] <- "Type A"
+  task_dist$Type[task_dist$Type == "B"] <- "Type B"
+  task_dist$Type[task_dist$Type == "AB"] <- "Mixed"
   
   task_dist$Mix <- as.character(task_dist$Mix)
-  task_dist$Mix[task_dist$Mix == "A"] <- "Group A"
-  task_dist$Mix[task_dist$Mix == "B"] <- "Group B"
+  task_dist$Mix[task_dist$Mix == "A"] <- "Type A"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Type B"
   task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
+  # Adjust x label order - 9/19/19
+  task_VarMean_byrep$Mix <- factor(task_VarMean_byrep$Mix, levels = c("Type A","Type B","Mixed"))
+  task_VarMean_byMix$Mix <- factor(task_VarMean_byMix$Mix, levels = c("Type A","Type B","Mixed"))
+  task_VarMean_byrep$Type <- factor(task_VarMean_byrep$Type, levels = c("Type A","Type B","Mixed"))
+  task_VarMean_byMix$Type <- factor(task_VarMean_byMix$Type, levels = c("Type A","Type B","Mixed"))
+  
   # Means of means
-  gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Group)) +
+  gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Type)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "",
@@ -194,26 +200,26 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   
-  gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Group)) +
-    geom_point(size = 0.3, alpha = 0.2, stroke = 0,
-               position = position_dodge(width = 1)) +
-    labs(x = "",
-         y = "Frequency task 2, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    theme_mk() +
-    theme(axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F"))) +
-    # theme(axis.text.x = Mix) +
-    geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
-               size = 0.8, alpha = 1, stroke = 0.2,
-               # shape = 21, fill = NA,
-               position = position_dodge(width = 1)) +
-    geom_errorbar(data = task_VarMean_byMix,
-                  aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
-                  size = 0.2, width = 0.4,
-                  position = position_dodge(width = 1))
-
-  gg_dist4
+  # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
+  #   geom_point(size = 0.3, alpha = 0.2, stroke = 0,
+  #              position = position_dodge(width = 1)) +
+  #   labs(x = "",
+  #        y = "Frequency task 2, mean \u00B1 s.e.") +
+  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
+  #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+  #   theme_mk() +
+  #   theme(axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F"))) +
+  #   # theme(axis.text.x = Mix) +
+  #   geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
+  #              size = 0.8, alpha = 1, stroke = 0.2,
+  #              # shape = 21, fill = NA,
+  #              position = position_dodge(width = 1)) +
+  #   geom_errorbar(data = task_VarMean_byMix,
+  #                 aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
+  #                 size = 0.2, width = 0.4,
+  #                 position = position_dodge(width = 1))
+  # 
+  # gg_dist4
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task2BehavVar.png"), width = 3, height = figH, dpi = 400)
   
   ####################
@@ -232,14 +238,18 @@ for (INDEX in 1:nrow(params)){
   
   # Change label names
   task_corr$Mix <- as.character(task_corr$Mix)
-  task_corr$Mix[task_corr$Mix == "A"] <- "Group A"
-  task_corr$Mix[task_corr$Mix == "B"] <- "Group B"
+  task_corr$Mix[task_corr$Mix == "A"] <- "Type A"
+  task_corr$Mix[task_corr$Mix == "B"] <- "Type B"
   task_corr$Mix[task_corr$Mix == "AB"] <- "Mixed"
   
   task_corr_VarMean$Mix <- as.character(task_corr_VarMean$Mix)
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "A"] <- "Group A"
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "B"] <- "Group B"
+  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "A"] <- "Type A"
+  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "B"] <- "Type B"
   task_corr_VarMean$Mix[task_corr_VarMean$Mix == "AB"] <- "Mixed"
+  
+  # Adjust x label order - 9/19/19
+  task_corr$Mix <- factor(task_corr$Mix, levels = c("Type A","Type B","Mixed"))
+  task_corr_VarMean$Mix <- factor(task_corr_VarMean$Mix, levels = c("Type A","Type B","Mixed"))
   
   # Plot
   gg_corr <- ggplot(data = task_corr_VarMean, aes(x = Mix, y = SpecMean, colour = Mix)) +
@@ -269,7 +279,7 @@ for (INDEX in 1:nrow(params)){
   # Calculate average SD by mix
   
   # WITHOUT per-group lines
-  # task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Group,] %>%
+  # task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Type,] %>%
   #   mutate(SD = (SD1 + SD2)/2)
   # 
   # task_VarMean_SD <- task_VarMean_byrep %>%
@@ -282,7 +292,7 @@ for (INDEX in 1:nrow(params)){
     mutate(SD = (SD1 + SD2)/2)
   
   task_VarMean_SD <- task_VarMean_byrep %>%
-    group_by(n, Mix, Group) %>%
+    group_by(n, Mix, Type) %>%
     summarise(SDMean = mean(SD),
               SDSE = sd(SD) / sqrt(length(SD)))
   
@@ -304,7 +314,7 @@ for (INDEX in 1:nrow(params)){
   #   geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   # Plot behavioral variation by mix -- WITH per-group line in the Mixed case
-  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Group)) +
+  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Type)) +
     geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
                size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +

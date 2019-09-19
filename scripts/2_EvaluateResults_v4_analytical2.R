@@ -235,37 +235,37 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
   
   # !!! NEW !!! change 
-  # 1) "Line" -> "Group"
-  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
-  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
-  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
+  # 1) "Line" -> "Type"
+  colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Type"
+  colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Type"
+  colnames(task_dist)[colnames(task_dist) == "Line"] <- "Type"
   
   # 2) Change category names
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"] <- "Group A"
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"] <- "Group B"
-  task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type A"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type B"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "AB"] <- "Mixed"
   
   task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Group A"
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Group B"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type A"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type B"
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
   
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"] <- "Group A"
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"] <- "Group B"
-  task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type A"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type B"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Group A"
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Group B"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type A"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type B"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
   
-  task_dist$Group[task_dist$Group == "A"] <- "Group A"
-  task_dist$Group[task_dist$Group == "B"] <- "Group B"
-  task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
+  task_dist$Type[task_dist$Type == "A"] <- "Type A"
+  task_dist$Type[task_dist$Type == "B"] <- "Type B"
+  task_dist$Type[task_dist$Type == "AB"] <- "Mixed"
   
   task_dist$Mix <- as.character(task_dist$Mix)
-  task_dist$Mix[task_dist$Mix == "A"] <- "Group A"
-  task_dist$Mix[task_dist$Mix == "B"] <- "Group B"
+  task_dist$Mix[task_dist$Mix == "A"] <- "Type A"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Type B"
   task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
   # NEW: Analytical predictions
@@ -297,8 +297,8 @@ for (INDEX in 1:nrow(params)){
   task_Mean_byMix_pred <- data.frame(
     Mean1 = c(deltas[[1]]/A_alpha[[1]], deltas[[1]]/B_alpha[[1]], n1A_pred, n1B_pred, 2*deltas[[1]]/(A_alpha[[1]]+B_alpha[[1]])),
     Mean2 = c(deltas[[2]]/A_alpha[[2]], deltas[[2]]/B_alpha[[2]], n2A_pred, n2B_pred, 2*deltas[[2]]/(A_alpha[[2]]+B_alpha[[2]])),
-    Group = c("Group A","Group B","Group A","Group B","Mixed"),
-    Mix = c("Group A","Group B","Mixed","Mixed","Mixed"),
+    Type = c("Type A","Type B","Type A","Type B","Mixed"),
+    Mix = c("Type A","Type B","Mixed","Mixed","Mixed"),
     n = 16,
     SE1 = NA,
     SE2 = NA
@@ -306,9 +306,9 @@ for (INDEX in 1:nrow(params)){
   
   # NEW: only for the varying delta and alpha type
   if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
-    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Group == "Mixed" | (task_VarMean_byrep$Mix %in% c("Group A","Group B")), ]
-    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Group == "Mixed" | (task_VarMean_byMix$Mix %in% c("Group A","Group B")), ]
-    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Group == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("Group A","Group B")), ]
+    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Type == "Mixed" | (task_VarMean_byrep$Mix %in% c("Type A","Type B")), ]
+    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Type == "Mixed" | (task_VarMean_byMix$Mix %in% c("Type A","Type B")), ]
+    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Type == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("Type A","Type B")), ]
   }
   
   task_Mean_byMix_pred <- task_Mean_byMix_pred %>% mutate("Data" = "Prediction")
@@ -316,9 +316,13 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_comb    <- merge(task_VarMean_byMix, task_Mean_byMix_pred, all=TRUE)
   task_VarMean_byrep   <- task_VarMean_byrep %>% mutate("Data" = "Simulation")
   
+  # Adjust x label order - 9/19/19
+  task_VarMean_comb$Mix <- factor(task_VarMean_comb$Mix, levels = c("Type A","Type B","Mixed"))
+  task_VarMean_comb$Type <- factor(task_VarMean_comb$Type, levels = c("Type A","Type B","Mixed"))
+  
   # Means of means
   gg_dist3 <- 
-    ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Group, shape = Data)) +
+    ggplot(data = task_VarMean_comb, aes(y = Mean1, x = Mix, colour = Type, shape = Data)) +
     # geom_point(data = task_VarMean_byrep, aes(y = Mean1, x = Mix),
                # size = 0.3, alpha = 0.3, stroke = 0, position = position_dodge(width = 0.7)) +
     geom_point(size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 0.7)) +
@@ -329,17 +333,17 @@ for (INDEX in 1:nrow(params)){
     scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
     scale_shape_manual(values = rep(c(1,16),3)) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-    geom_errorbar(data = task_VarMean_comb, aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
+    geom_errorbar(aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
                   size = 0.2, width = w, position = position_dodge(width = 0.7)) +
     # new 082919
     theme(legend.position = "none",
           axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F")))
   
   gg_dist3
-  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_reps_100_nolegend.png"), width = figH*1.25, height = figH*0.75, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_reps_100_nolegend.png"), width = figH*1.25, height = figH, dpi = 800)
   
   # gg_dist4 <- 
-  #   ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Group, shape = Data)) +
+  #   ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Type, shape = Data)) +
   #   geom_point(data = task_VarMean_comb, aes(x = Mix, y = Mean2),
   #              size = c, alpha = 1, stroke = 0.3, position = position_dodge(width = 1)) +
   #   theme_classic() +
