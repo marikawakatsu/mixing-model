@@ -78,7 +78,7 @@ for (INDEX in 1:nrow(params)){
     ####################
     # load data
     ####################
-    load(paste0("output/Rdata/", file_name2, "_robust_10.Rdata"))
+    load(paste0("output/Rdata/", file_name2, "_robust_50.Rdata"))
     
     ####################
     # process data
@@ -241,7 +241,7 @@ gg_amps <- ggplot() +
 gg_amps 
 
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_v2.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
-
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_v2.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 
 
