@@ -14,8 +14,8 @@ source("scripts/util/__Util__MASTER.R")
 # params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 
 ### Robustness check
-mu_sweep    <- seq(10, 20, by = 2) # range of AThreshM
-alpha_sweep <- seq(2, 7, by = 1)  # range of Aalpha
+mu_sweep    <- seq(11, 19, by = 2) # range of AThreshM
+alpha_sweep <- seq(2.5, 7, by = 1)  # range of Aalpha
 
 params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
 params[,3:4]  <- 2
