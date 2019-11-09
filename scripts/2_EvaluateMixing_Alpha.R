@@ -7,9 +7,9 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
+load("output/Rdata/Mix_AThreshM_11.00_11.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 
-file_name <- "Mix_Alphas_A-super-efficient"
+file_name <- "Mix_Alphas_A-super-efficient_A-higher-thresh"
 
 ####################
 # Final task distributions
@@ -92,7 +92,8 @@ gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, col
                         guide = FALSE) +
   scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
   theme_ctokita() +
-  theme(legend.position = c(0.9, 0.8))
+  theme(legend.position = c(0.9, 0.8),
+        legend.background = element_blank())
 gg_dist_sum
 
 ggsave(filename = paste0("output/Task_dist/", file_name, "_Means.png"), width = 4, height = 2, dpi = 400)
