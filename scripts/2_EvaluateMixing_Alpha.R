@@ -7,9 +7,9 @@ rm(list = ls())
 
 source("scripts/util/__Util__MASTER.R")
 
-load("output/Rdata/Mix_AThreshM_11.00_11.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
+load("output/Rdata/Mix_AThreshM_20.00_20.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 
-file_name <- "Mix_Alphas_A-super-efficient_A-higher-thresh"
+file_name <- "Mix_Alphas_A-super-efficient_A-higher-thresh-A20"
 
 ####################
 # Final task distributions

@@ -20,7 +20,7 @@ reps           <- 50 #number of replications per simulation (for ensemble) !!Cha
 
 # Threshold Parameters
 mix_ratios     <- seq(0, 1, 0.125) # %line A
-A_ThreshM      <- c(11, 11) #population threshold means for clone line A
+A_ThreshM      <- c(20, 20) #population threshold means for clone line A
 A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A 
 B_ThreshM      <- c(10, 10) #population threshold means for clone line B 
 B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B 

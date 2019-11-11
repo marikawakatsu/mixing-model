@@ -2,12 +2,12 @@
     "path" : "~/Documents/Research/Tarnita Lab/Mixing Experiments/MixingModel/scripts",
     "sortOrder" : [
         {
-            "ascending" : false,
-            "columnIndex" : 4
-        },
-        {
             "ascending" : true,
             "columnIndex" : 2
+        },
+        {
+            "ascending" : false,
+            "columnIndex" : 4
         }
     ]
 }
