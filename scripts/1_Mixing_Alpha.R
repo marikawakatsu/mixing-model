@@ -16,20 +16,20 @@ Ns             <- c(16) #vector of number of individuals to simulate
 m              <- 2 #number of tasks
 gens           <- 10000 #number of generations to run simulation 
 corrStep       <- 200 #number of time steps for calculation of correlation 
-reps           <- 50 #number of replications per simulation (for ensemble) !!Change!!
+reps           <- 100 #number of replications per simulation (for ensemble) !!Change!!
 
 # Threshold Parameters
 mix_ratios     <- seq(0, 1, 0.125) # %line A
-A_ThreshM      <- c(20, 20) #population threshold means for clone line A
-A_ThreshSD     <- A_ThreshM * 0.1 #population threshold standard deviations for clone line A 
-B_ThreshM      <- c(10, 10) #population threshold means for clone line B 
-B_ThreshSD     <- B_ThreshM * 0.1 #population threshold standard deviations for clone line B 
-InitialStim    <- c(0, 0) #intital vector of stimuli
-deltas         <- c(0.6, 0.6) #vector of stimuli increase rates  
-threshSlope    <- 7 #exponent parameter for threshold curve shape
-A_alpha        <- c(6, 6) #efficiency of task performance
-B_alpha        <- c(2, 2)
-quitP          <- c(0.2, 0.2) #probability of quitting task once active 
+A_ThreshM      <- c(10, 10)        # population threshold means for clone line A
+A_ThreshSD     <- A_ThreshM * 0.1  # population threshold standard deviations for clone line A (DON'T change)
+B_ThreshM      <- c(10, 10)        # population threshold means for clone line B 
+B_ThreshSD     <- B_ThreshM * 0.1  # population threshold standard deviations for clone line B (DON'T change)
+InitialStim    <- c(0, 0)          # intital vector of stimuli
+deltas         <- c(1.5, 1.5)      # vector of stimuli increase rates  
+threshSlope    <- 7                # exponent parameter for threshold curve shape (DON'T change)
+A_alpha        <- c(6, 6)          # efficiency of task performance for A type
+B_alpha        <- c(2, 2)          # efficiency of task performance for B type
+quitP          <- c(0.2, 0.2)      # probability of quitting task once active (DON'T change)
 
 file_name1 <- sprintf("Mix_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f",
                       A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 

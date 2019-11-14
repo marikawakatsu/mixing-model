@@ -90,7 +90,7 @@ gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, col
   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
   scale_size_continuous(range = c(0.1, 1), 
                         guide = FALSE) +
-  scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
+  # scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
   theme_ctokita() +
   theme(legend.position = c(0.9, 0.8),
         legend.background = element_blank())
