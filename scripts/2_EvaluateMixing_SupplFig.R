@@ -107,5 +107,8 @@ load("output/Rdata/Mix_AThreshM_20.00_20.00_BThreshM_10.00_10.00_deltas_0.60_0.6
 panelD_data <- process_mix_data(task_dist)
 gg_panelD <- plot_mix_data(panelD_data)
 ggsave(gg_panelD, filename = "output/Task_dist/svg_files/non-5050-panelD.svg", width = 90, height = 45, units = "mm")
+gg_panelD_legend <- gg_panelD +
+  theme(legend.position = "right")
+ggsave(gg_panelD_legend, filename = "output/Task_dist/svg_files/non-5050-panelDlegend.svg", width = 90, height = 45, units = "mm")
 
 
