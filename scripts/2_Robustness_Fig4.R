@@ -241,8 +241,12 @@ gg_amps <- ggplot() +
 
 gg_amps 
 
+# PNG
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_v2.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 
+# SVG
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.pdf"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 
