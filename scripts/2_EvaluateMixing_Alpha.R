@@ -58,6 +58,10 @@ task_dist_summary <- task_dist_summary %>%
   bind_rows(task_dist_lines) %>% 
   mutate(Group_mean = as.numeric(Group_mean))
 
+# Null hypothesis lines
+null_hypothesis <- task_dist_summary %>% 
+  filter(Mix %in% c(0, 1))
+
 ###### Plot ######
 # Plot raw data
 gg_dist <- ggplot(data = task_dist, aes(y = Task1, x = set, color = Line)) +
@@ -78,6 +82,11 @@ ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 4, hei
 
 # Plot summary points
 gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, color = Line)) +
+  geom_line(data = null_hypothesis, 
+            aes(y = Task1_mean, x = Mix, group = NA),
+            color = "grey70",
+            linetype = "dashed",
+            size = 0.3) +
   geom_errorbar(aes(ymin = Task1_mean - Task1_SE, ymax = Task1_mean + Task1_SE), 
                 position = position_dodge(width = 0.05),
                 width = 0.035,
@@ -93,6 +102,7 @@ gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, col
   # scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
   theme_ctokita() +
   theme(legend.position = c(0.9, 0.8),
+
         legend.background = element_blank())
 gg_dist_sum
 
