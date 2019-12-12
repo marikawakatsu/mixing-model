@@ -14,6 +14,9 @@ file_name <- "Non50-50Mixes_SupplFigure"
 ####################
 # Function to process data
 process_mix_data <- function(task_distribution_matrix) {
+  # Fix A-B naming and change to X-Y
+  task_dist$Line[task_dist$Line == "A"] <- "X"
+  task_dist$Line[task_dist$Line == "B"] <- "Y"
   # Process raw data
   task_dist <- task_dist %>% 
     group_by(n) %>% 
@@ -82,7 +85,7 @@ plot_mix_data <- function(task_distribution_data, null_hypothesis_data) {
     geom_point(aes(size = Group_mean),
                position = position_dodge(width = 0.05)) +
     theme_classic() +
-    labs(x = "Fraction of A individuals in colony",
+    labs(x = "Fraction of X individuals in colony",
          y = "Frequency Task 1, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
     scale_size_manual(values = c(0.2, 1), 
@@ -105,16 +108,17 @@ panelA_null <- panelA[[2]]
 gg_panelA <- plot_mix_data(panelA_data, panelA_null)
 ggsave(gg_panelA, filename = "output/Task_dist/svg_files/non-5050-panelA.svg", width = 90, height = 45, units = "mm")
 
-# Panel B (convex, high demand)
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_1.50_1.50_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
+
+# Panel C (convex, low demand)
+load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 panelB <- process_mix_data(task_dist)
 panelB_data <- panelB[[1]]
 panelB_null <- panelB[[2]]
 gg_panelB <- plot_mix_data(panelB_data, panelB_null)
 ggsave(gg_panelB, filename = "output/Task_dist/svg_files/non-5050-panelB.svg", width = 90, height = 45, units = "mm")
 
-# Panel C (convex, low demand)
-load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
+# Panel B (convex, high demand)
+load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_1.50_1.50_threshSlope_7_Aalpha_6.00_6.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 panelC <- process_mix_data(task_dist)
 panelC_data <- panelC[[1]]
 panelC_null <- panelC[[2]]
