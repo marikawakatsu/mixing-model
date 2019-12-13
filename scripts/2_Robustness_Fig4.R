@@ -207,37 +207,48 @@ colTitle <- "" # "Change in between-\ntype relative task\nperformance"
 
 gg_amps <- ggplot() +
   theme_bw() +
-  geom_raster(data = robustcheck, 
-              aes(x = Calpha1, y = Cmu1, fill = amps)) +
-  scale_x_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
-                      breaks = seq(min(alpha_sweep), max(alpha_sweep), 1),
-                      expand = c(0,0)) +
-  scale_y_continuous( # limits = c(min(mu_sweep), max(mu_sweep)),
-                      breaks = seq(min(mu_sweep), max(mu_sweep), 2),
-                      expand = c(0,0)) +
-  scale_fill_gradientn(name = colTitle,
+  geom_tile(data = robustcheck, 
+              # aes(x = Calpha1, y = Cmu1, fill = amps)) +
+            aes(x = Cmu1, y = Calpha1, fill = amps)) +  # flip order of axes
+  # scale_x_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
+  #                     breaks = seq(min(alpha_sweep), max(alpha_sweep), 1),
+  #                     expand = c(0,0)) +
+  # scale_y_continuous( # limits = c(min(mu_sweep), max(mu_sweep)),
+  #                     breaks = seq(min(mu_sweep), max(mu_sweep), 2),
+  #                     expand = c(0,0)) +
+  scale_y_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
+                        breaks = seq(min(alpha_sweep), max(alpha_sweep), 1),
+                        expand = c(0,0)) +
+  scale_x_continuous( # limits = c(min(mu_sweep), max(mu_sweep)),
+                        breaks = seq(min(mu_sweep), max(mu_sweep), 2),
+                        expand = c(0,0)) +
+  scale_fill_gradientn(name    = colTitle,
                        colours = colPal,
                        # limits = c(-colLim, colLim),
-                       limits = c(-0.24, 0.24),
-                       breaks = seq(-0.2, 0.2, 0.1),
-                       labels = c("-0.2   Contagion", "-0.1", " 0.0", " 0.1", " 0.2   Amplification"),
-                       oob = squish) +
-  xlab( expression("Task efficiency"~(alpha^C)) ) +
-  ylab( expression("Mean task threshold"~(mu^C)) ) +
+                       limits  = c(-0.24, 0.24),
+                       breaks  = seq(-0.2, 0.2, 0.1),
+                       labels  = c("-0.2\nContagion", "-0.1", " 0.0", " 0.1", " 0.2\nAmplification"),
+                       oob     = squish) +
+  # xlab( expression("Task efficiency"~(alpha^X)) ) +
+  # ylab( expression("Mean task threshold"~(mu^X)) ) +
+  ylab( expression("Task efficiency"~(alpha^X)) ) +
+  xlab( expression("Mean task threshold"~(mu^X)) ) +
   theme(# legend.title = element_text(), 
         # legend.key.height = unit(0.84, "cm"),
-        legend.key.height = unit(0.1, "npc"),
-        legend.key.width= unit(0.04, "npc"),
-        legend.key = element_rect(colour = "black", size = 0.5),
-        legend.margin =  margin(t = 0, r = 0, b = 0, l = -0.02, "npc"),
-        legend.text = element_text(size = 5),
-        legend.title = element_text(size = 6),
+        legend.key.height = unit(0.04, "npc"),
+        legend.key.width  = unit(0.14, "npc"),
+        legend.key        = element_rect(colour = "black", size = 0.5),
+        legend.margin     = margin(t = 0, r = 0, b = 0, l = -0.02, "npc"),
+        legend.text       = element_text(size = 5),
+        legend.title      = element_text(size = 6),
         legend.background = element_rect(fill = "NA", size = 1),
+        legend.position   = "top",
         axis.text.y = element_text(size = 8, margin = margin(5, 2, 5, -2), color = "black"),
         axis.text.x = element_text(size = 8, margin = margin(2, 5, -2, 5), color = "black"),
-        axis.title = element_text(size = 11, margin = margin(0, 0, 0, 0)),
+        axis.title  = element_text(size = 11, margin = margin(0, 0, 0, 0)),
         axis.ticks.length = unit(0, "cm"),
-        panel.border = element_rect(fill = "NA", size = 1))
+        panel.border = element_rect(fill = "NA", size = 1)
+        )
 
 gg_amps 
 
@@ -245,8 +256,12 @@ gg_amps
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_v2.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 
-# SVG
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.pdf"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+
+# # SVG
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp.pdf"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.eps"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 

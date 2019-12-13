@@ -139,49 +139,51 @@ for (INDEX in 1:nrow(params)){
   colnames(task_dist)[colnames(task_dist) == "Line"] <- "Type"
   
   # 2) Change category names
-  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type C"
-  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type D"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type X"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type Y"
   task_VarMean_byMix$Type[task_VarMean_byMix$Type == "AB"] <- "Mixed"
   
   task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type C"
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type D"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type X"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type Y"
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
   
-  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type C"
-  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type D"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type X"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type Y"
   task_VarMean_byrep$Type[task_VarMean_byrep$Type == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type C"
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type D"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type X"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type Y"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
   
-  task_dist$Type[task_dist$Type == "A"] <- "Type C"
-  task_dist$Type[task_dist$Type == "B"] <- "Type D"
+  task_dist$Type[task_dist$Type == "A"] <- "Type X"
+  task_dist$Type[task_dist$Type == "B"] <- "Type Y"
   task_dist$Type[task_dist$Type == "AB"] <- "Mixed"
   
   task_dist$Mix <- as.character(task_dist$Mix)
-  task_dist$Mix[task_dist$Mix == "A"] <- "Type C"
-  task_dist$Mix[task_dist$Mix == "B"] <- "Type D"
+  task_dist$Mix[task_dist$Mix == "A"] <- "Type X"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Type Y"
   task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
   # Adjust x label order - 9/19/19
-  task_VarMean_byrep$Mix <- factor(task_VarMean_byrep$Mix, levels = c("Type C","Type D","Mixed"))
-  task_VarMean_byMix$Mix <- factor(task_VarMean_byMix$Mix, levels = c("Type C","Type D","Mixed"))
-  task_VarMean_byrep$Type <- factor(task_VarMean_byrep$Type, levels = c("Type C","Type D","Mixed"))
-  task_VarMean_byMix$Type <- factor(task_VarMean_byMix$Type, levels = c("Type C","Type D","Mixed"))
+  task_VarMean_byrep$Mix <- factor(task_VarMean_byrep$Mix, levels = c("Type X","Type Y","Mixed"))
+  task_VarMean_byMix$Mix <- factor(task_VarMean_byMix$Mix, levels = c("Type X","Type Y","Mixed"))
+  task_VarMean_byrep$Type <- factor(task_VarMean_byrep$Type, levels = c("Type X","Type Y","Mixed"))
+  task_VarMean_byMix$Type <- factor(task_VarMean_byMix$Type, levels = c("Type X","Type Y","Mixed"))
   
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Type)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "",
-         y = "Frequency task 1, mean \u00B1 s.e.") +
+         y = "Task 1 performance, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     theme_mk() +
-    theme(axis.text.x = element_text(colour = palette[INDEX,])) +
+    theme(legend.position = "none",
+          axis.text.x     = element_text(colour = palette[INDEX,]),
+          axis.title.x    = element_text(size=0)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 1, size = 0.1, color = "gray30" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
@@ -191,12 +193,12 @@ for (INDEX in 1:nrow(params)){
     geom_errorbar(data = task_VarMean_byMix, 
                   aes(x = Mix, ymin = Mean1 - SE1, ymax = Mean1 + SE1),
                   size = 0.2, width = 0.6, 
-                  position = position_dodge(width = 1)) +
-    theme(legend.position="none")
+                  position = position_dodge(width = 1))
   
   gg_dist3
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
   #   geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
@@ -236,18 +238,18 @@ for (INDEX in 1:nrow(params)){
   
   # Change label names
   task_corr$Mix <- as.character(task_corr$Mix)
-  task_corr$Mix[task_corr$Mix == "A"] <- "Type C"
-  task_corr$Mix[task_corr$Mix == "B"] <- "Type D"
+  task_corr$Mix[task_corr$Mix == "A"] <- "Type X"
+  task_corr$Mix[task_corr$Mix == "B"] <- "Type Y"
   task_corr$Mix[task_corr$Mix == "AB"] <- "Mixed"
   
   task_corr_VarMean$Mix <- as.character(task_corr_VarMean$Mix)
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "A"] <- "Type C"
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "B"] <- "Type D"
+  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "A"] <- "Type X"
+  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "B"] <- "Type Y"
   task_corr_VarMean$Mix[task_corr_VarMean$Mix == "AB"] <- "Mixed"
   
   # Adjust x label order - 9/19/19
-  task_corr$Mix <- factor(task_corr$Mix, levels = c("Type C","Type D","Mixed"))
-  task_corr_VarMean$Mix <- factor(task_corr_VarMean$Mix, levels = c("Type C","Type D","Mixed"))
+  task_corr$Mix <- factor(task_corr$Mix, levels = c("Type X","Type Y","Mixed"))
+  task_corr_VarMean$Mix <- factor(task_corr_VarMean$Mix, levels = c("Type X","Type Y","Mixed"))
   
   # Plot
   gg_corr <- ggplot(data = task_corr_VarMean, aes(x = Mix, y = SpecMean, colour = Mix)) +
@@ -256,11 +258,12 @@ for (INDEX in 1:nrow(params)){
                position = position_dodge(width = 1)) +
     theme_mk() +
     theme(legend.position = "none",
-          axis.text.x = element_text(colour = palette[INDEX,])) +
+          axis.text.x     = element_text(colour = palette[INDEX,]),
+          axis.title.x    = element_text(size=0)) +
     labs(x = "",
          y = "Specialization, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
-    scale_x_discrete(limits=c("Type C","Type D","Mixed")) + 
+    scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
     scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SpecMean - SpecSE, ymax = SpecMean + SpecSE),
@@ -269,7 +272,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_corr
   ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -318,11 +321,12 @@ for (INDEX in 1:nrow(params)){
                position = position_dodge(width = 1)) +
     theme_mk() +
     theme(legend.position = "none",
-          axis.text.x = element_text(colour = palette[INDEX,])) +
-    xlab("Mix") +
-    ylab("Behavioral variation, mean \u00B1 s.e.") +
+          axis.text.x     = element_text(colour = palette[INDEX,]),
+          axis.title.x    = element_text(size=0)) +
+    labs(x = "",
+         y = "Behavioral variation, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
-    scale_x_discrete(limits=c("Type C","Type D","Mixed")) + 
+    scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
     scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
@@ -334,7 +338,7 @@ for (INDEX in 1:nrow(params)){
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
   
 }
 
