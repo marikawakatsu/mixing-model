@@ -241,31 +241,31 @@ for (INDEX in 1:nrow(params)){
   colnames(task_dist)[colnames(task_dist) == "Line"] <- "Type"
   
   # 2) Change category names
-  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type A"
-  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type B"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"] <- "Type X"
+  task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"] <- "Type Y"
   task_VarMean_byMix$Type[task_VarMean_byMix$Type == "AB"] <- "Mixed"
   
   task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type A"
-  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type B"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"] <- "Type X"
+  task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"] <- "Type Y"
   task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
   
-  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type A"
-  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type B"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"] <- "Type X"
+  task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"] <- "Type Y"
   task_VarMean_byrep$Type[task_VarMean_byrep$Type == "AB"] <- "Mixed"
   
   task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type A"
-  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type B"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"] <- "Type X"
+  task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"] <- "Type Y"
   task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
   
-  task_dist$Type[task_dist$Type == "A"] <- "Type A"
-  task_dist$Type[task_dist$Type == "B"] <- "Type B"
+  task_dist$Type[task_dist$Type == "A"] <- "Type X"
+  task_dist$Type[task_dist$Type == "B"] <- "Type Y"
   task_dist$Type[task_dist$Type == "AB"] <- "Mixed"
   
   task_dist$Mix <- as.character(task_dist$Mix)
-  task_dist$Mix[task_dist$Mix == "A"] <- "Type A"
-  task_dist$Mix[task_dist$Mix == "B"] <- "Type B"
+  task_dist$Mix[task_dist$Mix == "A"] <- "Type X"
+  task_dist$Mix[task_dist$Mix == "B"] <- "Type Y"
   task_dist$Mix[task_dist$Mix == "AB"] <- "Mixed"
   
   # NEW: Analytical predictions
@@ -297,8 +297,8 @@ for (INDEX in 1:nrow(params)){
   task_Mean_byMix_pred <- data.frame(
     Mean1 = c(deltas[[1]]/A_alpha[[1]], deltas[[1]]/B_alpha[[1]], n1A_pred, n1B_pred, 2*deltas[[1]]/(A_alpha[[1]]+B_alpha[[1]])),
     Mean2 = c(deltas[[2]]/A_alpha[[2]], deltas[[2]]/B_alpha[[2]], n2A_pred, n2B_pred, 2*deltas[[2]]/(A_alpha[[2]]+B_alpha[[2]])),
-    Type = c("Type A","Type B","Type A","Type B","Mixed"),
-    Mix = c("Type A","Type B","Mixed","Mixed","Mixed"),
+    Type = c("Type X","Type Y","Type X","Type Y","Mixed"),
+    Mix = c("Type X","Type Y","Mixed","Mixed","Mixed"),
     n = 16,
     SE1 = NA,
     SE2 = NA
@@ -306,9 +306,9 @@ for (INDEX in 1:nrow(params)){
   
   # NEW: only for the varying delta and alpha type
   if( A_ThreshM[[1]]==A_ThreshM[[2]] & A_ThreshM[[1]]==B_ThreshM[[2]] ){
-    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Type == "Mixed" | (task_VarMean_byrep$Mix %in% c("Type A","Type B")), ]
-    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Type == "Mixed" | (task_VarMean_byMix$Mix %in% c("Type A","Type B")), ]
-    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Type == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("Type A","Type B")), ]
+    task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Type == "Mixed" | (task_VarMean_byrep$Mix %in% c("Type X","Type Y")), ]
+    task_VarMean_byMix <- task_VarMean_byMix[task_VarMean_byMix$Type == "Mixed" | (task_VarMean_byMix$Mix %in% c("Type X","Type Y")), ]
+    task_Mean_byMix_pred <- task_Mean_byMix_pred[task_Mean_byMix_pred$Type == "Mixed" | (task_Mean_byMix_pred$Mix %in% c("Type X","Type Y")), ]
   }
   
   task_Mean_byMix_pred <- task_Mean_byMix_pred %>% mutate("Data" = "Prediction")
@@ -317,8 +317,8 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_byrep   <- task_VarMean_byrep %>% mutate("Data" = "Simulation")
   
   # Adjust x label order - 9/19/19
-  task_VarMean_comb$Mix <- factor(task_VarMean_comb$Mix, levels = c("Type A","Type B","Mixed"))
-  task_VarMean_comb$Type <- factor(task_VarMean_comb$Type, levels = c("Type A","Type B","Mixed"))
+  task_VarMean_comb$Mix <- factor(task_VarMean_comb$Mix, levels = c("Type X","Type Y","Mixed"))
+  task_VarMean_comb$Type <- factor(task_VarMean_comb$Type, levels = c("Type X","Type Y","Mixed"))
   
   # Means of means
   gg_dist3 <- 
@@ -329,7 +329,7 @@ for (INDEX in 1:nrow(params)){
     theme_classic() +
     theme_mk() +
     labs(x = "",
-         y = "Frequency Task 1") +
+         y = "Task 1 performance") +
     scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
     scale_shape_manual(values = rep(c(1,16),3)) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
@@ -341,6 +341,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist3
   ggsave(filename = paste0("output/Task_dist/vs_analytical/", file_name, "_Task1_comp_reps_100_nolegend.png"), width = figH*1.25, height = figH, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_Task1_comp_reps_100_nolegend.pdf"), width = figH*1.25, height = figH, dpi = 800)
   
   # gg_dist4 <- 
   #   ggplot(data = task_VarMean_comb, aes(y = Mean2, x = Mix, colour = Type, shape = Data)) +
