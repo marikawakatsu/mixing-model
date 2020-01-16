@@ -21,6 +21,9 @@ palette <- matrix(c("#009640","#2B4B9B","#2B706E", # 3c
 # params <- matrix(c(6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 # palette <- matrix(c("#EE751C","#2B4B9B","#8D615B"), nrow = 1, ncol = 3, byrow = TRUE)
 
+# NEW 01/16/20 Updated Fig. 4c
+params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+
 # Plotting
 ymax <- 0.5 # max y for plotting
 yinc <- 0.1 # y-axis increments
@@ -70,8 +73,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  # load(paste0("output/Rdata/", file_name, ".Rdata"))
-  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   
   ####################
   # Final task distributions

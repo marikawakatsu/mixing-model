@@ -9,9 +9,9 @@
 rm(list = ls())
 
 # Fig. 3a-b
-# params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b old
-#                    2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10), 
-#                  nrow = 2, ncol = 10, byrow = TRUE) 
+params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b old
+                   2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10),
+                 nrow = 2, ncol = 10, byrow = TRUE)
 params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b new
                    6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10),
                  nrow = 2, ncol = 10, byrow = TRUE)
@@ -69,8 +69,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  # load(paste0("output/Rdata/", file_name, ".Rdata"))
+  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   
   ####################
