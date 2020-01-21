@@ -42,8 +42,14 @@ source("scripts/util/__Util__MASTER.R")
 # }
 
 ### Robustness check -- 012020 addition part 2
-mu_sweep    <- seq(6, 9, by = 1) # range of AThreshM
-alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
+# mu_sweep    <- seq(8, 8, by = 1) # range of AThreshM
+# mu_sweep    <- seq(9, 9, by = 1) # range of AThreshM
+# alpha_sweep <- seq(2, 4, by = 0.5)  # range of Aalpha
+# alpha_sweep <- seq(4.5, 7, by = 0.5)  # range of Aalpha
+# mu_sweep    <- seq(7, 7, by = 1) # range of AThreshM
+# alpha_sweep <- seq(6.5, 7, by = 0.5)  # range of Aalpha
+mu_sweep    <- seq(17, 20, by = 1) # range of AThreshM
+alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
 
 params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
 params[,3:4]  <- 2
