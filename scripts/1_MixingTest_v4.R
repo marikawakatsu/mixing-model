@@ -8,7 +8,7 @@ rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
 ### Individual sims
-params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 # params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 # params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 # params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
@@ -26,6 +26,34 @@ params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10,
 #   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
 #   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
 # }
+
+### Robustness check -- 012020 addition part 1
+# mu_sweep    <- seq(6, 20, by = 1) # range of AThreshM
+# alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
+# 
+# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
+# params[,3:4]  <- 2
+# params[,5:6]  <- 0.6
+# params[,9:10] <- 10
+# 
+# for(i in 1:nrow(params)){
+#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
+#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
+# }
+
+### Robustness check -- 012020 addition part 2
+mu_sweep    <- seq(6, 9, by = 1) # range of AThreshM
+alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
+
+params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
+params[,3:4]  <- 2
+params[,5:6]  <- 0.6
+params[,9:10] <- 10
+
+for(i in 1:nrow(params)){
+  params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
+  params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
+}
 
 ### Comparing with analytical predictions
 # params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
@@ -333,8 +361,8 @@ for (INDEX in 1:nrow(params)){
   # Save run
   ####################
   # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
   
   print(proc.time() - ptm)
   Sys.sleep(2)
