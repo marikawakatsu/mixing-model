@@ -24,17 +24,17 @@ mix_ratios     <- data.frame("A" = c(1, 0, 0, 0.5, 0.5, 0,   1/3),
                              "C" = c(0, 0, 1, 0,   0.5, 0.5, 1/3)) # %of each type
 A_ThreshM      <- c(10, 10)        # population threshold means for clone line A
 A_ThreshSD     <- A_ThreshM * 0.1  # population threshold standard deviations for clone line A (DON'T change)
-B_ThreshM      <- c(10, 10)        # population threshold means for clone line B 
+B_ThreshM      <- c(15, 15)        # population threshold means for clone line B 
 B_ThreshSD     <- B_ThreshM * 0.1  # population threshold standard deviations for clone line B (DON'T change)
-C_ThreshM      <- c(10, 10)        # population threshold means for clone line A
+C_ThreshM      <- c(7, 7)        # population threshold means for clone line A
 C_ThreshSD     <- C_ThreshM * 0.1  # population threshold standard deviations for clone line C (DON'T change)
 InitialStim    <- c(0, 0)          # intital vector of stimuli
 deltas         <- c(0.6, 0.6)      # vector of stimuli increase rates  
 threshSlope    <- 7                # exponent parameter for threshold curve shape (DON'T change)
-A_alpha        <- c(6, 6)          # efficiency of task performance for A type
-B_alpha        <- c(2, 2)          # efficiency of task performance for B type
-C_alpha        <- c(2, 2)          # efficiency of task performance for C type
-quitP          <- c(0.2, 0.2)      # probability of quitting task once active (DON'T change)
+A_alpha        <- c(2, 2)          # efficiency of task performance for A type
+B_alpha        <- c(7, 7)          # efficiency of task performance for B type
+C_alpha        <- c(1.5, 1.5)          # efficiency of task performance for C type
+quitP          <- c(0.2, 0.2, 0.2) # probability of quitting task once active for each line A, B, C (DON'T change)
 
 file_name <- sprintf("Mix_ThreeTypes_AThreshM_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_CThreshM_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_Calpha_%1.2f_%1.2f_quitP_%1.2f",
                       A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], C_ThreshM[1], C_ThreshM[2],
@@ -52,6 +52,82 @@ groups_taskStep  <- list()
 groups_taskTally <- list()
 groups_stim      <- list()
 groups_entropy   <- list()
+
+# Functions to set task update function based on mix
+updateTask_ABC <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g_A <- updateTaskPerformance(P_sub_g  = P_g[1:(n_A), ],
+                                 TaskMat  = X_g[1:(n_A), ],
+                                 QuitProb = quitP[1]) 
+  X_g_B <- updateTaskPerformance(P_sub_g  = P_g[(n_A+1):(n_A+n_B), ],
+                                 TaskMat  = X_g[(n_A+1):(n_A+n_B), ],
+                                 QuitProb = quitP[2])
+  X_g_C <- updateTaskPerformance(P_sub_g  = P_g[(n_A+1+n_B):nrow(P_g), ],
+                                 TaskMat  = X_g[(n_A+1+n_B):nrow(X_g), ],
+                                 QuitProb = quitP[3])
+  rownames(X_g_B) <- paste0("v-", (n_A+1):(n_A+n_B))
+  rownames(X_g_C) <- paste0("v-", (n_A+n_B+1):nrow(P_g))
+  X_g <- rbind(X_g_A, X_g_B)
+  X_g <- rbind(X_g, X_g_C)
+  return(X_g)
+}
+
+updateTask_AB <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g_A <- updateTaskPerformance(P_sub_g  = P_g[1:(n_A), ],
+                                 TaskMat  = X_g[1:(n_A), ],
+                                 QuitProb = quitP[1]) 
+  X_g_B <- updateTaskPerformance(P_sub_g  = P_g[(n_A+1):nrow(P_g), ],
+                                 TaskMat  = X_g[(n_A+1):nrow(X_g), ],
+                                 QuitProb = quitP[2])
+  rownames(X_g_B) <- paste0("v-", (n_A+1):nrow(P_g))
+  X_g <- rbind(X_g_A, X_g_B)
+  return(X_g)
+}
+
+updateTask_AC <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g_A <- updateTaskPerformance(P_sub_g  = P_g[1:(n_A), ],
+                                 TaskMat  = X_g[1:(n_A), ],
+                                 QuitProb = quitP[1]) 
+  X_g_C <- updateTaskPerformance(P_sub_g  = P_g[(n_C+1):nrow(P_g), ],
+                                 TaskMat  = X_g[(n_C+1):nrow(X_g), ],
+                                 QuitProb = quitP[2])
+  rownames(X_g_C) <- paste0("v-", (n_A+1):nrow(P_g))
+  X_g <- rbind(X_g_A, X_g_C)
+  return(X_g)
+}
+
+updateTask_BC <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g_B <- updateTaskPerformance(P_sub_g  = P_g[1:(n_B), ],
+                                 TaskMat  = X_g[1:(n_B), ],
+                                 QuitProb = quitP[2])
+  X_g_C <- updateTaskPerformance(P_sub_g  = P_g[(n_B+1):nrow(P_g), ],
+                                 TaskMat  = X_g[(n_B+1):nrow(P_g), ],
+                                 QuitProb = quitP[3]) 
+  rownames(X_g_C) <- paste0("v-", (n_B+1):nrow(P_g))
+  X_g <- rbind(X_g_B, X_g_C)
+  return(X_g)
+}
+    
+updateTask_A <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g <- updateTaskPerformance(P_sub_g    = P_g,
+                               TaskMat    = X_g,
+                               QuitProb   = quitP[1])
+  return(X_g)
+}
+
+updateTask_B <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g <- updateTaskPerformance(P_sub_g    = P_g,
+                               TaskMat    = X_g,
+                               QuitProb   = quitP[2])
+  return(X_g)
+}
+
+updateTask_C <- function(n_A, n_B, n_C, P_g, TaskMat, QuitProb) {
+  X_g <- updateTaskPerformance(P_sub_g    = P_g,
+                               TaskMat    = X_g,
+                               QuitProb   = quitP[3])
+  return(X_g)
+}
+
 
 
 # Loop through group sizes
@@ -79,6 +155,30 @@ for (i in 1:length(Ns)) {
     input      <- c( rep(A_alpha, n_A), rep(B_alpha, n_B), rep(C_alpha, n_C) ) 
     alpha      <- matrix(input, ncol = m, byrow = T)
     
+    # Choose task performance function
+    if (n_A != 0 & n_B != 0 & n_C != 0) {
+      mix <- "ABC"
+      updateTask_mix <- updateTask_ABC
+    } else if (n_A != 0 & n_B != 0){
+      mix <- "AB"
+      updateTask_mix <- updateTask_AB
+    } else if (n_A != 0 & n_C != 0){
+      mix <- "AC"
+      updateTask_mix <- updateTask_AC
+    } else if (n_B != 0 & n_C != 0){
+      mix <- "BC"
+      updateTask_mix <- updateTask_BC
+    } else if (n_A != 0) {
+      mix <- "A"
+      updateTask_mix <- updateTask_A
+    } else if (n_B != 0) {
+      mix <- "B"
+      updateTask_mix <- updateTask_B
+    } else {
+      mix <- "C"
+      updateTask_mix <- updateTask_C
+    }
+    
     # Prep lists for collection of simulation outputs
     ens_taskDist  <- list()
     ens_taskCorr  <- list()
@@ -98,7 +198,6 @@ for (i in 1:length(Ns)) {
       
       # Seed internal thresholds 
       if (n_A != 0 & n_B != 0 & n_C != 0) {
-        mix <- "ABC"
         threshMatA <- seedThresholds(n = n_A, 
                                      m = m, 
                                      ThresholdMeans = A_ThreshM, 
@@ -118,7 +217,6 @@ for (i in 1:length(Ns)) {
         threshMat <- rbind(threshMat, threshMatC)
         rm(threshMatA, threshMatB, threshMatC)
       } else if (n_A != 0 & n_B != 0){
-        mix <- "AB"
         threshMatA <- seedThresholds(n = n_A, 
                                      m = m, 
                                      ThresholdMeans = A_ThreshM, 
@@ -131,7 +229,6 @@ for (i in 1:length(Ns)) {
         rownames(threshMatB) <- paste0("B-", rownames(threshMatB))
         threshMat <- rbind(threshMatA, threshMatB)
       } else if (n_A != 0 & n_C != 0){
-        mix <- "AC"
         threshMatA <- seedThresholds(n = n_A, 
                                      m = m, 
                                      ThresholdMeans = A_ThreshM, 
@@ -144,7 +241,6 @@ for (i in 1:length(Ns)) {
         rownames(threshMatC) <- paste0("C-", rownames(threshMatC))
         threshMat <- rbind(threshMatA, threshMatC)
       } else if (n_B != 0 & n_C != 0){
-        mix <- "BC"
         threshMatB <- seedThresholds(n = n_B, 
                                      m = m, 
                                      ThresholdMeans = B_ThreshM, 
@@ -157,21 +253,18 @@ for (i in 1:length(Ns)) {
         rownames(threshMatC) <- paste0("C-", rownames(threshMatC))
         threshMat <- rbind(threshMatB, threshMatC)
       } else if (n_A != 0) {
-        mix <- "A"
         threshMat <- seedThresholds(n = n, 
                                     m = m, 
                                     ThresholdMeans = A_ThreshM, 
                                     ThresholdSDs = A_ThreshSD)
         rownames(threshMat) <- paste0("A-", rownames(threshMat))
       } else if (n_B != 0) {
-        mix <- "B"
         threshMat <- seedThresholds(n = n, 
                                     m = m, 
                                     ThresholdMeans = B_ThreshM, 
                                     ThresholdSDs = B_ThreshSD)
         rownames(threshMat) <- paste0("B-", rownames(threshMat))
       } else {
-        mix <- "C"
         threshMat <- seedThresholds(n = n, 
                                     m = m, 
                                     ThresholdMeans = C_ThreshM, 
@@ -210,25 +303,7 @@ for (i in 1:length(Ns)) {
                                     StimulusMatrix = stimMat, 
                                     nSlope = threshSlope) #!!! Change!!!
         # Update task performance
-        if (n_A != 0 & n_B != 0) {
-          X_g_A <- updateTaskPerformance(P_sub_g  = P_g[1:(n_A), ],
-                                         TaskMat  = X_g[1:(n_A), ],
-                                         QuitProb = quitP[1]) 
-          X_g_B <- updateTaskPerformance(P_sub_g  = P_g[(n_A+1):nrow(P_g), ],
-                                         TaskMat  = X_g[(n_A+1):nrow(X_g), ],
-                                         QuitProb = quitP[2])
-          rownames(X_g_B) <- paste0("v-", (n_A+1):nrow(P_g))
-          X_g <- rbind(X_g_A, X_g_B)
-          rm(X_g_A, X_g_B)
-        } else if (n_A != 0 & n_B == 0) {
-          X_g <- updateTaskPerformance(P_sub_g    = P_g,
-                                       TaskMat    = X_g,
-                                       QuitProb   = quitP[1])  
-        } else if (n_A == 0 & n_B != 0) {
-          X_g <- updateTaskPerformance(P_sub_g    = P_g,
-                                       TaskMat    = X_g,
-                                       QuitProb   = quitP[2])  
-        }
+        X_g <- updateTask_mix(n_A, n_B, n_C, P_g, TaskMat, QuitProb)
         
         # Capture current task performance tally
         tally <- matrix(c(t, colSums(X_g)), ncol = ncol(X_g) + 1)
@@ -238,7 +313,6 @@ for (i in 1:length(Ns)) {
         
         # Update total task performance profile
         X_tot <- X_tot + X_g
-        X_tot
         
         # Create time step for correlation
         if (t %% corrStep == 0) {
