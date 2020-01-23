@@ -248,13 +248,14 @@ gg_amps <- ggplot() +
   scale_x_continuous( # limits = c(min(mu_sweep), max(mu_sweep)),
                         breaks = seq(min(mu_sweep), max(mu_sweep), 2),
                         expand = c(0,0)) +
-  scale_fill_gradientn(name    = colTitle,
-                       colours = colPal,
+  scale_fill_gradientn(name     = colTitle,
+                       colours  = colPal,
+                       na.value = "light gray",
                        # limits = c(-colLim, colLim),
-                       limits  = c(-0.24, 0.24),
-                       breaks  = seq(-0.2, 0.2, 0.1),
-                       labels  = c("-0.2\nContagion", "-0.1", " 0.0", " 0.1", " 0.2\nAmplification"),
-                       oob     = squish) +
+                       limits   = c(-0.24, 0.24),
+                       breaks   = seq(-0.2, 0.2, 0.1),
+                       labels   = c("-0.2\nContagion", "-0.1", " 0.0", " 0.1", " 0.2\nAmplification"),
+                       oob      = squish) +
   ylab( expression("Task efficiency ("*alpha^X~"or"~alpha^Y*")") ) +
   xlab( expression("Mean task threshold ("*mu^X~"or"~mu^Y*")") ) +
   theme(legend.key.height = unit(0.04, "npc"),

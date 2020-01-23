@@ -8,10 +8,11 @@ rm(list = ls())
 source("scripts/util/__Util__MASTER.R")
 
 ### Individual sims
-# params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# params <- matrix(c(6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(  5,   5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
+params <- matrix(c(  5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
+params <- matrix(c(  5,   5, 2, 2, 1.4,	1.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
+# params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6,  7,  7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
+# params <- matrix(c(  3,   3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
 
 ### Robustness check -- 090919
 # mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
@@ -43,24 +44,18 @@ source("scripts/util/__Util__MASTER.R")
 # }
 
 ### Robustness check -- 012020 addition part 2
-# mu_sweep    <- seq(8, 8, by = 1) # range of AThreshM
-# mu_sweep    <- seq(9, 9, by = 1) # range of AThreshM
-# alpha_sweep <- seq(2, 4, by = 0.5)  # range of Aalpha
-# alpha_sweep <- seq(4.5, 7, by = 0.5)  # range of Aalpha
-# mu_sweep    <- seq(7, 7, by = 1) # range of AThreshM
-# alpha_sweep <- seq(6.5, 7, by = 0.5)  # range of Aalpha
-mu_sweep    <- seq(17, 20, by = 1) # range of AThreshM
-alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
-
-params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
-params[,3:4]  <- 2
-params[,5:6]  <- 0.6
-params[,9:10] <- 10
-
-for(i in 1:nrow(params)){
-  params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
-  params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
-}
+# mu_sweep    <- seq(17, 20, by = 1) # range of AThreshM
+# alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
+# 
+# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
+# params[,3:4]  <- 2
+# params[,5:6]  <- 0.6
+# params[,9:10] <- 10
+# 
+# for(i in 1:nrow(params)){
+#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
+#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
+# }
 
 ### Robustness check -- 012020 addition part 2
 # mu_sweep    <- seq(6, 9, by = 1) # range of AThreshM
@@ -99,7 +94,7 @@ for (INDEX in 1:nrow(params)){
   m              <- 2 #number of tasks
   gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 50 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
@@ -381,12 +376,12 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
   
   print(proc.time() - ptm)
-  Sys.sleep(2)
+  Sys.sleep(0.5)
 
 }
 

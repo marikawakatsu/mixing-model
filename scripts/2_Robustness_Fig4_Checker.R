@@ -31,9 +31,10 @@ for(i in 1:nrow(params)){
 }
 
 # ...or select individual param set
-params <- matrix(c(5, 5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
-params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
-params <- matrix(c(3, 3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
+# params <- matrix(c(5, 5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
+params <- matrix(c(  5,   5, 2, 2, 1.4,	1.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
+# params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
+# params <- matrix(c(3, 3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -85,7 +86,8 @@ for (INDEX in 1:nrow(params)){
   rm(file_name1, file_name2)
   
   # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
+  # load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   
   ####################
@@ -247,7 +249,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist3
   
-  ggsave(filename = paste0("output/Parameter_exp/", file_name, "_robust_50.png"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Parameter_exp/", file_name, "_robust_50.png"), width = figH, height = figH*1.15, dpi = 800)
 
   
 }
