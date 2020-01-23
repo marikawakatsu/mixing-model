@@ -11,65 +11,57 @@ source("scripts/util/__Util__MASTER.R")
 # params <- matrix(c(  5,   5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
 # params <- matrix(c(  5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
 # params <- matrix(c(  5,   5, 2, 2, 1.4,	1.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
-params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6,  7,  7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
+# params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6,  7.5,  7.5, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
 # params <- matrix(c(  3,   3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
 
 ### Robustness check -- 090919
 # mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
 # alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
-# 
-# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
-# params[,3:4]  <- 2
-# params[,5:6]  <- 0.6
-# params[,9:10] <- 10
-# 
-# for(i in 1:nrow(params)){
-#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
-#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
-# }
 
 ### Robustness check -- 012020 addition part 1
 # mu_sweep    <- seq(16, 20, by = 1) # range of AThreshM
 # mu_sweep    <- seq(6, 20, by = 1) # range of AThreshM
 # alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
-# 
-# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
-# params[,3:4]  <- 2
-# params[,5:6]  <- 0.6
-# params[,9:10] <- 10
-# 
-# for(i in 1:nrow(params)){
-#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
-#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
-# }
 
 ### Robustness check -- 012020 addition part 2
 # mu_sweep    <- seq(17, 20, by = 1) # range of AThreshM
 # alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha
-# 
-# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
-# params[,3:4]  <- 2
-# params[,5:6]  <- 0.6
-# params[,9:10] <- 10
-# 
-# for(i in 1:nrow(params)){
-#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
-#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
-# }
 
-### Robustness check -- 012020 addition part 2
-# mu_sweep    <- seq(6, 9, by = 1) # range of AThreshM
-# alpha_sweep <- seq(7, 7, by = 0.5)  # range of Aalpha
-# 
-# params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
-# params[,3:4]  <- 2
-# params[,5:6]  <- 0.6
-# params[,9:10] <- 10
-# 
-# for(i in 1:nrow(params)){
-#   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
-#   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
-# }
+# Robustness check -- 012023 addition part 3a-3e
+# mu_sweep    <- seq(6.5, 15.5, by = 1) # range of AThreshM # part 3
+# alpha_sweep <- seq(1, 1.5, by = 0.5)  # range of Aalpha # part 3a
+# alpha_sweep <- seq(2, 2.5, by = 0.5)  # range of Aalpha # part 3b
+# alpha_sweep <- seq(3, 3.5, by = 0.5)  # range of Aalpha # part 3c
+# alpha_sweep <- seq(4, 4.5, by = 0.5)  # range of Aalpha # part 3d
+# alpha_sweep <- seq(5, 6, by = 0.5)  # range of Aalpha # part 3e
+
+## Robustness check -- 012023 addition part 4a, 4b, 4c
+# mu_sweep    <- seq(6.5, 15.5, by = 1) # range of AThreshM # part 4
+# alpha_sweep <- seq(1.25, 1.75, by = 0.5)  # range of Aalpha # part 4a
+# alpha_sweep <- seq(2.25, 2.75, by = 0.5)  # range of Aalpha # part 4b
+# alpha_sweep <- seq(3.25, 3.75, by = 0.5)  # range of Aalpha # part 4c
+# alpha_sweep <- seq(4.25, 4.75, by = 0.5)  # range of Aalpha # part 4d
+# alpha_sweep <- seq(5.25, 5.75, by = 0.5)  # range of Aalpha # part 4e
+
+## Robustness check -- 012023 addition part 5a, 5b, 5c
+mu_sweep    <- seq(6, 16, by = 1) # range of AThreshM # part 5
+# alpha_sweep <- seq(1.25, 1.75, by = 0.5)  # range of Aalpha # part 5a
+# alpha_sweep <- seq(2.25, 2.75, by = 0.5)  # range of Aalpha # part 5b
+# alpha_sweep <- seq(3.25, 3.75, by = 0.5)  # range of Aalpha # part 5c
+# alpha_sweep <- seq(4.25, 4.75, by = 0.5)  # range of Aalpha # part 5d
+alpha_sweep <- seq(5.25, 5.75, by = 0.5)  # range of Aalpha # part 5e
+
+#### common for all robustness checks ####
+params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
+params[,3:4]  <- 2
+params[,5:6]  <- 0.6
+params[,9:10] <- 10
+
+for(i in 1:nrow(params)){
+  params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
+  params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
+}
+##########################################
 
 ### Comparing with analytical predictions
 # params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
@@ -94,7 +86,7 @@ for (INDEX in 1:nrow(params)){
   m              <- 2 #number of tasks
   gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 100 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 50 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
@@ -376,12 +368,12 @@ for (INDEX in 1:nrow(params)){
   ####################
   # Save run
   ####################
-  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, ".Rdata"))
-  # save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
+  save(task_dist, task_corr, file = paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
   
   print(proc.time() - ptm)
-  Sys.sleep(0.5)
+  Sys.sleep(0.1)
 
 }
 
