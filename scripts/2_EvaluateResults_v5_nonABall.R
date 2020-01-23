@@ -9,20 +9,22 @@
 rm(list = ls())
 
 # Fig. 3c-d
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 14, 14, 10, 10,  # 3c
-                   6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), # 3d
-                 nrow = 2, ncol = 10, byrow = TRUE)
+# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 14, 14, 10, 10,  # 3c
+#                    6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), # 3d
+#                  nrow = 2, ncol = 10, byrow = TRUE)
 
-palette <- matrix(c("#009640","#2B4B9B","#2B706E", # 3c
+# Fig. 4c-d
+params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6,  7,  7, 10, 10,  # 4c
+                     3,   3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), # 4d
+                 nrow = 2, ncol = 10, byrow = TRUE)    
+
+palette <- matrix(c("#009640","#2B4B9B","#2B706E",  # 3c
                     "#EE751C","#2B4B9B","#8D615B"), # 3d
                   nrow = 2, ncol = 3, byrow = TRUE)
 
 # Fig. S4 -- 3d only
 # params <- matrix(c(6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 # palette <- matrix(c("#EE751C","#2B4B9B","#8D615B"), nrow = 1, ncol = 3, byrow = TRUE)
-
-# NEW 01/16/20 Updated Fig. 4c
-params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -73,8 +75,8 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   
   ####################
   # Final task distributions
