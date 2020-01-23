@@ -1,24 +1,39 @@
 ################################################################################
 #
-# Evaluate ensemble model outputs
-# Updated 06/05/19: 
-#       Plots the behavioral variation + specialization in colonies
+# Evaluate ensemble model outputs -- quick check for robustness fig
 #
 ################################################################################
 
 rm(list = ls())
 
-# Fig. 3a-b
-params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b old
-                   2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10),
-                 nrow = 2, ncol = 10, byrow = TRUE)
-params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b new
-                   6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10),
-                 nrow = 2, ncol = 10, byrow = TRUE)
+#######################
+# Set parameter range #
+#######################
 
-# Fig. S1 and S5 (S5 requires manual changes below)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # S1
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # S5
+# Robustness check
+# mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
+# alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
+# mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
+# alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
+###### NEW 012120
+mu_sweep    <- seq(6, 20, by = 1) # range of AThreshM
+alpha_sweep <- seq(1, 7, by = 0.5)  # range of Aalpha
+
+params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
+params[,3:4]  <- 2    # efficiency of A
+params[,5:6]  <- 0.6  # demand rate
+params[,9:10] <- 10   # mean threshold of A
+
+# Fill in params matrix
+for(i in 1:nrow(params)){
+  params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
+  params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
+}
+
+# ...or select individual param set
+params <- matrix(c(5, 5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
+params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7, 7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
+params <- matrix(c(3, 3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -70,7 +85,7 @@ for (INDEX in 1:nrow(params)){
   rm(file_name1, file_name2)
   
   # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
   
   
   ####################
@@ -172,6 +187,41 @@ for (INDEX in 1:nrow(params)){
   task_VarMean_byrep$Type <- factor(task_VarMean_byrep$Type, levels = c("Type X","Type Y","Mixed"))
   task_VarMean_byMix$Type <- factor(task_VarMean_byMix$Type, levels = c("Type X","Type Y","Mixed"))
   
+  # Fig title based on pattern - 1/22/20
+  # # extract relevant data
+  # X_pure <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Group=="Type X"]
+  # Y_pure <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Group=="Type Y"]
+  # X_mix <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type X"]
+  # Y_mix <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type Y"]
+  # X_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Group=="Type X"]
+  # Y_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Group=="Type Y"]
+  # X_mix_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type X"]
+  # Y_mix_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type Y"]
+  # 
+  # # compute and store deg of behavioral amplification / contagion ("amp")
+  # # amp <- abs(Y_mix - X_mix) - abs(Y_pure - X_pure)
+  # amp <- (Y_mix - X_mix) - (Y_pure - X_pure)  # new definition
+  # robustcheck[INDEX,'amps'] <- amp
+  # 
+  # # if there is a 'flip' in order, record NaN; will appear as gray
+  # CIfactor <- 0
+  # 
+  # if( X_pure < Y_pure ){
+  #   if( (X_mix - X_mix_SE*CIfactor) > (Y_mix + Y_mix_SE*CIfactor) ){
+  #     robustcheck[INDEX,'amps'] <- NaN
+  #     print("CASE1")
+  #     print(paste0(INDEX))
+  #     print(paste0(params[INDEX,]))
+  #   }
+  # }else if( Y_pure < X_pure ){
+  #   if( (Y_mix - Y_mix_SE*CIfactor) > (X_mix + X_mix_SE*CIfactor) ){
+  #     robustcheck[INDEX,'amps'] <- NaN
+  #     print("CASE2")
+  #     print(paste0(INDEX))
+  #     print(paste0(params[INDEX,]))
+  #   }
+  # }
+  
   # Means of means
   gg_dist3 <- ggplot(data = task_VarMean_byrep, aes(y = Mean1, x = Mix, colour = Type)) +
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
@@ -196,154 +246,9 @@ for (INDEX in 1:nrow(params)){
                   position = position_dodge(width = 1))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
-  
-  # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
-  #   geom_point(size = 0.3, alpha = 0.2, stroke = 0,
-  #              position = position_dodge(width = 1)) +
-  #   labs(x = "",
-  #        y = "Frequency task 2, mean \u00B1 s.e.") +
-  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-  #   scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
-  #   theme_mk() +
-  #   theme(axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F"))) +
-  #   # theme(axis.text.x = Mix) +
-  #   geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean2),
-  #              size = 0.8, alpha = 1, stroke = 0.2,
-  #              # shape = 21, fill = NA,
-  #              position = position_dodge(width = 1)) +
-  #   geom_errorbar(data = task_VarMean_byMix,
-  #                 aes(x = Mix, ymin = Mean2 - SE2, ymax = Mean2 + SE2),
-  #                 size = 0.2, width = 0.4,
-  #                 position = position_dodge(width = 1))
-  # 
-  # gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task2BehavVar.png"), width = 3, height = figH, dpi = 400)
-  
-  ####################
-  # Task Rank Correlation
-  ####################
-  # Compute mean
-  task_corr <- task_corr %>% 
-    mutate(TaskMean = (Task1 + Task2) / 2)
-  
-  # Calculate means and SE
-  task_corr_VarMean <- task_corr %>% 
-    group_by(n, Mix) %>% 
-    summarise(SpecMean = mean(TaskMean),
-              SpecSE = sd(TaskMean) / sqrt(length(TaskMean)),
-              SpecCI = 1.96 * SpecSE)
-  
-  # Change label names
-  task_corr$Mix <- as.character(task_corr$Mix)
-  task_corr$Mix[task_corr$Mix == "A"] <- "Type X"
-  task_corr$Mix[task_corr$Mix == "B"] <- "Type Y"
-  task_corr$Mix[task_corr$Mix == "AB"] <- "Mixed"
-  
-  task_corr_VarMean$Mix <- as.character(task_corr_VarMean$Mix)
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "A"] <- "Type X"
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "B"] <- "Type Y"
-  task_corr_VarMean$Mix[task_corr_VarMean$Mix == "AB"] <- "Mixed"
-  
-  # Adjust x label order - 9/19/19
-  task_corr$Mix <- factor(task_corr$Mix, levels = c("Type X","Type Y","Mixed"))
-  task_corr_VarMean$Mix <- factor(task_corr_VarMean$Mix, levels = c("Type X","Type Y","Mixed"))
-  
-  # Plot
-  gg_corr <- ggplot(data = task_corr_VarMean, aes(x = Mix, y = SpecMean, colour = Mix)) +
-    geom_point(data = task_corr, aes(x = Mix, y = TaskMean, colour = Mix),
-               size = 0.3, alpha = 0.2, stroke = 0, 
-               position = position_dodge(width = 1)) +
-    theme_mk() +
-    theme(legend.position = "none",
-          axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
-          axis.title.x    = element_text(size=0)) +
-    labs(x = "",
-         y = "Specialization, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-    scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
-    # Mean and SE portion of plot
-    geom_errorbar(aes(x = Mix, ymin = SpecMean - SpecSE, ymax = SpecMean + SpecSE),
-                  size = 0.2, width = 0.6) +
-    geom_point(size = 0.8, alpha = 1, stroke = 0.2)
-  
-  gg_corr
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
-  
-  ####################
-  # Task variance by group size
-  ####################
-  # Calculate average SD by mix
-  
-  # WITHOUT per-group lines
-  # task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Type,] %>%
-  #   mutate(SD = (SD1 + SD2)/2)
-  # 
-  # task_VarMean_SD <- task_VarMean_byrep %>%
-  #   group_by(n, Mix) %>%
-  #   summarise(SDMean = mean(SD),
-  #             SDSE = sd(SD) / sqrt(length(SD)))
-  
-  # WITH per-group lines
-  task_VarMean_byrep <- task_VarMean_byrep %>%
-    mutate(SD = (SD1 + SD2)/2)
-  
-  task_VarMean_SD <- task_VarMean_byrep %>%
-    group_by(n, Mix, Type) %>%
-    summarise(SDMean = mean(SD),
-              SDSE = sd(SD) / sqrt(length(SD)))
-  
-  # # Plot behavioral variation by mix -- WITHOUT per-group line in the Mixed case
-  # gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Mix)) +
-  #   geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
-  #              size = 0.3, alpha = 0.2, stroke = 0, 
-  #              position = position_dodge(width = 1)) +
-  #   theme_mk() +
-  #   theme(legend.position = "none",
-  #         axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F"))) +
-  #   xlab("Mix") +
-  #   ylab("Behavioral variation") +
-  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-  #   scale_y_continuous(limits = c(0, 0.25), breaks = seq(-1, 1, 0.05)) +
-  #   # Mean and SE portion of plot
-  #   geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE, colour = Mix),
-  #                 size = 0.2, width = 0.4) +
-  #   geom_point(size = 0.8, alpha = 1, stroke = 0.2)
-  
-  # Plot behavioral variation by mix -- WITH per-group line in the Mixed case
-  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Type)) +
-    geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
-               size = 0.3, alpha = 0.2, stroke = 0, 
-               position = position_dodge(width = 1)) +
-    theme_mk() +
-    theme(legend.position = "none",
-          axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
-          axis.title.x    = element_text(size=0)) +
-    xlab("Mix") +
-    labs(x = "",
-         y = "Behavioral variation, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-    scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
-    # Mean and SE portion of plot
-    geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
-                  size = 0.2, width = 0.6, 
-                  position = position_dodge(width = 1)) +
-    geom_point(size = 0.8, alpha = 1, stroke = 0.2, 
-               position = position_dodge(width = 1))
-  
-  gg_var
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, units = "in", dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
+  ggsave(filename = paste0("output/Parameter_exp/", file_name, "_robust_50.png"), width = figH, height = figH*1.15, dpi = 800)
+
   
 }
 
