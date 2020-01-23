@@ -9,10 +9,10 @@ source("scripts/util/__Util__MASTER.R")
 
 ### Individual sims
 # params <- matrix(c(  5,   5, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4a
-params <- matrix(c(  5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
-params <- matrix(c(  5,   5, 2, 2, 1.4,	1.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
+# params <- matrix(c(  5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
+# params <- matrix(c(  5,   5, 2, 2, 1.4,	1.4, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4b
 # params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6,  7,  7, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4c
-# params <- matrix(c(  3,   3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
+params <- matrix(c(  3,   3, 2, 2, 0.6,	0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)  #4d
 
 ### Robustness check -- 090919
 # mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
@@ -94,7 +94,7 @@ for (INDEX in 1:nrow(params)){
   m              <- 2 #number of tasks
   gens           <- 10000 #number of generations to run simulation 
   corrStep       <- 200 #number of time steps for calculation of correlation 
-  reps           <- 10 #number of replications per simulation (for ensemble) !!Change!!
+  reps           <- 100 #number of replications per simulation (for ensemble) !!Change!!
   
   # Threshold Parameters
   mixes          <- c("A", "B", "AB")
