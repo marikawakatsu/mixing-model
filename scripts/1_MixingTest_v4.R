@@ -63,6 +63,13 @@ for(i in 1:nrow(params)){
 }
 ##########################################
 
+# params <- matrix(c(3.75, 3.75, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+#                  nrow = 1, ncol = 10, byrow = TRUE)
+# params <- matrix(c(4.75, 4.75, 2, 2, 0.6,	0.6, 10, 10, 10, 10),
+#                  nrow = 1, ncol = 10, byrow = TRUE)
+params <- matrix(c(1, 1, 2, 2, 0.6,	0.6, 10.5, 10.5, 10, 10),
+                 nrow = 1, ncol = 10, byrow = TRUE)
+
 ### Comparing with analytical predictions
 # params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,
 #                    2, 2, 6, 6, 0.6,	0.6, 10, 10, 10, 10,
