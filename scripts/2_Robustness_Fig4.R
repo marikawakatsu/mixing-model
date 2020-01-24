@@ -19,8 +19,8 @@ library(RColorBrewer)
 # mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
 # alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
 ###### NEW 012120
-mu_sweep    <- seq(6, 16, by = 0.5) # range of AThreshM
-alpha_sweep <- seq(1, 6, by = 0.25)  # range of Aalpha
+mu_sweep    <- seq(6.5, 15.5, by = 0.5) # range of AThreshM
+alpha_sweep <- seq(1.25, 5.75, by = 0.25)  # range of Aalpha
 
 params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
 params[,3:4]  <- 2    # efficiency of A
@@ -32,6 +32,9 @@ for(i in 1:nrow(params)){
   params[i,7:8] <- mu_sweep[(i-1)%/%length(alpha_sweep)+1]
   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
 }
+
+mu_sweep    <- seq(6, 16, by = 0.5) # range of AThreshM
+alpha_sweep <- seq(1, 6, by = 0.25)  # range of Aalpha
 
 # Prep matrix for storing
 robustcheck <- as.data.frame(params)
@@ -144,33 +147,33 @@ for (INDEX in 1:nrow(params)){
     task_VarMean_byMix <- rbind(task_VarMean_byMixbyLine, task_VarMean_byMixABonly) %>% group_by(n, Mix)
     
     # !!! NEW !!! change 
-    # 1) "Line" -> "Group"
-    colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Group"
-    colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Group"
-    colnames(task_dist)[colnames(task_dist) == "Line"] <- "Group"
+    # 1) "Line" -> "Type"
+    colnames(task_VarMean_byMix)[colnames(task_VarMean_byMix) == "Line"] <- "Type"
+    colnames(task_VarMean_byrep)[colnames(task_VarMean_byrep) == "Line"] <- "Type"
+    colnames(task_dist)[colnames(task_dist) == "Line"] <- "Type"
     
     # 2) Change category names
-    task_VarMean_byMix$Group[task_VarMean_byMix$Group == "A"]  <- "Type X"
-    task_VarMean_byMix$Group[task_VarMean_byMix$Group == "B"]  <- "Type Y"
-    task_VarMean_byMix$Group[task_VarMean_byMix$Group == "AB"] <- "Mixed"
+    task_VarMean_byMix$Type[task_VarMean_byMix$Type == "A"]  <- "Type X"
+    task_VarMean_byMix$Type[task_VarMean_byMix$Type == "B"]  <- "Type Y"
+    task_VarMean_byMix$Type[task_VarMean_byMix$Type == "AB"] <- "Mixed"
     
     task_VarMean_byMix$Mix <- as.character(task_VarMean_byMix$Mix)
     task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "A"]  <- "Type X"
     task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "B"]  <- "Type Y"
     task_VarMean_byMix$Mix[task_VarMean_byMix$Mix == "AB"] <- "Mixed"
     
-    task_VarMean_byrep$Group[task_VarMean_byrep$Group == "A"]  <- "Type X"
-    task_VarMean_byrep$Group[task_VarMean_byrep$Group == "B"]  <- "Type Y"
-    task_VarMean_byrep$Group[task_VarMean_byrep$Group == "AB"] <- "Mixed"
+    task_VarMean_byrep$Type[task_VarMean_byrep$Type == "A"]  <- "Type X"
+    task_VarMean_byrep$Type[task_VarMean_byrep$Type == "B"]  <- "Type Y"
+    task_VarMean_byrep$Type[task_VarMean_byrep$Type == "AB"] <- "Mixed"
     
     task_VarMean_byrep$Mix <- as.character(task_VarMean_byrep$Mix)
     task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "A"]  <- "Type X"
     task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "B"]  <- "Type Y"
     task_VarMean_byrep$Mix[task_VarMean_byrep$Mix == "AB"] <- "Mixed"
     
-    task_dist$Group[task_dist$Group == "A"]  <- "Type X"
-    task_dist$Group[task_dist$Group == "B"]  <- "Type Y"
-    task_dist$Group[task_dist$Group == "AB"] <- "Mixed"
+    task_dist$Type[task_dist$Type == "A"]  <- "Type X"
+    task_dist$Type[task_dist$Type == "B"]  <- "Type Y"
+    task_dist$Type[task_dist$Type == "AB"] <- "Mixed"
     
     task_dist$Mix <- as.character(task_dist$Mix)
     task_dist$Mix[task_dist$Mix == "A"]  <- "Type X"
@@ -180,14 +183,14 @@ for (INDEX in 1:nrow(params)){
     #########################
     # extract relevant data
     #########################
-    X_pure    <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Group=="Type X"]
-    Y_pure    <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Group=="Type Y"]
-    X_mix     <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type X"]
-    Y_mix     <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type Y"]
-    X_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Group=="Type X"]
-    Y_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Group=="Type Y"]
-    X_mix_SE  <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type X"]
-    Y_mix_SE  <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Group=="Type Y"]
+    X_pure    <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Type=="Type X"]
+    Y_pure    <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Type=="Type Y"]
+    X_mix     <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Type=="Type X"]
+    Y_mix     <- task_VarMean_byMix$Mean1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Type=="Type Y"]
+    X_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type X" & task_VarMean_byMix$Type=="Type X"]
+    Y_pure_SE <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Type Y" & task_VarMean_byMix$Type=="Type Y"]
+    X_mix_SE  <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Type=="Type X"]
+    Y_mix_SE  <- task_VarMean_byMix$SE1[task_VarMean_byMix$Mix=="Mixed" & task_VarMean_byMix$Type=="Type Y"]
     
     #########################
     # compute and store deg of behavioral amplification / contagion ("amp")
@@ -208,20 +211,16 @@ for (INDEX in 1:nrow(params)){
     if( X_pure < Y_pure ){
       if( (X_mix - X_mix_SE*CIfactor) > (Y_mix + Y_mix_SE*CIfactor) ){
         robustcheck[INDEX,'amps'] <- NaN
-        if( A_alpha[1] == 10){
-          print("CASE1")
-          print(paste0(INDEX))
-          print(paste0(params[INDEX,]))
-        }
+        # print("CASE1")
+        # print(paste0(INDEX))
+        # print(paste0(params[INDEX,]))
       }
     }else if( X_pure > Y_pure ){
       if( (Y_mix - Y_mix_SE*CIfactor) > (X_mix + X_mix_SE*CIfactor) ){
         robustcheck[INDEX,'amps'] <- NaN
-        if( A_alpha[1] == 10){
-          print("CASE2")
-          print(paste0(INDEX))
-          print(paste0(params[INDEX,]))
-        }
+        # print("CASE2")
+        # print(paste0(INDEX))
+        # print(paste0(params[INDEX,]))
       }
     }
     
@@ -246,13 +245,13 @@ gg_amps <- ggplot() +
   theme_bw() +
   geom_tile(data   = robustcheck, 
             colour = "light gray",
-            size   = 0.03,
+            size   = 0.005,
             aes(x = Cmu1, y = Calpha1, fill = amps)) +  # flip order of axes
   scale_y_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
-                        breaks = seq(min(alpha_sweep), max(alpha_sweep), 1),
+                        breaks = seq(min(alpha_sweep), max(alpha_sweep), 0.5),
                         expand = c(0,0)) +
   scale_x_continuous( # limits = c(min(mu_sweep), max(mu_sweep)),
-                        breaks = seq(min(mu_sweep), max(mu_sweep), 2),
+                        breaks = seq(min(mu_sweep), max(mu_sweep), 1),
                         expand = c(0,0)) +
   scale_fill_gradientn(name     = colTitle,
                        colours  = colPal,
@@ -272,8 +271,8 @@ gg_amps <- ggplot() +
         legend.title      = element_text(size = 6),
         legend.background = element_rect(fill = "NA", size = 1),
         legend.position   = "top",
-        axis.text.y       = element_text(size = 8, margin = margin(5, 2, 5, -2), color = "black"),
-        axis.text.x       = element_text(size = 8, margin = margin(2, 5, -2, 5), color = "black"),
+        axis.text.y       = element_text(size = 6, margin = margin(5, 2, 5, -2), color = "black"),
+        axis.text.x       = element_text(size = 6, margin = margin(2, 5, -2, 5), color = "black"),
         axis.title        = element_text(size = 11, margin = margin(0, 0, 0, 0)),
         axis.ticks.length = unit(0, "cm"),
         panel.border      = element_rect(fill = "NA", size = 1)
@@ -287,7 +286,7 @@ gg_amps
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.png"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
-# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
 
 # # Vector
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
@@ -295,4 +294,6 @@ gg_amps
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.eps"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.pdf"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
+
 
