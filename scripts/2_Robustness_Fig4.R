@@ -19,8 +19,8 @@ library(RColorBrewer)
 # mu_sweep    <- seq(10, 20, by = 1) # range of AThreshM
 # alpha_sweep <- seq(2, 7, by = 0.5)  # range of Aalpha
 ###### NEW 012120
-mu_sweep    <- seq(6, 20, by = 1) # range of AThreshM
-alpha_sweep <- seq(1, 7, by = 0.5)  # range of Aalpha
+mu_sweep    <- seq(6, 16, by = 0.5) # range of AThreshM
+alpha_sweep <- seq(1, 6, by = 0.25)  # range of Aalpha
 
 params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
 params[,3:4]  <- 2    # efficiency of A
@@ -208,16 +208,20 @@ for (INDEX in 1:nrow(params)){
     if( X_pure < Y_pure ){
       if( (X_mix - X_mix_SE*CIfactor) > (Y_mix + Y_mix_SE*CIfactor) ){
         robustcheck[INDEX,'amps'] <- NaN
-        # print("CASE1")
-        # print(paste0(INDEX))
-        # print(paste0(params[INDEX,]))
+        if( A_alpha[1] == 10){
+          print("CASE1")
+          print(paste0(INDEX))
+          print(paste0(params[INDEX,]))
+        }
       }
     }else if( X_pure > Y_pure ){
       if( (Y_mix - Y_mix_SE*CIfactor) > (X_mix + X_mix_SE*CIfactor) ){
         robustcheck[INDEX,'amps'] <- NaN
-        # print("CASE2")
-        # print(paste0(INDEX))
-        # print(paste0(params[INDEX,]))
+        if( A_alpha[1] == 10){
+          print("CASE2")
+          print(paste0(INDEX))
+          print(paste0(params[INDEX,]))
+        }
       }
     }
     
@@ -242,7 +246,7 @@ gg_amps <- ggplot() +
   theme_bw() +
   geom_tile(data   = robustcheck, 
             colour = "light gray",
-            size   = 0.05,
+            size   = 0.03,
             aes(x = Cmu1, y = Calpha1, fill = amps)) +  # flip order of axes
   scale_y_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
                         breaks = seq(min(alpha_sweep), max(alpha_sweep), 1),
@@ -283,6 +287,7 @@ gg_amps
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.png"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 
 # # Vector
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)

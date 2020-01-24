@@ -44,12 +44,12 @@ source("scripts/util/__Util__MASTER.R")
 # alpha_sweep <- seq(5.25, 5.75, by = 0.5)  # range of Aalpha # part 4e
 
 ## Robustness check -- 012023 addition part 5a, 5b, 5c
-mu_sweep    <- seq(6, 16, by = 1) # range of AThreshM # part 5
+# mu_sweep    <- seq(6, 16, by = 1) # range of AThreshM # part 5
 # alpha_sweep <- seq(1.25, 1.75, by = 0.5)  # range of Aalpha # part 5a
 # alpha_sweep <- seq(2.25, 2.75, by = 0.5)  # range of Aalpha # part 5b
 # alpha_sweep <- seq(3.25, 3.75, by = 0.5)  # range of Aalpha # part 5c
 # alpha_sweep <- seq(4.25, 4.75, by = 0.5)  # range of Aalpha # part 5d
-alpha_sweep <- seq(5.25, 5.75, by = 0.5)  # range of Aalpha # part 5e
+# alpha_sweep <- seq(5.25, 5.75, by = 0.5)  # range of Aalpha # part 5e
 
 #### common for all robustness checks ####
 params        <- matrix(data = NA, nrow = length(mu_sweep)*length(alpha_sweep), ncol = 10)
