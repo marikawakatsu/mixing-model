@@ -25,9 +25,9 @@ A_ThreshSD     <- A_ThreshM * 0.1  # population threshold standard deviations fo
 B_ThreshM      <- c(10, 10)        # population threshold means for clone line B 
 B_ThreshSD     <- B_ThreshM * 0.1  # population threshold standard deviations for clone line B (DON'T change)
 InitialStim    <- c(0, 0)          # intital vector of stimuli
-deltas         <- c(0.6, 0.6)      # vector of stimuli increase rates  
+deltas         <- c(1.3, 1.3)      # vector of stimuli increase rates  
 threshSlope    <- 7                # exponent parameter for threshold curve shape (DON'T change)
-A_alpha        <- c(6, 6)          # efficiency of task performance for A type
+A_alpha        <- c(5, 5)          # efficiency of task performance for A type
 B_alpha        <- c(2, 2)          # efficiency of task performance for B type
 quitP          <- c(0.2, 0.2)      # probability of quitting task once active (DON'T change)
 
