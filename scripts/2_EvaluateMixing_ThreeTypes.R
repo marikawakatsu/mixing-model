@@ -20,9 +20,19 @@ task_dist <- task_dist %>%
   group_by(n) %>% 
   mutate(set = paste0(Mix, "-", replicate))
 
+# Substsite A-B-C line names for Y-X-X
+lines <- c("A", "B", "C")
+new_lines <- c("Y", "X1", "X2")
+mixes <- c("A", "B", "C", "AB", "AC", "BC", "ABC")
+new_mixes <- c("Y", "X1", "X2", "YX1", "YX2", "X1X2", "YX1X2")
+task_dist <- task_dist %>% 
+  mutate(Line = plyr::mapvalues(Line, lines, new_lines),
+         Mix = plyr::mapvalues(Mix, mixes, new_mixes))  %>% 
+  mutate(set = paste0(Mix, "-", replicate))
+
 # Order sets for appropriate plotting
 plot_order <- c()
-mixes <- c("A", "B", "C", "AB", "AC", "BC", "ABC")
+mixes <- c("Y", "X1", "X2", "YX1", "YX2", "X1X2", "YX1X2")
 for (mix in mixes) {
   mix_reps <- paste(mix, seq(1, 100), sep = "-")
   plot_order <- c(plot_order, mix_reps)
@@ -43,7 +53,8 @@ task_dist_summary <- task_dist %>%
             Task2_SD = sd(Task2),
             Task1_SE = sd(Task2) / sqrt(length(Task2))) %>% 
   mutate(Line = as.character(Mix),
-         Group_mean = TRUE)
+         Line_mean = FALSE) %>% 
+  filter(!Mix %in% c("Y", "X1", "X2")) #filter out pure line group means, since those are in the mix x line means in the next block
 
 
 # Mix x Line means
@@ -58,12 +69,12 @@ task_dist_lines <- task_dist %>%
             Task2_mean = mean(Task2),
             Task2_SD = sd(Task2),
             Task1_SE = sd(Task2) / sqrt(length(Task2))) %>% 
-  mutate(Group_mean = FALSE)
+  mutate(Line_mean = TRUE)
 
 #Bind
 task_dist_summary <- task_dist_summary %>% 
   bind_rows(task_dist_lines) %>% 
-  mutate(Group_mean = as.numeric(Group_mean),
+  mutate(Line_mean = as.numeric(Line_mean),
          Line = factor(Line, levels = mixes))
 
 
@@ -88,38 +99,45 @@ gg_dist
 
 ggsave(filename = paste0("output/Task_dist/", file_name, ".png"), width = 5, height = 2, dpi = 400)
 
+# Filter out mix means
+task_dist_summary <- task_dist_summary %>% 
+  filter(Line_mean == 1)
+
 # Plot summary points
-pure_A <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "A" & task_dist_summary$Group_mean == 1]
-pure_B <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "B" & task_dist_summary$Group_mean == 1]
-pure_C <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "C" & task_dist_summary$Group_mean == 1]
+pure_Y <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "Y" & task_dist_summary$Line_mean == 1]
+pure_X1 <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "X1" & task_dist_summary$Line_mean == 1]
+pure_X2 <- task_dist_summary$Task1_mean[task_dist_summary$Mix == "X2" & task_dist_summary$Line_mean == 1]
 gg_dist_sum <- ggplot(data = task_dist_summary, aes(y = Task1_mean, x = Mix, color = Line)) +
-  geom_hline(yintercept = pure_A, 
+  geom_hline(yintercept = pure_Y, 
              size = 0.1,
              linetype = "dotted",
              color = line_cols[1]) +
-  geom_hline(yintercept = pure_B, 
+  geom_hline(yintercept = pure_X1, 
              size = 0.1,
              linetype = "dotted",
              color = line_cols[2]) +
-  geom_hline(yintercept = pure_C, 
+  geom_hline(yintercept = pure_X2, 
              size = 0.1,
              linetype = "dotted",
              color = line_cols[3]) +
-  geom_errorbar(aes(ymin = Task1_mean - Task1_SE, ymax = Task1_mean + Task1_SE), 
-                position = position_dodge(width = 0.05),
-                width = 0.035,
+  geom_errorbar(aes(ymin = Task1_mean - Task1_SE, ymax = Task1_mean + Task1_SE),
+                width = 0.3,
                 size = 0.2) +
-  geom_point(aes(size = Group_mean),
-             position = position_dodge(width = 0.05)) +
+  geom_point(aes(size = Line_mean)) +
   theme_classic() +
-  labs(x = "Mix",
-       y = "Frequency Task 1, mean \u00B1 s.e.") +
+  labs(x = "",
+       y = "Task 1 performance, mean \u00B1 s.e.") +
+  scale_x_discrete("",
+                   labels = c("Y", expression(X[1]), expression(X[2]),
+                              expression(YX[1]), expression(YX[2]), expression(X[1]~X[2]),
+                              expression(YX[1]~X[2]) )) +
   scale_color_manual(values = mix_col) +
-  scale_size_continuous(range = c(0.1, 1.5), 
+  scale_size_continuous(range = c(0.1, 1), 
                         guide = FALSE) +
   # scale_y_continuous(limits = c(0, 0.4), breaks = seq(0, 1, 0.1)) +
   theme_ctokita() +
-  theme(legend.background = element_blank())
+  theme(legend.position = "none")
 gg_dist_sum
 
 ggsave(filename = paste0("output/Task_dist/", file_name, "_Means.png"), width = 4, height = 2, dpi = 400)
+ggsave(filename = paste0("output/Task_dist/", file_name, "_Means.svg"), width = 4, height = 2)
