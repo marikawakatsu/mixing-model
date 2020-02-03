@@ -234,7 +234,11 @@ for (INDEX in 1:nrow(params)){
 # From Chris's code
 myPalette <- colorRampPalette(brewer.pal(8, "YlOrRd"))
 colPal <- c(myPalette(5), "#800026")
-colPal <- c("#7C217F", "white", "#EE751C")
+# colPal <- c("#7C217F", "white", "#EE751C")
+# colPal <- c("#bd925a", "white", "#79a7ac")  # vik palette v1, update 2/2/20
+colPal <- c("#A16928", "white", "#2887a1")  # vik palette v2, update 2/2/20
+
+#A16928,#bd925a,#d6bd8d,#edeac2,#b5c8b8,#79a7ac,#2887a1
 
 colLim <- abs( c(max(robustcheck$amps), min(robustcheck$amps)) ) + 0.02
 # colTitle <- expression(atop("Behavioral change",
@@ -286,7 +290,7 @@ gg_amps
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50.png"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.png"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.png"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
 
 # # Vector
 # # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp.eps"), width = 2.90, height = 2.10, units = "in",  dpi = 800)
@@ -294,6 +298,7 @@ ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.png"
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.eps"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.pdf"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-2.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
 
 
