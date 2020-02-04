@@ -75,7 +75,7 @@ process_mix_data <- function(task_distribution_matrix) {
 }
 
 # Function to plot data
-plot_mix_data <- function(task_distribution_data, null_hypothesis_data) {
+plot_mix_data <- function(task_distribution_data, null_hypothesis_data, col_palette, x_label) {
   gg_dist_sum <- ggplot(data = task_distribution_data, aes(y = Task1_mean, x = Mix, color = Line)) +
     geom_line(data = null_hypothesis_data, 
               aes(y = Task1_mean, x = Mix, group = NA),
@@ -89,15 +89,18 @@ plot_mix_data <- function(task_distribution_data, null_hypothesis_data) {
     geom_point(aes(size = Group_mean),
                position = position_dodge(width = 0.075)) +
     theme_classic() +
-    labs(x = "Fraction of X individuals in colony",
+    labs(# x = "Fraction of X individuals in colony",
+         x = bquote("Fraction of"~X[.(x_label)]~"individuals in colony"),
          y = "Task 1 performance, mean \u00B1 s.e.") +
-    scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F"),
+    scale_color_manual(values = col_palette,
                        name = "Mix") +
     scale_size_manual(values = c(0.2, 1), 
                       guide = FALSE) +
     scale_y_continuous(limits = c(0, 0.50), breaks = seq(0, 1, 0.1)) +
     theme_ctokita() +
-    theme(legend.position   = "none",
+    theme(legend.position   = "right",
+          legend.margin     = margin(0,0,0,0),
+          legend.box.margin = margin(-10,0,-10,-10),
           legend.background = element_blank())
   return(gg_dist_sum)
 }
@@ -110,24 +113,29 @@ load("output/Rdata/Mix_AThreshM_7.50_7.50_BThreshM_10.00_10.00_deltas_0.60_0.60_
 panelA <- process_mix_data(task_dist)
 panelA_data <- panelA[[1]]
 panelA_null <- panelA[[2]]
-gg_panelA <- plot_mix_data(panelA_data, panelA_null)
+panelA_col  <- c("#009640","#2B4B9B","#2B706E")
+panelA_xlab <- 2
+gg_panelA <- plot_mix_data(panelA_data, panelA_null, panelA_col, panelA_xlab)
 ggsave(gg_panelA, filename = "output/Task_dist/svg_files/non-5050-panelA_v2.pdf", width = 90, height = 45, units = "mm")
 
-
-# Panel C (convex, low demand)
+# Panel B (convex, low demand)
 load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_0.60_0.60_threshSlope_7_Aalpha_5.00_5.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 panelB <- process_mix_data(task_dist)
 panelB_data <- panelB[[1]]
 panelB_null <- panelB[[2]]
-gg_panelB <- plot_mix_data(panelB_data, panelB_null)
+panelB_col  <- c("#E52521", "#2B4B9B", "#7C217F")
+panelB_xlab <- 1
+gg_panelB <- plot_mix_data(panelB_data, panelB_null, panelB_col, panelB_xlab)
 ggsave(gg_panelB, filename = "output/Task_dist/svg_files/non-5050-panelB_v2.pdf", width = 90, height = 45, units = "mm")
 
-# Panel B (convex, high demand)
+# Panel C (convex, high demand)
 load("output/Rdata/Mix_AThreshM_10.00_10.00_BThreshM_10.00_10.00_deltas_1.30_1.30_threshSlope_7_Aalpha_5.00_5.00_Balpha_2.00_2.00_quitP_0.20.Rdata")
 panelC <- process_mix_data(task_dist)
 panelC_data <- panelC[[1]]
 panelC_null <- panelC[[2]]
-gg_panelC <- plot_mix_data(panelC_data, panelC_null)
+panelC_col  <- c("#E52521", "#2B4B9B", "#7C217F")
+panelC_xlab <- 1
+gg_panelC <- plot_mix_data(panelC_data, panelC_null, panelC_col, panelC_xlab)
 ggsave(gg_panelC, filename = "output/Task_dist/svg_files/non-5050-panelC_v2.pdf", width = 90, height = 45, units = "mm")
 
 # Panel D (concave)
@@ -135,7 +143,9 @@ load("output/Rdata/Mix_AThreshM_15.00_15.00_BThreshM_10.00_10.00_deltas_0.60_0.6
 panelD <- process_mix_data(task_dist)
 panelD_data <- panelD[[1]]
 panelD_null <- panelD[[2]]
-gg_panelD <- plot_mix_data(panelD_data, panelD_null)
+panelD_col  <- c("#EE751C","#2B4B9B","#8D615B")
+panelD_xlab <- 3
+gg_panelD <- plot_mix_data(panelD_data, panelD_null, panelD_col, panelD_xlab)
 ggsave(gg_panelD, filename = "output/Task_dist/svg_files/non-5050-panelD_v2.pdf", width = 90, height = 45, units = "mm")
 # gg_panelD_legend <- gg_panelD +
 #   theme(legend.position = "right")

@@ -235,8 +235,9 @@ for (INDEX in 1:nrow(params)){
 myPalette <- colorRampPalette(brewer.pal(8, "YlOrRd"))
 colPal <- c(myPalette(5), "#800026")
 # colPal <- c("#7C217F", "white", "#EE751C")
-# colPal <- c("#bd925a", "white", "#79a7ac")  # vik palette v1, update 2/2/20
-colPal <- c("#A16928", "white", "#2887a1")  # vik palette v2, update 2/2/20
+colPal <- c("#bd925a", "white", "#79a7ac")  # vik palette v1, update 2/2/20
+# colPal <- c("#A16928", "white", "#2887a1")  # vik palette v2, update 2/2/20
+
 
 #A16928,#bd925a,#d6bd8d,#edeac2,#b5c8b8,#79a7ac,#2887a1
 
