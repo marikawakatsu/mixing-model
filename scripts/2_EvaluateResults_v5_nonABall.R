@@ -16,16 +16,15 @@ rm(list = ls())
 # Fig. 4c-d
 params <- matrix(c(1.5, 1.5, 2, 2, 0.6,	0.6, 7.5, 7.5, 10, 10,  # 4c
                      3,   3, 2, 2, 0.6,	0.6,  15,  15, 10, 10), # 4d
-                 nrow = 1, ncol = 10, byrow = TRUE)    
+                 nrow = 2, ncol = 10, byrow = TRUE)    
 
 palette <- matrix(c("#009640","#2B4B9B","#2B706E",  # 3c
                     "#EE751C","#2B4B9B","#8D615B"), # 3d
-                  nrow = 1, ncol = 3, byrow = TRUE)
+                  nrow = 2, ncol = 3, byrow = TRUE)
 
 # Fig. S4 -- 4d only
-# params  <- matrix(c(6, 6, 2, 2, 0.6, 0.6, 20, 20, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# params  <- matrix(c(3, 3, 2, 2, 0.6, 0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
-# palette <- matrix(c("#EE751C","#2B4B9B","#8D615B"), nrow = 1, ncol = 3, byrow = TRUE)
+params  <- matrix(c(3, 3, 2, 2, 0.6, 0.6, 15, 15, 10, 10), nrow = 1, ncol = 10, byrow = TRUE)
+palette <- matrix(c("#EE751C","#2B4B9B","#8D615B"), nrow = 1, ncol = 3, byrow = TRUE)
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -67,7 +66,7 @@ for (INDEX in 1:nrow(params)){
                         A_ThreshM[1], A_ThreshM[2], B_ThreshM[1], B_ThreshM[2], deltas[1], deltas[2], threshSlope, 
                         A_alpha[1], A_alpha[2], B_alpha[1], B_alpha[2], quitP[1])  # for quitp[1] = quitP[2]
   
-  file_name2 <- sprintf("N16only_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
+  file_name2 <- sprintf("N8only_AThreshM_%1.2f_%1.2f_AThreshSD_%1.2f_%1.2f_BThreshM_%1.2f_%1.2f_BThreshSD_%1.2f_%1.2f_deltas_%1.2f_%1.2f_threshSlope_%d_%d_Aalpha_%1.2f_%1.2f_Balpha_%1.2f_%1.2f_quitP_%1.2f_%1.2f",
                         A_ThreshM[1], A_ThreshM[2], A_ThreshSD[1]/A_ThreshM[1], A_ThreshSD[2]/A_ThreshM[2], 
                         B_ThreshM[1], B_ThreshM[2], B_ThreshSD[1]/B_ThreshM[1], B_ThreshSD[2]/B_ThreshM[2],
                         deltas[1], deltas[2], threshSlope, threshSlope, A_alpha[1], A_alpha[2], 
@@ -78,6 +77,15 @@ for (INDEX in 1:nrow(params)){
   
   # load(paste0("output/Rdata/", file_name, ".Rdata"))
   load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  
+  # new 020820 -- set index for the type of X
+  if( params[INDEX,1] == 5 ){
+    x_label <- 1
+  }else if( params[INDEX,1] == 1.5 ){
+    x_label <- 2
+  }else if( params[INDEX,1] == 3 ){
+    x_label <- 3
+  }
   
   ####################
   # Final task distributions
@@ -186,6 +194,9 @@ for (INDEX in 1:nrow(params)){
          y = "Task 1 performance, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
+                                "Type Y" = "Type Y",
+                                "Mixed"  = "Mixed")) +
     theme_mk() +
     theme(legend.position = "none",
           axis.text.x     = element_text(colour = palette[INDEX,]),
@@ -203,7 +214,7 @@ for (INDEX in 1:nrow(params)){
   
   gg_dist3
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
@@ -269,16 +280,19 @@ for (INDEX in 1:nrow(params)){
     labs(x = "",
          y = "Specialization, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
-    scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
     scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
+    # scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
+    scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
+                                "Type Y" = "Type Y",
+                                "Mixed"  = "Mixed")) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SpecMean - SpecSE, ymax = SpecMean + SpecSE),
                   size = 0.2, width = 0.6) +
     geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   gg_corr
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -332,8 +346,11 @@ for (INDEX in 1:nrow(params)){
     labs(x = "",
          y = "Behavioral variation, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
-    scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
     scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
+    # scale_x_discrete(limits=c("Type X","Type Y","Mixed")) + 
+    scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
+                                "Type Y" = "Type Y",
+                                "Mixed"  = "Mixed")) +
     # Mean and SE portion of plot
     geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
                   size = 0.2, width = 0.6, 
@@ -343,8 +360,8 @@ for (INDEX in 1:nrow(params)){
   
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
 
 }
 

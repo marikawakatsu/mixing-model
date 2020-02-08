@@ -235,11 +235,10 @@ for (INDEX in 1:nrow(params)){
 myPalette <- colorRampPalette(brewer.pal(8, "YlOrRd"))
 colPal <- c(myPalette(5), "#800026")
 # colPal <- c("#7C217F", "white", "#EE751C")
-colPal <- c("#bd925a", "white", "#79a7ac")  # vik palette v1, update 2/2/20
-# colPal <- c("#A16928", "white", "#2887a1")  # vik palette v2, update 2/2/20
+# colPal <- c("#bd925a", "white", "#79a7ac")  # vik palette v1, update 2/2/20
+colPal <- c("#A16928", "white", "#2887a1")  # vik palette v2, update 2/2/20
 
-
-#A16928,#bd925a,#d6bd8d,#edeac2,#b5c8b8,#79a7ac,#2887a1
+#Darker #A16928,#bd925a,#d6bd8d,#edeac2,#b5c8b8,#79a7ac,#2887a1 #Darker
 
 colLim <- abs( c(max(robustcheck$amps), min(robustcheck$amps)) ) + 0.02
 # colTitle <- expression(atop("Behavioral change",
@@ -250,8 +249,9 @@ gg_amps <- ggplot() +
   theme_bw() +
   geom_tile(data   = robustcheck, 
             colour = "light gray",
-            size   = 0.005,
+            size   = 0.0000001,
             aes(x = Cmu1, y = Calpha1, fill = amps)) +  # flip order of axes
+  scale_size(guide = 'none') +
   scale_y_continuous( # limits = c(min(alpha_sweep), max(alpha_sweep)),
                         breaks = seq(min(alpha_sweep), max(alpha_sweep), 0.5),
                         expand = c(0,0)) +
@@ -260,7 +260,7 @@ gg_amps <- ggplot() +
                         expand = c(0,0)) +
   scale_fill_gradientn(name     = colTitle,
                        colours  = colPal,
-                       na.value = "light gray",
+                       na.value = "light gray", #909090",
                        # limits = c(-colLim, colLim),
                        limits   = c(-0.24, 0.24),
                        breaks   = seq(-0.2, 0.2, 0.1),
@@ -300,6 +300,6 @@ gg_amps
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.pdf"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-2.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 1600)
 
 
