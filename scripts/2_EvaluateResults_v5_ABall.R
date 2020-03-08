@@ -8,22 +8,14 @@
 
 rm(list = ls())
 
-# Fig. 3a-b
-# params <- matrix(c(2, 2, 1, 1, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b old
-#                    2, 2, 1, 1, 0.4,	0.4, 10, 10, 10, 10),
-#                  nrow = 2, ncol = 10, byrow = TRUE)
-# params <- matrix(c(6, 6, 2, 2, 0.6,	0.6, 10, 10, 10, 10,  # 3a-b new
-#                    6, 6, 2, 2, 1.5,	1.5, 10, 10, 10, 10),
-#                  nrow = 2, ncol = 10, byrow = TRUE)
-
 # Fig. 4a-d
-params <- matrix(c(  5,   5, 2, 2, 0.6,	0.6, 10, 10, 10, 10,   #4a
-                     5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10),  #4b
-                 nrow = 2, ncol = 10, byrow = TRUE)  
+params <- matrix(c(  5,   5, 2, 2, 0.6,	0.6, 10, 10, 10, 10,   # Fig. 4a
+                     5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10),  # Fig. 4b
+                 nrow = 2, ncol = 10, byrow = TRUE)
 
-# Fig. S1 and S5 (S5 requires manual changes below)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # S1
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # S5
+# Figs. 1 & S1 and S5 (S5 requires manual changes below)
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # Fig. 1
+# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # Fig. S5
 
 # Plotting
 ymax <- 0.5 # max y for plotting
@@ -85,6 +77,8 @@ for (INDEX in 1:nrow(params)){
     x_label <- 2
   }else if( params[INDEX,1] == 3 ){
     x_label <- 3
+  }else{
+    x_label <- ""
   }
   
     
@@ -218,7 +212,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
@@ -297,7 +291,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -305,45 +299,28 @@ for (INDEX in 1:nrow(params)){
   # Calculate average SD by mix
   
   # WITHOUT per-group lines
-  # task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Type,] %>%
-  #   mutate(SD = (SD1 + SD2)/2)
-  # 
-  # task_VarMean_SD <- task_VarMean_byrep %>%
-  #   group_by(n, Mix) %>%
-  #   summarise(SDMean = mean(SD),
-  #             SDSE = sd(SD) / sqrt(length(SD)))
-  
-  # WITH per-group lines
-  task_VarMean_byrep <- task_VarMean_byrep %>%
+  task_VarMean_byrep <- task_VarMean_byrep[task_VarMean_byrep$Mix == task_VarMean_byrep$Type,] %>%
     mutate(SD = (SD1 + SD2)/2)
-  
+
   task_VarMean_SD <- task_VarMean_byrep %>%
-    group_by(n, Mix, Type) %>%
+    group_by(n, Mix) %>%
     summarise(SDMean = mean(SD),
               SDSE = sd(SD) / sqrt(length(SD)))
   
-  # # Plot behavioral variation by mix -- WITHOUT per-group line in the Mixed case
-  # gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Mix)) +
-  #   geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
-  #              size = 0.3, alpha = 0.2, stroke = 0, 
-  #              position = position_dodge(width = 1)) +
-  #   theme_mk() +
-  #   theme(legend.position = "none",
-  #         axis.text.x = element_text(colour = c("#E52521","#2B4B9B","#7C217F"))) +
-  #   xlab("Mix") +
-  #   ylab("Behavioral variation") +
-  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-  #   scale_y_continuous(limits = c(0, 0.25), breaks = seq(-1, 1, 0.05)) +
-  #   # Mean and SE portion of plot
-  #   geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE, colour = Mix),
-  #                 size = 0.2, width = 0.4) +
-  #   geom_point(size = 0.8, alpha = 1, stroke = 0.2)
+  # WITH per-group lines
+  # task_VarMean_byrep <- task_VarMean_byrep %>%
+  #   mutate(SD = (SD1 + SD2)/2)
+  # 
+  # task_VarMean_SD <- task_VarMean_byrep %>%
+  #   group_by(n, Mix, Type) %>%
+  #   summarise(SDMean = mean(SD),
+  #             SDSE = sd(SD) / sqrt(length(SD)))
   
-  # Plot behavioral variation by mix -- WITH per-group line in the Mixed case
-  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Type)) +
+  # Plot behavioral variation by mix -- WITHOUT per-group line in the Mixed case
+  gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Mix)) +
     geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
-               size = 0.3, alpha = 0.2, stroke = 0, 
-               position = position_dodge(width = 1)) +
+             size = 0.3, alpha = 0.2, stroke = 0, 
+             position = position_dodge(width = 1)) +
     theme_mk() +
     theme(legend.position = "none",
           axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
@@ -362,6 +339,30 @@ for (INDEX in 1:nrow(params)){
                   position = position_dodge(width = 1)) +
     geom_point(size = 0.8, alpha = 1, stroke = 0.2, 
                position = position_dodge(width = 1))
+  
+  # Plot behavioral variation by mix -- WITH per-group line in the Mixed case
+  # gg_var <- ggplot(data = task_VarMean_SD, aes(x = Mix, y = SDMean, colour = Type)) +
+  #   geom_point(data = task_VarMean_byrep, aes(x = Mix, y = SD),
+  #              size = 0.3, alpha = 0.2, stroke = 0, 
+  #              position = position_dodge(width = 1)) +
+  #   theme_mk() +
+  #   theme(legend.position = "none",
+  #         axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
+  #         axis.title.x    = element_text(size=0)) +
+  #   xlab("Mix") +
+  #   labs(x = "",
+  #        y = "Behavioral variation, mean \u00B1 s.e.") +
+  #   scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
+  #   scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
+  #   scale_x_discrete(label = c("Type X" = bquote("Type"~X[.(x_label)]),
+  #                              "Type Y" = "Type Y",
+  #                              "Mixed"  = "Mixed")) +
+  #   # Mean and SE portion of plot
+  #   geom_errorbar(aes(x = Mix, ymin = SDMean - SDSE, ymax = SDMean + SDSE),
+  #                 size = 0.2, width = 0.6, 
+  #                 position = position_dodge(width = 1)) +
+  #   geom_point(size = 0.8, alpha = 1, stroke = 0.2, 
+  #              position = position_dodge(width = 1))
   
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)

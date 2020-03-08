@@ -266,8 +266,10 @@ gg_amps <- ggplot() +
                        breaks   = seq(-0.2, 0.2, 0.1),
                        labels   = c("-0.2\nContagion", "-0.1", " 0.0", " 0.1", " 0.2\nAmplification"),
                        oob      = squish) +
-  ylab( expression("Task efficiency ("*alpha^X~"or"~alpha^Y*")") ) +
-  xlab( expression("Mean task threshold ("*mu^X~"or"~mu^Y*")") ) +
+  # ylab( expression("Task efficiency ("*alpha^X~"or"~alpha^Y*")") ) +
+  ylab( expression("Task efficiency ("*alpha^X*")") ) +
+  # xlab( expression("Mean task threshold ("*mu^X~"or"~mu^Y*")") ) +
+  xlab( expression("Mean task threshold ("*mu^X*")") ) +
   theme(legend.key.height = unit(0.04, "npc"),
         legend.key.width  = unit(0.14, "npc"),
         legend.key        = element_rect(colour = "black", size = 0.5),
@@ -300,6 +302,6 @@ gg_amps
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.pdf"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 1600)
+ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-5.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 1600)
 
 
