@@ -302,6 +302,6 @@ gg_amps
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_temp2.pdf"), width = 2.50, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v3.pdf"), width = 2.70, height = 2.90, units = "in",  dpi = 800)
 # ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v4.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 800)
-ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-5.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 1600)
+# ggsave(filename = paste0("output/Parameter_exp/Parameter_space_sample_50_v5-5.pdf"), width = 2.55, height = 2.90, units = "in",  dpi = 1600)
 
 
