@@ -9,9 +9,8 @@
 rm(list = ls())
 
 # Fig. 4a-d
-params <- matrix(c(  3.5, 3.5, 2, 2, 0.6,	0.6, 11, 11, 10, 10),   # Fig. 4a
-#                      5,   5, 2, 2, 1.3,	1.3, 10, 10, 10, 10  # Fig. 4b
-                  
+params <- matrix(c( 4.5, 4.5, 2, 2, 0.6, 0.6, 11, 11, 10, 10,   # Fig. 4a
+                    4.5, 4.5, 2, 2, 1.3, 1.3, 11, 11, 10, 10),  # Fig. 4b
                  nrow = 1, ncol = 10, byrow = TRUE)
 
 # Figs. 1 & S1 and S5 (S5 requires manual changes below)
