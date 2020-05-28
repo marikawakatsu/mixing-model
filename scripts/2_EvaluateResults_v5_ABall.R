@@ -11,7 +11,7 @@ rm(list = ls())
 # Fig. 4a-d
 params <- matrix(c( 4.5, 4.5, 2, 2, 0.6, 0.6, 11, 11, 10, 10,   # Fig. 4a
                     4.5, 4.5, 2, 2, 1.3, 1.3, 11, 11, 10, 10),  # Fig. 4b
-                 nrow = 1, ncol = 10, byrow = TRUE)
+                 nrow = 2, ncol = 10, byrow = TRUE)
 
 # Figs. 1 & S1 and S5 (S5 requires manual changes below)
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # Fig. 1
@@ -66,12 +66,12 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   # load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   # new 020820 -- set index for the type of X
-  if( params[INDEX,1] == 5 ){
+  if( params[INDEX,1] == 4.5 ){
     x_label <- 1
   }else if( params[INDEX,1] == 1.5 ){
     x_label <- 2
@@ -186,16 +186,20 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "",
-         y = "Task 1 performance, mean \u00B1 s.e.") +
+         y = "Task performance, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E52521","#2B4B9B","#7C217F")) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
                                 "Type Y" = "Type Y",
                                 "Mixed"  = "Mixed")) +
     theme_mk() +
+    # theme(legend.position = "none",
+    #       axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
+    #       axis.title.x    = element_text(size=0)) +
     theme(legend.position = "none",
-          axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
-          axis.title.x    = element_text(size=0)) +
+          axis.text.x     = element_text(size=6.5,colour = c("#E52521","#2B4B9B","#7C217F")),
+          axis.title.x    = element_text(size=0),
+          axis.title      = element_text(size=9)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 1, size = 0.1, color = "gray30" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
@@ -212,7 +216,8 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.3, dpi = 800)
   
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
@@ -291,7 +296,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -368,7 +373,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, units = "in", dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
   
 }
 

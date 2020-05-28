@@ -193,16 +193,20 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
                position = position_dodge(width = 1)) +
     labs(x = "",
-         y = "Task 1 performance, mean \u00B1 s.e.") +
+         y = "Task performance, mean \u00B1 s.e.") +
     scale_color_manual(values = palette[INDEX,]) +
     scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
     scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
                                 "Type Y" = "Type Y",
                                 "Mixed"  = "Mixed")) +
     theme_mk() +
+    # theme(legend.position = "none",
+    #       axis.text.x     = element_text(colour = palette[INDEX,]),
+    #       axis.title.x    = element_text(size=0)) +
     theme(legend.position = "none",
-          axis.text.x     = element_text(colour = palette[INDEX,]),
-          axis.title.x    = element_text(size=0)) +
+          axis.text.x     = element_text(size=6.5,colour = palette[INDEX,]),
+          axis.title.x    = element_text(size=0),
+          axis.title      = element_text(size=9)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 1, size = 0.1, color = "gray30" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
@@ -217,7 +221,7 @@ for (INDEX in 1:nrow(params)){
   gg_dist3
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.3, dpi = 800)
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
   #   geom_point(size = 0.3, alpha = 0.2, stroke = 0, 
@@ -370,7 +374,7 @@ for (INDEX in 1:nrow(params)){
   gg_var
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
   
 }
 
