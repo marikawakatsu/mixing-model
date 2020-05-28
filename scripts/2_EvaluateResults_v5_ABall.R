@@ -66,9 +66,9 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   # load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
-  # load(paste0("output/Rdata/", file_name, ".Rdata"))
+  load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   # new 020820 -- set index for the type of X
   if( params[INDEX,1] == 4.5 ){
