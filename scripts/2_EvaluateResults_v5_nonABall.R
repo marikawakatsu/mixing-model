@@ -204,7 +204,7 @@ for (INDEX in 1:nrow(params)){
     #       axis.text.x     = element_text(colour = palette[INDEX,]),
     #       axis.title.x    = element_text(size=0)) +
     theme(legend.position = "none",
-          axis.text.x     = element_text(size=6.5,colour = palette[INDEX,]),
+          axis.text.x     = element_text(colour = palette[INDEX,]),
           axis.title.x    = element_text(size=0),
           axis.title      = element_text(size=9)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),

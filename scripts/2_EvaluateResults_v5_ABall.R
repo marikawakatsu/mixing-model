@@ -14,13 +14,14 @@ params <- matrix(c( 4.5, 4.5, 2, 2, 0.6, 0.6, 11, 11, 10, 10,   # Fig. 4a
                  nrow = 2, ncol = 10, byrow = TRUE)
 
 # Figs. 1 & S1 and S5 (S5 requires manual changes below)
-# params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # Fig. 1
+params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, byrow = TRUE) # Fig. 1
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # Fig. S5
 
 # Plotting
-ymax <- 0.5 # max y for plotting
-yinc <- 0.1 # y-axis increments
-figH <- 1.5 # figure height for printing; default width is 3
+ymax     <- 0.5  # max y for plotting
+yinc     <- 0.1  # y-axis increments
+figW     <- 1.5  # figure width for printing; default width is 3
+figratio <- 1 # height:width ratio
 
 
 for (INDEX in 1:nrow(params)){
@@ -197,7 +198,7 @@ for (INDEX in 1:nrow(params)){
     #       axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
     #       axis.title.x    = element_text(size=0)) +
     theme(legend.position = "none",
-          axis.text.x     = element_text(size=6.5,colour = c("#E52521","#2B4B9B","#7C217F")),
+          axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
           axis.title.x    = element_text(size=0),
           axis.title      = element_text(size=9)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
@@ -212,12 +213,12 @@ for (INDEX in 1:nrow(params)){
                   position = position_dodge(width = 1))
   
   gg_dist3
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
-  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figH, height = figH*1.3, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Task1Summary_SE.png"), width = 2.25, height = figW, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE.png"), width = 2.25, height = figW, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task1Summary_SE_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figW, height = figW*figratio, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Task1Summary_SE_nolegend.pdf"), width = figW, height = figW*figratio, dpi = 800)
   
   
   # gg_dist4 <- ggplot(data = task_VarMean_byrep, aes(y = Mean2, x = Mix, colour = Type)) +
@@ -240,7 +241,7 @@ for (INDEX in 1:nrow(params)){
   #                 position = position_dodge(width = 1))
   # 
   # gg_dist4
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task2BehavVar.png"), width = 3, height = figH, dpi = 400)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Task2BehavVar.png"), width = 3, height = figW, dpi = 400)
   
   ####################
   # Task Rank Correlation
@@ -293,10 +294,10 @@ for (INDEX in 1:nrow(params)){
     geom_point(size = 0.8, alpha = 1, stroke = 0.2)
   
   gg_corr
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figH, height = figH*1.15, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figW, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figW, height = figW*figratio, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -370,10 +371,10 @@ for (INDEX in 1:nrow(params)){
   #              position = position_dodge(width = 1))
   
   gg_var
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figH, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figH, height = figH*1.15, units = "in", dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figH, height = figH*1.15, units = "in", dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figW, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figW, height = figW*figratio, units = "in", dpi = 800)
+  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figW, height = figW*figratio, units = "in", dpi = 800)
   
 }
 

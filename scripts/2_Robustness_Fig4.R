@@ -33,8 +33,8 @@ for(i in 1:nrow(params)){
   params[i,1:2] <- alpha_sweep[((i-1)%%length(alpha_sweep)+1)]
 }
 
-mu_sweep    <- seq(6, 16, by = 0.5) # range of AThreshM
-alpha_sweep <- seq(1, 6, by = 0.25)  # range of Aalpha
+# mu_sweep    <- seq(6, 16, by = 0.5) # range of AThreshM
+# alpha_sweep <- seq(1, 6, by = 0.25)  # range of Aalpha
 
 # Prep matrix for storing
 robustcheck <- as.data.frame(params)
