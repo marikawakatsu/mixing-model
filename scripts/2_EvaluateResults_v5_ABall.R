@@ -18,10 +18,15 @@ params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 20, 20), nrow = 1, ncol = 10, b
 # params <- matrix(c(2, 2, 2, 2, 0.6,	0.6, 10, 10, 10, 10), nrow = 1, ncol = 10, byrow = TRUE) # Fig. S5
 
 # Plotting
-ymax     <- 0.5  # max y for plotting
-yinc     <- 0.1  # y-axis increments
-figW     <- 1.5  # figure width for printing; default width is 3
-figratio <- 1 # height:width ratio
+ymax     <- 0.5   # max y for plotting task performance: 0.5
+ymin     <- 0.1   # max y for plotting task performance: 0.1 for Fig. 1, 0.0 for Fig. 3
+yinc     <- 0.1   # y-axis increments for task performance
+ymaxVar  <- 0.2   # max y for plotting behavioral variation: 0.5
+yminVar  <- 0.05  # max y for plotting behavioral variation: 0.05 for Fig. 1, 0.0 for SI
+ymaxSpec <- 1.0   # max y for plotting behavioral specialization: 1.0
+yminSpec <- 0.4   # max y for plotting behavioral specialization: 0.2 for Fig. 1, -0.1 for SI
+figW     <- 1.5   # figure width for printing; default width is 3
+figratio <- 1.10   # height:width ratio: 1.10 for Fig. 1, 1.3 for Fig. 3
 
 
 for (INDEX in 1:nrow(params)){
@@ -67,9 +72,9 @@ for (INDEX in 1:nrow(params)){
   file_name <- file_name2
   rm(file_name1, file_name2)
   
-  # load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
+  load(paste0("output/Rdata/", file_name, "reps_100.Rdata"))
   # load(paste0("output/Rdata/", file_name, "_robust_50.Rdata"))
-  load(paste0("output/Rdata/", file_name, ".Rdata"))
+  # load(paste0("output/Rdata/", file_name, ".Rdata"))
   
   # new 020820 -- set index for the type of X
   if( params[INDEX,1] == 4.5 ){
@@ -189,18 +194,18 @@ for (INDEX in 1:nrow(params)){
     labs(x = "",
          y = "Task performance, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E52521","#2B4B9B","#7C217F")) +
-    scale_y_continuous(limits = c(0, ymax), breaks = seq(0, ymax, yinc)) +
+    scale_y_continuous(limits = c(ymin, ymax), breaks = seq(0, ymax, yinc)) +
     scale_x_discrete(label  = c("Type X" = bquote("Type"~X[.(x_label)]),
                                 "Type Y" = "Type Y",
                                 "Mixed"  = "Mixed")) +
     theme_mk() +
-    # theme(legend.position = "none",
-    #       axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
-    #       axis.title.x    = element_text(size=0)) +
     theme(legend.position = "none",
           axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
-          axis.title.x    = element_text(size=0),
-          axis.title      = element_text(size=9)) +
+          axis.title.x    = element_text(size=0)) +
+    # theme(legend.position = "none",
+    #       axis.text.x     = element_text(colour = c("#E52521","#2B4B9B","#7C217F")),
+    #       axis.title.x    = element_text(size=0),
+    #       axis.title      = element_text(size=9)) +
     geom_hline( yintercept = mean( task_VarMean_byMix[task_VarMean_byMix$Mix != "Mixed",]$Mean1 ),
                 lty = 1, size = 0.1, color = "gray30" ) +
     geom_point(data = task_VarMean_byMix, aes(x = Mix, y = Mean1),
@@ -284,7 +289,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "",
          y = "Specialization, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-    scale_y_continuous(limits = c(-0.1, 1), breaks = seq(-1, 1, 0.2)) +
+    scale_y_continuous(limits = c(yminSpec, ymaxSpec), breaks = seq(-1, 1, 0.2)) +
     scale_x_discrete(label = c("Type X" = bquote("Type"~X[.(x_label)]),
                                "Type Y" = "Type Y",
                                "Mixed"  = "Mixed")) +
@@ -297,7 +302,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Spec_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec.png"), width = 1.5, height = figW, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Spec_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figW, height = figW*figratio, dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Spec_nolegend.pdf"), width = figW, height = figW*figratio, dpi = 800)
   
   ####################
   # Task variance by group size
@@ -335,7 +340,7 @@ for (INDEX in 1:nrow(params)){
     labs(x = "",
          y = "Behavioral variation, mean \u00B1 s.e.") +
     scale_color_manual(values = c("#E52521", "#2B4B9B", "#7C217F")) +
-    scale_y_continuous(limits = c(0, 0.2), breaks = seq(-1, 1, 0.05)) +
+    scale_y_continuous(limits = c(yminVar, ymaxVar), breaks = seq(-1, 1, 0.05)) +
     scale_x_discrete(label = c("Type X" = bquote("Type"~X[.(x_label)]),
                                "Type Y" = "Type Y",
                                "Mixed"  = "Mixed")) +
@@ -374,7 +379,7 @@ for (INDEX in 1:nrow(params)){
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var.png"), width = 1.5, height = figW, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_Var_Sep_nolegend.png"), width = figW, height = figW*figratio, dpi = 800)
   # ggsave(filename = paste0("output/Task_dist/", file_name, "_reps_100_Var_Sep_nolegend.png"), width = figW, height = figW*figratio, units = "in", dpi = 800)
-  # ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figW, height = figW*figratio, units = "in", dpi = 800)
+  ggsave(filename = paste0("output/Task_dist/pdf_files_MK/", file_name, "_reps_100_Var_Sep_nolegend.pdf"), width = figW, height = figW*figratio, units = "in", dpi = 800)
   
 }
 
