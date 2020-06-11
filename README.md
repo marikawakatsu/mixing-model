@@ -1,5 +1,5 @@
 # mixing-model
-Exploring the emergent behavioral patterns in heterogeneous ant colonies using the fixed threshold model.
+Exploring the emergent behavioral patterns in heterogeneous ant colonies using the fixed threshold model. This is the living repository of this code.
 
 ## Components of this Repository
 This directory has three main files:
